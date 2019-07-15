@@ -56,7 +56,7 @@ public class Mesa {
 					return "La mesa ya se encuentra ocupada.";
 				}
 				else {
-					usuario.mesa = buscador;
+					usuario.getMesa() = buscador;
 					usuarios.add(usuario);
 					return "La mesa ha sido ocupada.";
 				}
