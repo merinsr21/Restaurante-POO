@@ -9,6 +9,14 @@ public class Factura {
 	private Pedido pedido;
 	private ArrayList<Calificacion> calificaciones = new ArrayList<Calificacion>();
 	
+	public Factura(int codigo, Usuario usuario, Pedido pedido) {
+		this.codigo = codigo;
+		this.usuario = usuario;
+		this.pedido = pedido;
+	}
+	public Factura() {
+		
+	}
 	public int getCodigo() {
 		return codigo;
 	}
@@ -32,6 +40,12 @@ public class Factura {
 	}
 	public void setCalificaciones(ArrayList<Calificacion> calificaciones) {
 		this.calificaciones = calificaciones;
+	}
+
+	@Override
+	public String toString() {
+		return "Factura N°: " + codigo + "\nUsuario: " + usuario.getNombre() + "\nMesa N°: " + pedido.getMesa()
+				+ "\nDetalle del Pedido: " + "]";
 	}
 	
 	

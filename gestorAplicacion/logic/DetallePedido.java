@@ -1,13 +1,27 @@
 package gestorAplicacion.logic;
+import java.util.*;
 
 public class DetallePedido {
 	
-	private Pedido pedido;
 	private int cantidad;
+	private int codigoDet;
 	private Comida comida;
-	private int precio;
+	private Pedido pedido;
+	private ArrayList<DetallePedido> detalles = new ArrayList<DetallePedido>();
 	
-	
+	public DetallePedido(int cantidad, int codigoCom,int codigoDet) { //constructor para inicializar comida con base a un código
+		this.cantidad = cantidad;
+		this.codigoDet = codigoDet;
+		for(Comida r : Comida.getMenu()) {
+			if(r.getCodigo() == codigoCom ) {
+				comida = r;
+				break;
+			}
+		}	
+	}
+	public DetallePedido() {
+		
+	}
 	public Pedido getPedido() {
 		return pedido;
 	}
@@ -25,12 +39,6 @@ public class DetallePedido {
 	}
 	public void setComida(Comida comida) {
 		this.comida = comida;
-	}
-	public int getPrecio() {
-		return precio;
-	}
-	public void setPrecio(int precio) {
-		this.precio = precio;
 	}
 	
 	

@@ -43,6 +43,10 @@ public class Comida implements Comparable<Comida> {
 		return nombre;
 	}
 	
+	public int getPrecio() {
+		return precio;
+	}
+	
 	public int compareTo(Comida c) {                    // como hacer para que el collections.sort() entre el compareTo que yo quiera.
 		if(codigo < c.codigo) {
 			return -1;
