@@ -5,7 +5,7 @@ import uiMain.*;
 
 public class Calificar extends OpcionDeMenu {
 	
-	public Calificar(int pos) {
+	public Calificar(String pos) {
 		super(pos);
 	}
 	
@@ -20,6 +20,6 @@ public class Calificar extends OpcionDeMenu {
 	}
 	
 	public String toString(){
-		return "Califica un comida";
+		return "Calificar una comida";
 	}
 }

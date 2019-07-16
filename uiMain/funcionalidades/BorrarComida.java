@@ -6,7 +6,7 @@ import uiMain.*;
 
 public class BorrarComida extends OpcionDeMenu {
 	
-	public BorrarComida(int pos) {
+	public BorrarComida(String pos) {
 		super(pos);
 	}
 	
@@ -14,10 +14,10 @@ public class BorrarComida extends OpcionDeMenu {
 		Scanner entrada = new Scanner(System.in);
 		System.out.println("Ingrese el codigo de la comida que desea borrar.");
 		int n = entrada.nextInt();
-		String print = "La comida que desea borrar no se encuentra en el menu.";;
+		String print = "La comida que desea borrar no se encuentra en el menú.";;
 		for(Comida r :  Comida.getMenu()) {
 			if(r.getCodigo() == n) {
-				print = r.getNombre()+" "+"ha sido eliminada del menu.";
+				print = r.getNombre()+" "+"ha sido eliminada del menú.";
 				Comida.getMenu().remove(r);
 				break;
 			}
@@ -27,6 +27,6 @@ public class BorrarComida extends OpcionDeMenu {
 	
 	
 	public String toString() {
-		return "Borra una comida del menu para que esta ya no pueda ser pedida por un usuario";
+		return "Borrar comida del menú";
 	}
 }

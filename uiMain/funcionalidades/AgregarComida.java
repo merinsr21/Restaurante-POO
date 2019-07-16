@@ -6,7 +6,7 @@ import uiMain.*;
 
 public class AgregarComida extends OpcionDeMenu {
 	
-	public AgregarComida(int pos) {
+	public AgregarComida(String pos) {
 		super(pos);
 	}
 	
@@ -20,6 +20,6 @@ public class AgregarComida extends OpcionDeMenu {
 	}
 	
 	public String toString() {
-		return "Agrega una comida al menu para que esta pueda ser pedida por un usuario";
+		return "Agregar comida al menú";
 	}
 }

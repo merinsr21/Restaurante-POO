@@ -6,12 +6,12 @@ import java.util.*;
 
 public class OrdenarMenu extends OpcionDeMenu {
 	
-	public OrdenarMenu (int pos) {
+	public OrdenarMenu (String pos) {
 		super(pos);
 	}
 	
 	public void ejecutar() {
-		System.out.println("Ingrese el parametro con el cual quiere ordenar el menu(1 = codigo,  2 = nombre, 3 = precio)");
+		System.out.println("Ingrese el parámetro con el cual quiere ordenar el menú(1 = código,  2 = nombre, 3 = precio)");
 		Collections.sort(Comida.getMenu());
 		for(Comida r : Comida.getMenu()) {
 			System.out.println(r);
@@ -19,6 +19,6 @@ public class OrdenarMenu extends OpcionDeMenu {
 	}
 	
 	public String toString() {
-		return "Ordena el menu con base a un parametro (codigo, nombre, precio) y lo muestra";
+		return "Ordenar el menú";
 	}
 }

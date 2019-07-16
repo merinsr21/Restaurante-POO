@@ -1,23 +1,27 @@
 package uiMain;
 
+import java.util.Map;
+
+import BaseDatos.Datos;
+
 public abstract class OpcionDeMenu {
 	
-	private int pos;
+	private String pos;
 	
 	
 	public OpcionDeMenu() {
 		
 	}
 	
-	public OpcionDeMenu(int pos) {
+	public OpcionDeMenu(String pos) {
 		this.pos = pos;
 	}
 	
-	public int getPos() {
+	public String getPos() {
 		return pos;
 	}
 	
-	public void setPos(int pos) {
+	public void setPos(String pos) {
 		this.pos = pos;
 	}
 	
@@ -25,7 +29,11 @@ public abstract class OpcionDeMenu {
 	
 	public abstract String toString();
 	
-	public static void mostrarFuncionalidades() {            //mostrar funcionalidades de la opcion de menu.
-		
+	public static void mostrarFuncionalidades() {
+		int i = 1;
+		for (Map.Entry<String, OpcionDeMenu> opcionDeMenu : Datos.funcionalidades.entrySet()) {   //mostrar funcionalidades de la opcion de menu.
+			System.out.println(i + " "+opcionDeMenu.getValue());
+			i++;
+		}
 	}
 }
