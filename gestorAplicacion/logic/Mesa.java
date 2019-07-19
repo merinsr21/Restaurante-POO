@@ -7,7 +7,7 @@ public class Mesa {
 	private int codigo;
 	private int numeroDeSillas;
 	private Boolean ocupada;
-	private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+	private static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 	private ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
 	private static ArrayList<Mesa> mesas = new ArrayList<Mesa>();
 	
@@ -49,19 +49,20 @@ public class Mesa {
 	// funcionalidad para ver mesas disponibles.
 	//funcionalidad para ocupar mesa.
 	
-	public String ocuparMesa(int codigo, Usuario usuario) {              //Solo funciona para un usuario.
+	public static String ocuparMesa(int codigo, Usuario usuario) {              //A una mesa solo se le puede asignar un usuario. REVISAR!
+		String print = "la mesa que desea ocupar no existe";
 		for(Mesa buscador : mesas) {
 			if(buscador.codigo == codigo) {
 				if(buscador.ocupada == true) {
-					return "La mesa ya se encuentra ocupada.";
+					print = "La mesa ya se encuentra ocupada.";
 				}
 				else {
-					usuario.getMesa() = buscador;
+					usuario.setMesa(buscador);
 					usuarios.add(usuario);
-					return "La mesa ha sido ocupada.";
+					print = "La mesa"+" "+buscador.getCodigo()+" "+"ha sido ocupada.";
 				}
 			}
 		}
-		return "La mesa que desea ocupar no existe.";
+		return print;
 	}
 }

@@ -61,7 +61,7 @@ public class Calificacion {
 		this.usuario = usuario;
 	}
 	
-	public static void crearCalificacion(int codigo, int puntaje) {
+	public static void crearCalificacion(int codigo, int puntaje) {                // REVISAR
 		Calificacion calificacion = new Calificacion(codigo, puntaje);
 		calificaciones.add(calificacion);		
 		
