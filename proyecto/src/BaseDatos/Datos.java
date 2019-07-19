@@ -24,7 +24,7 @@ public class Datos {
 	
 	public static void cargarDatos() {
 		crearArchivosYDirs();
-		String ruta = System.getProperty("usuario.dir")+"\\src\\temp\\";
+		String ruta = System.getProperty("user.dir")+"\\src\\temp\\";
 		cargarUsuarios(ruta);
 		cargarAdmins(ruta);
 		CargarMenus(ruta);
@@ -37,7 +37,7 @@ public class Datos {
             String line;
             while((line = br.readLine()) != null){
             	if (!line.isEmpty()) {
-            		String [] usuario = line.split("|");
+            		String [] usuario = line.split(";");
             		String nombreUsuario = usuario[0];
             		String nombre = usuario[1];
             		String correo = usuario[2];
@@ -58,7 +58,7 @@ public class Datos {
             String line;
             while((line = br.readLine()) != null){
             	if (!line.isEmpty()) {
-            		String [] usuario = line.split("|");
+            		String [] usuario = line.split(";");
             		String nombreUsuario = usuario[0];
             		String nombre = usuario[1];
             		String correo = usuario[2];
@@ -79,7 +79,7 @@ public class Datos {
             String line;
             while((line = br.readLine()) != null){
             	if (!line.isEmpty()) {
-            		String [] menu = line.split("|");
+            		String [] menu = line.split(";");
             		Usuario usuario = Usuario.getUsuarioConNombreUsuario(menu[0]);
             		//slice de arrays
             		String[] funcionalidades = Arrays.copyOfRange(menu, 1, menu.length);
@@ -94,7 +94,7 @@ public class Datos {
 	
 	public static void guardarDatos() {
 		crearArchivosYDirs();
-		String ruta = System.getProperty("usuario.dir")+"\\src\\temp\\";
+		String ruta = System.getProperty("user.dir")+"\\src\\temp\\";
 		guardarUsuarios(ruta);
 		guardarMenus(ruta);
 	}
