@@ -111,11 +111,11 @@ public class Usuario {
 			Datos.usuarios.put(nombreUsuario,usuario);
 			return "Ha sido creado";
 		}else{
-			return "No ha sido creado...";
+			return "No ha sido creado";
 		}
 	}
 	
-	public static String editUser(Usuario uusuario,int opcion, String valor){
+	public static String editarUsuario(Usuario uusuario,int opcion, String valor){
 		switch (opcion) {
 		case 1:	
 			uusuario.setNombre(valor);

@@ -20,7 +20,7 @@ public class MenuDeConsola {
 		this.opciones = opciones;
 	}
 	
-	public Usuario getUser() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 

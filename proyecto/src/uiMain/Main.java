@@ -75,5 +75,4 @@ public class Main {
 		Main.menuInvitado = new MenuDeConsola(opcionesInvitado);
 		
 	}
-
 }

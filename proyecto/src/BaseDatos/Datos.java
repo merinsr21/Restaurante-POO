@@ -27,7 +27,7 @@ public class Datos {
 		String ruta = System.getProperty("user.dir")+"\\src\\temp\\";
 		cargarUsuarios(ruta);
 		cargarAdmins(ruta);
-		CargarMenus(ruta);
+		cargarMenus(ruta);
 	}
 	
 	private static void cargarUsuarios(String ruta) {
@@ -72,7 +72,7 @@ public class Datos {
         }
 	}
 	
-	private static void CargarMenus(String ruta) {
+	private static void cargarMenus(String ruta) {
 		try{
             FileReader fr = new FileReader(ruta+"menusUsuarios.txt");
             BufferedReader br = new BufferedReader(fr);
@@ -88,7 +88,7 @@ public class Datos {
             }
             br.close();
         }catch(Exception e){
-        	//Error al leer
+        	//Error de lectura
         }
 	}
 	
@@ -106,12 +106,12 @@ public class Datos {
             PrintWriter pw = new PrintWriter(fwU);
             PrintWriter pwAdmin = new PrintWriter(fwAdmin);
     		for (Map.Entry<String, Usuario> usuario : usuarios.entrySet()) {
-    			Usuario userObj = usuario.getValue();
-    			String line = userObj.getNombreUsuario()+";";
-    			line += userObj.getNombre()+";";
-    			line += userObj.getCorreo()+";";
-    			line += userObj.getContraseña();
-    			if(userObj instanceof Administrador) {
+    			Usuario usuarioO = usuario.getValue();
+    			String line = usuarioO.getNombreUsuario()+";";
+    			line += usuarioO.getNombre()+";";
+    			line += usuarioO.getCorreo()+";";
+    			line += usuarioO.getContraseña();
+    			if(usuarioO instanceof Administrador) {
     				pwAdmin.println(line);
 					
 				}else {
@@ -132,11 +132,11 @@ public class Datos {
             PrintWriter pw = new PrintWriter(fw);
     		for (Map.Entry<String, MenuDeConsola> menu : menus.entrySet()) {
     			MenuDeConsola menuObj = menu.getValue();
-    			String line = menuObj.getUser().getNombreUsuario()+";";
+    			String line = menuObj.getUsuario().getNombreUsuario()+";";
     			for (String  op : menuObj.getFuncionalidades()) {
     				line += op+";";
 				}
-    			//Correccion por el ; extra
+    			//Para borrar el ; que se pone al final
     			pw.println(line.substring(0,(line.length()-1)));
     		}
             pw.close();
@@ -153,11 +153,11 @@ public class Datos {
 	    if (! directorio.exists()){
 	        directorio.mkdir();
 	    }
-		File usersRegisteredFile = new File(ruta+"usuarios.txt");
-		File adminUsersFile = new File(ruta+"administradores.txt");
+		File archivoUsuariosRegistrados = new File(ruta+"usuarios.txt");
+		File archivoAdmin = new File(ruta+"administradores.txt");
 		File menusUsuarios = new File(ruta+"menusUsuarios.txt");
-		usersRegisteredFile.createNewFile();
-		adminUsersFile.createNewFile();
+		archivoUsuariosRegistrados.createNewFile();
+		archivoAdmin.createNewFile();
 		}
 		catch(IOException e){
 			//Ocurrio algo al crear las carpetas y los archivos
