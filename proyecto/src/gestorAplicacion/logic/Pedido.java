@@ -77,7 +77,7 @@ public class Pedido {
 			int pt = Integer.parseInt(r.getPrecioTotal());
 			sumatoria += pt;
 			s = Integer.toString(sumatoria);
-		}
+                }
 		pedido.setPrecioTotal(s);
 		return sumatoria;
 	}
