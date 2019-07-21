@@ -31,7 +31,7 @@ public abstract class OpcionDeMenu {
 	
 	public static void mostrarFuncionalidades() {
 		int i = 1;
-		for (Map.Entry<String, OpcionDeMenu> opcionDeMenu : Datos.funcionalidades.entrySet()) {   //mostrar funcionalidades de la opcion de menu.
+		for (Map.Entry<String, OpcionDeMenu> opcionDeMenu : Datos.funcionalidades.entrySet()) {   //mostrar funcionalidades de la opción de menú.
 			System.out.println(i + " "+opcionDeMenu.getValue());
 			i++;
 		}

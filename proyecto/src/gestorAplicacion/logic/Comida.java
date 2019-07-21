@@ -1,41 +1,44 @@
 package gestorAplicacion.logic;
 import java.util.*;
 
+import BaseDatos.*;
+
+
 public class Comida implements Comparable<Comida> {
 	
-	private int codigo;
+	private String codigo;
 	private String nombre;
-	private int precio;
+	private String precio;
 	private ArrayList<DetallePedido> pedidos = new ArrayList<DetallePedido>();
 	private ArrayList<Calificacion> calificaciones = new ArrayList<Calificacion>();
-	private static ArrayList<Comida> menu = new ArrayList<Comida>();
+	private static ArrayList<Comida> menuC = new ArrayList<Comida>();
 	
 	public Comida() {
 		
 	}
 	
-	
-	public Comida(int codigo, String nombre, int precio) {
+	public Comida(String codigo, String nombre, String precio) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.precio = precio;
+		Datos.menuComidas.put(codigo, this);
 	}
 	
-	public static void agregarComida(int codigo, String nombre, int precio) {
+	public static void agregarComida(String codigo, String nombre, String precio) {
 		Comida comida = new Comida(codigo,nombre,precio);
-		getMenu().add(comida);
+		getMenuC().add(comida);
+		Datos.menuComidas.put(codigo, comida);
 	}
 	
 	public String toString() {
-		return "    "+codigo+"     "+nombre+"     "+precio;
+		return "   "+codigo+"      "+nombre+"         "+precio;
 	}
 	
-
-	public static ArrayList<Comida> getMenu() {
-		return menu;
+	public static ArrayList<Comida> getMenuC() {
+		return menuC;
 	}
 	
-	public int getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 	
@@ -43,15 +46,17 @@ public class Comida implements Comparable<Comida> {
 		return nombre;
 	}
 	
-	public int getPrecio() {
+	public String getPrecio() {
 		return precio;
 	}
 	
-	public int compareTo(Comida c) {                    // como hacer para que el collections.sort() entre el compareTo que yo quiera.
-		if(codigo < c.codigo) {
+	public int compareTo(Comida c) {   // como hacer para que el collections.sort() entre el compareTo que yo quiera.
+		int codigo1 = Integer.parseInt(codigo);
+		int codigo2 = Integer.parseInt(c.codigo);
+		if(codigo1 < codigo2) {
 			return -1;
 		}
-		if(codigo > c.codigo) {
+		if(codigo1 > codigo2) {
 			return 1;
 		}
 		else {
@@ -60,10 +65,12 @@ public class Comida implements Comparable<Comida> {
 	}
 	
 	public int compareToByPrecio(Comida c) {                    // como hacer para que el collections.sort() entre el compareTo que yo quiera ?
-		if(precio < c.precio) {
+		int precio1 = Integer.parseInt(precio);
+		int precio2 = Integer.parseInt(c.precio);
+		if(precio1 < precio2) {
 			return -1;
 		}
-		if(precio > c.precio) {
+		if(precio1 > precio2) {
 			return 1;
 		}
 		else {

@@ -1,6 +1,9 @@
 package uiMain.funcionalidades;
 
 import uiMain.*;
+
+import java.util.Map;
+import BaseDatos.*;
 import gestorAplicacion.logic.Mesa;
 
 public class VerMesasDisponibles extends OpcionDeMenu {
@@ -11,9 +14,10 @@ public class VerMesasDisponibles extends OpcionDeMenu {
 	
 	public void ejecutar() {
 		System.out.println("Las siguientes mesas están disponibles: ");
-		for(Mesa r: Mesa.getMesas()) {
-			if(r.getOcupada() == false) {
-				System.out.println(r);
+		for(Map.Entry<String, Mesa> mesa : Datos.mesas.entrySet()) {
+			Mesa mesaOb = mesa.getValue();
+			if(mesaOb.getOcupada().equals("false")) {
+				System.out.println(mesaOb);
 			}
 		}
 	}

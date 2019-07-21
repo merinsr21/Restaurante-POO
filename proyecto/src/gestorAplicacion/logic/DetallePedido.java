@@ -6,8 +6,8 @@ public class DetallePedido {
 	private int cantidad;
 	private Comida comida;
 	private Pedido pedido;
-	private int precioTotal;
-	//private ArrayList<DetallePedido> detalles = new ArrayList<DetallePedido>();
+	private String precioTotal;
+	private ArrayList<DetallePedido> detallesD = new ArrayList<DetallePedido>();
 	
 	public DetallePedido(int cantidad, Comida comida) { 
 		this.cantidad = cantidad;
@@ -34,23 +34,28 @@ public class DetallePedido {
 	public void setComida(Comida comida) {
 		this.comida = comida;
 	}
+	public ArrayList<DetallePedido> getDetallesD() {
+		return detallesD;
+	}
 	
-	public int getPrecioTotal() {
+	public String getPrecioTotal() {
 		return precioTotal;
 	}
 	
-	public void setPrecioTotal(int precioTotal) {
+	public void setPrecioTotal(String precioTotal) {
 		this.precioTotal = precioTotal;
 	}
 	
 	
 	public static DetallePedido crearDetallePedido(int codigo, int cantidad) {
 		DetallePedido t = null;
-		for(Comida r: Comida.getMenu()) {
-			if(r.getCodigo() == codigo) {
+		for(Comida r: Comida.getMenuC()) {
+			if(r.getCodigo().equals(codigo)) {
 				DetallePedido detallePedido = new DetallePedido(cantidad,r);
 				t = detallePedido;
-				detallePedido.setPrecioTotal(r.getPrecio()*cantidad);
+				int gp = Integer.parseInt(r.getPrecio());
+				String gpc = Integer.toString(gp*cantidad);
+				detallePedido.setPrecioTotal(gpc);
 				break;
 			}
 		}
@@ -58,7 +63,7 @@ public class DetallePedido {
 	}
 	
 	public String toString() {
-		return comida.getCodigo()+" "+comida.getNombre()+" "+cantidad+" "+comida.getPrecio()+" "+precioTotal; 
+		return "Código: "+comida.getCodigo()+"| Nombre: "+comida.getNombre()+"| Cantidad: "+cantidad+"| Precio: "+comida.getPrecio()+"| Precio Total: "+precioTotal; 
 	}
 	
 	

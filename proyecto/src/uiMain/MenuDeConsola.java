@@ -49,7 +49,7 @@ public class MenuDeConsola {
 	public void lanzarMenu(){
 		Scanner entrada = new Scanner(System.in);
 		
-		System.out.println();
+		//System.out.println();
 		int i = 1;
 		for (OpcionDeMenu option : opciones) {
 			
@@ -59,7 +59,7 @@ public class MenuDeConsola {
 		//Opcion para terminar el programa, hecho con un try catch.
 		System.out.println(i+" Terminar programa");
 		
-		System.out.print("Ingrese la opción: ");
+		System.out.print("Ingrese una opción: ");
 		int opt = entrada.nextInt();
 		opciones.get((opt-1)).ejecutar();
 		
