@@ -12,7 +12,7 @@ public class OcuparMesa extends OpcionDeMenu{
 	
 	public void ejecutar() {
 		Scanner entrada = new Scanner(System.in);
-		System.out.println("Ingrese el código de la mesa que desea ocupar:");
+		System.out.println("Ingrese el número de la mesa que desea ocupar:");
 		int codigo = entrada.nextInt();	
 		System.out.println("Ingrese la cantidad de sillas que desea: ");
 		int numeroSillas = entrada.nextInt();

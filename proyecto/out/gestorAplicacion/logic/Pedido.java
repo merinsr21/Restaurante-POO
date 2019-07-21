@@ -5,19 +5,18 @@ import gestorAplicacion.users.*;
 public class Pedido {
 	
 	private int codigo;
-	private int precioTotal;
-	private Boolean preparado;   
+	private Boolean preparado;   //inicializa en false
 	private Chef chef;
 	private Factura factura;
 	private Usuario usuario;
 	private Mesa mesa;
-	private  ArrayList<DetallePedido> detallesP = new ArrayList<DetallePedido>();
+	private  ArrayList<DetallePedido> pedidosP = new ArrayList<DetallePedido>();
 	
 	public Pedido() {
 		
 	}
-	public Pedido(Usuario usuario) {
-		this.usuario = usuario;
+	public Pedido(int codigo) {
+		this.codigo = codigo;
 	}
 	public int getCodigo() {
 		return codigo;
@@ -49,11 +48,11 @@ public class Pedido {
 	public void setPreparado(Boolean preparado) {
 		this.preparado = preparado;
 	}
-	public ArrayList<DetallePedido> getDetallesP() {
-		return detallesP;
+	public ArrayList<DetallePedido> getDetalles() {
+		return pedidosP;
 	}
 	public void setPedidosP(DetallePedido detalle) {
-		detallesP.add(detalle);
+		pedidosP.add(detalle);
 	}
 	public Chef getChef() {
 		return chef;
@@ -61,21 +60,30 @@ public class Pedido {
 	public void setChef(Chef chef) {
 		this.chef = chef;
 	}
-	
-	public int getPrecioTotal() {
-		return precioTotal;
+	public void hacerPedido() {
+		
 	}
-	
-	public void setPrecioTotal(int precioTotal) {
-		this.precioTotal = precioTotal;
+	public void crearDetallePedido(int cantidad, int codigo) {                          //funcionaldad de hacer pedido
+		DetallePedido detalle = new DetallePedido(cantidad, codigo, codigo+1);
+		Pedido pedido = new Pedido(codigo+2);
+		Usuario usuaio = new Usuario();
+		pedido.setPedidosP(detalle);
+		usuario.setPedidosU(pedido);
 	}
-	
-	public int CalcularPrecioTotal(Pedido pedido) {
-		int sumatoria = 0;
-		for(DetallePedido r: pedido.getDetallesP()) {
-			sumatoria += r.getPrecioTotal();
+	public int precioTotal() {
+		int sum = 0;
+		for(DetallePedido t : pedidosP) {
+			int codigo = t.getComida().getPrecio();
+			int cantidad = t.getCantidad();
+			for(Comida x : Comida.getMenu()) {
+				if(x.getCodigo() == codigo) {
+					sum += x.getPrecio();
+				}
+			}
 		}
-		pedido.setPrecioTotal(sumatoria);
-		return sumatoria;
+	
 	}
+	
+	
+	
 }

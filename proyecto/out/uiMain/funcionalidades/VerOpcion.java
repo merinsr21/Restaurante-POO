@@ -22,7 +22,7 @@ public class VerOpcion extends OpcionDeMenu {
 
 	@Override
 	public String toString() {
-		return "Ver funcionalidades de un usuario";
+		return "Ver funciones de un usuario";
 	}
 
 }

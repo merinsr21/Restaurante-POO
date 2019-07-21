@@ -11,6 +11,7 @@ public class OrdenarMenu extends OpcionDeMenu {
 	}
 	
 	public void ejecutar() {
+		System.out.println("Ingrese el parámetro con el cual quiere ordenar el menú(1 = código,  2 = nombre, 3 = precio)");
 		Collections.sort(Comida.getMenu());
 		for(Comida r : Comida.getMenu()) {
 			System.out.println(r);
@@ -18,6 +19,6 @@ public class OrdenarMenu extends OpcionDeMenu {
 	}
 	
 	public String toString() {
-		return "Ordenar el menú de comidas y mostrarlo";
+		return "Ordenar el menú";
 	}
 }

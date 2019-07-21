@@ -7,7 +7,7 @@ public class DetallePedido {
 	private Comida comida;
 	private Pedido pedido;
 	private int precioTotal;
-	//private ArrayList<DetallePedido> detalles = new ArrayList<DetallePedido>();
+	private ArrayList<DetallePedido> detallesD = new ArrayList<DetallePedido>();
 	
 	public DetallePedido(int cantidad, Comida comida) { 
 		this.cantidad = cantidad;
@@ -33,6 +33,9 @@ public class DetallePedido {
 	}
 	public void setComida(Comida comida) {
 		this.comida = comida;
+	}
+	public ArrayList<DetallePedido> getDetallesD() {
+		return detallesD;
 	}
 	
 	public int getPrecioTotal() {

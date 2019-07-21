@@ -5,9 +5,9 @@ import java.util.Scanner;
 import gestorAplicacion.users.Usuario;
 import uiMain.OpcionDeMenu;
 
-public class VerOpcion extends OpcionDeMenu {
+public class AñadirOpcion extends OpcionDeMenu{
 	
-	public VerOpcion(String pos){
+	public AñadirOpcion(String pos){
 		super(pos);
 	}
 	
@@ -17,12 +17,15 @@ public class VerOpcion extends OpcionDeMenu {
 		System.out.print("Ingrese el nombre de usuario: ");
 		String nombreUsuario = entrada.next();
 		Usuario usuario = Usuario.getUsuarioConNombreUsuario(nombreUsuario);
-		usuario.getMenu().verOpcion();
+		OpcionDeMenu.mostrarFuncionalidades();
+		System.out.print("Ingrese el número de la funcionalidad a añadir: ");
+		String op = entrada.next();
+		usuario.getMenu().añadirOpcion(op);
 	}
 
 	@Override
 	public String toString() {
-		return "Ver funcionalidades de un usuario";
+		return "Añadir funcionalidades a un usuario";
 	}
 
 }

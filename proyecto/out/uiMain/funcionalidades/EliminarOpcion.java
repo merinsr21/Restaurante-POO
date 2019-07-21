@@ -5,9 +5,9 @@ import java.util.Scanner;
 import gestorAplicacion.users.Usuario;
 import uiMain.OpcionDeMenu;
 
-public class VerOpcion extends OpcionDeMenu {
+public class EliminarOpcion extends OpcionDeMenu{
 	
-	public VerOpcion(String pos){
+	public EliminarOpcion(String pos){
 		super(pos);
 	}
 	
@@ -18,11 +18,14 @@ public class VerOpcion extends OpcionDeMenu {
 		String nombreUsuario = entrada.next();
 		Usuario usuario = Usuario.getUsuarioConNombreUsuario(nombreUsuario);
 		usuario.getMenu().verOpcion();
+		System.out.print("Ingrese el número de la funcionalidad a remover: ");
+		int i = entrada.nextInt();
+		usuario.getMenu().eliminarOpcion(i);
 	}
 
 	@Override
 	public String toString() {
-		return "Ver funcionalidades de un usuario";
+		return "Quitar funcionalidades de un usuario";
 	}
 
 }

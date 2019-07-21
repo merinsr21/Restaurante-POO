@@ -17,7 +17,7 @@ public class VerFactura extends OpcionDeMenu {
 		Scanner entrada = new Scanner(System.in);
 		System.out.print("Ingrese su nombre de usuario: ");
 		String nombreUsuario = entrada.next();
-		System.out.println("Ingrese la fecha :");
+		System.out.println("Ingrese la fecha de su factura:");
 		Pedido p = null;
 		String fecha = entrada.next();
 		for(Pedido r: Usuario.getUsuarioConNombreUsuario(nombreUsuario).getPedidosU()) {
@@ -28,14 +28,14 @@ public class VerFactura extends OpcionDeMenu {
 		}
 	
 		System.out.println("Factura");
-		for(DetallePedido t: p.getDetalles()) {
+		for(DetallePedido t: p.getDetallesP()) {
 			System.out.println(t);
 		}
 		System.out.println("Precio total: ");
 	}
 	
 	public String toString() {
-		return "Muestra la factura";
+		return "Ver factura de acuerdo a la fecha";
 	}
 
 }
