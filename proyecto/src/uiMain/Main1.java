@@ -19,22 +19,18 @@ public class Main1 {
 		Usuario usuario2 = new Usuario("pepe","pepito2","caca@gmail.coma","caca1234");
 		VerMesasDisponibles ver = new VerMesasDisponibles("5");
 		OcuparMesa ocupar = new OcuparMesa("6");
+		Pedir pedir = new Pedir("7");
+		VerFactura verFactura = new VerFactura("8");
 		
-		//agregar.ejecutar();
-		//agregar.ejecutar();
-		//agregar.ejecutar();
-		//agregar.ejecutar();
-		//mostrar.ejecutar();
+		agregar.ejecutar();
+		agregar.ejecutar();
+		agregar.ejecutar();
+		agregar.ejecutar();
+		mostrar.ejecutar();
 		ver.ejecutar();
 		ocupar.ejecutar();
-		//ocupar.ejecutar();
-		ver.ejecutar();
-		System.out.println(usuario.getMesa());
-		for(Mesa r: Mesa.getMesas()) {
-			if(r.getCodigo() == 1) {
-				System.out.println(r.usuarios.get(0));
-			}
-		}
+		pedir.ejecutar();
+		verFactura.ejecutar();       //Error
 		
 		
 		
@@ -43,8 +39,7 @@ public class Main1 {
 		
 		
 		
-		
-		
+
 		
 	}
 

@@ -4,20 +4,14 @@ import java.util.*;
 public class DetallePedido {
 	
 	private int cantidad;
-	private int codigoDet;
 	private Comida comida;
 	private Pedido pedido;
-	private ArrayList<DetallePedido> detalles = new ArrayList<DetallePedido>();
+	private int precioTotal;
+	//private ArrayList<DetallePedido> detalles = new ArrayList<DetallePedido>();
 	
-	public DetallePedido(int cantidad, int codigoCom,int codigoDet) { //constructor para inicializar comida con base a un código
+	public DetallePedido(int cantidad, Comida comida) { 
 		this.cantidad = cantidad;
-		this.codigoDet = codigoDet;
-		for(Comida r : Comida.getMenu()) {
-			if(r.getCodigo() == codigoCom ) {
-				comida = r;
-				break;
-			}
-		}	
+		this.comida = comida;
 	}
 	public DetallePedido() {
 		
@@ -41,7 +35,31 @@ public class DetallePedido {
 		this.comida = comida;
 	}
 	
+	public int getPrecioTotal() {
+		return precioTotal;
+	}
 	
+	public void setPrecioTotal(int precioTotal) {
+		this.precioTotal = precioTotal;
+	}
+	
+	
+	public static DetallePedido crearDetallePedido(int codigo, int cantidad) {
+		DetallePedido t = null;
+		for(Comida r: Comida.getMenu()) {
+			if(r.getCodigo() == codigo) {
+				DetallePedido detallePedido = new DetallePedido(cantidad,r);
+				t = detallePedido;
+				detallePedido.setPrecioTotal(r.getPrecio()*cantidad);
+				break;
+			}
+		}
+		return t;
+	}
+	
+	public String toString() {
+		return comida.getCodigo()+" "+comida.getNombre()+" "+cantidad+" "+comida.getPrecio()+" "+precioTotal; 
+	}
 	
 	
 }
