@@ -1,1 +1,2 @@
 laura;usuarioInvitado;laura@gmail.com;12345
+felipe;Felipe;felipe@gmail.com;12345

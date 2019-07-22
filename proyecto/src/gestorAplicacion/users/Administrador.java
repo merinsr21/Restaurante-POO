@@ -17,15 +17,16 @@ public class Administrador extends Usuario{
 	
 	public static String nuevoAdministrador(String nombre, String nombreUsuario, String correo, String contraseña){
 		Administrador usuario = new Administrador();
-		//Validaciones de cada parametro
+		//Validaciones de cada parámetro al ser private
 		usuario.setNombre(nombre);
 		usuario.setNombreUsuario(nombreUsuario);
 		usuario.setCorreo(correo);
 		usuario.setContraseña(contraseña);
 		
-		//Menu por defecto al crear un nuevo usuario administrador
-		String [] funcionalidades = {"1","2","3","4","5","6","7"};
+		//Menú por defecto al crear un nuevo usuario administrador
+		String [] funcionalidades = {"1","3","7","8","9","10","11","12","14","13"};
 		MenuDeConsola.nuevoMenu(usuario, funcionalidades);
+		
 		if(true){
 			Datos.usuarios.put(nombreUsuario, usuario);
 			return "Ha sido creado";

@@ -4,14 +4,14 @@ import gestorAplicacion.users.*;
 
 public class Pedido {
 	
-	private int codigo;
-	private int precioTotal;
+	private String codigo;
+	private String precioTotal;
 	private Boolean preparado;   
 	private Chef chef;
 	private Factura factura;
 	private Usuario usuario;
 	private Mesa mesa;
-	private  ArrayList<DetallePedido> detalles = new ArrayList<DetallePedido>();
+	private ArrayList<DetallePedido> detallesP = new ArrayList<DetallePedido>();
 	
 	public Pedido() {
 		
@@ -19,10 +19,10 @@ public class Pedido {
 	public Pedido(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	public int getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(int codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 	public Factura getFactura() {
@@ -49,11 +49,11 @@ public class Pedido {
 	public void setPreparado(Boolean preparado) {
 		this.preparado = preparado;
 	}
-	public ArrayList<DetallePedido> getDetalles() {
-		return detalles;
+	public ArrayList<DetallePedido> getDetallesP() {
+		return detallesP;
 	}
 	public void setPedidosP(DetallePedido detalle) {
-		detalles.add(detalle);
+		detallesP.add(detalle);
 	}
 	public Chef getChef() {
 		return chef;
@@ -62,20 +62,23 @@ public class Pedido {
 		this.chef = chef;
 	}
 	
-	public int getPrecioTotal() {
+	public String getPrecioTotal() {
 		return precioTotal;
 	}
 	
-	public void setPrecioTotal(int precioTotal) {
+	public void setPrecioTotal(String precioTotal) {
 		this.precioTotal = precioTotal;
 	}
 	
-	public int CalcularPrecioTotal(Pedido pedido) {
+	public static int calcularPrecioTotal(Pedido pedido) {
 		int sumatoria = 0;
-		for(DetallePedido r: pedido.getDetalles()) {
-			sumatoria += r.getPrecioTotal();
+		String s = null;
+		for(DetallePedido r: pedido.getDetallesP()) {
+			int pt = Integer.parseInt(r.getPrecioTotal());
+			sumatoria += pt;
+			s = Integer.toString(sumatoria);
 		}
-		pedido.setPrecioTotal(sumatoria);
+		pedido.setPrecioTotal(s);
 		return sumatoria;
 	}
 }

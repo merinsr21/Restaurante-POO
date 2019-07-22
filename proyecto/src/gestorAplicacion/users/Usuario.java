@@ -103,16 +103,20 @@ public class Usuario {
 		this.menu = menu;
 	}
 	
+	public HashMap<String, Usuario> getUsuarios(){
+		return Datos.usuarios;
+	}
+	
 	public static String nuevoUsuario(String nombre, String nombreUsuario, String correo, String contraseña){
 		Usuario usuario = new Usuario();
-		//Validaciones de cada parametro
+		//Validaciones de cada parámetro porque son private en la clase
 		usuario.setNombre(nombre);
 		usuario.setNombreUsuario(nombreUsuario);
 		usuario.setCorreo(correo);
 		usuario.setContraseña(contraseña);
 		
 		//Menu por defecto al crear un nuevo usuario
-		String [] funcionalidades = {"8","9","10","11"};
+		String [] funcionalidades = {"1","2","3","4","5","6","12"};
 		MenuDeConsola.nuevoMenu(usuario, funcionalidades);
 		if(true){
 			Datos.usuarios.put(nombreUsuario,usuario);
@@ -137,17 +141,13 @@ public class Usuario {
 	
 	public static String eliminarUsuario(String nombreUsuario){
 		Datos.usuarios.remove(nombreUsuario);
-		return "Ha sido eliminado";
+		return "El usuario se ha eliminado";
 	}
 	
 	public static Usuario getUsuarioConNombreUsuario(String nombreUsuario){
         return Datos.usuarios.get(nombreUsuario);
     }
-	
-	public HashMap<String, Usuario> getUsers(){
-		return Datos.usuarios;
-	}
-	
+
     public static String iniciarSesion(String nombreUsuario, String contraseña){
         Usuario usuario = Usuario.getUsuarioConNombreUsuario(nombreUsuario);
         if (usuario != null){

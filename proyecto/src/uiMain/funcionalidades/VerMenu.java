@@ -1,5 +1,9 @@
 package uiMain.funcionalidades;
 import uiMain.*;
+
+import java.util.TreeMap;
+
+import BaseDatos.Datos;
 import gestorAplicacion.logic.Comida;
 
 public class VerMenu extends OpcionDeMenu {
@@ -11,9 +15,10 @@ public class VerMenu extends OpcionDeMenu {
 		
 	}
 	public void ejecutar() {
-		System.out.println("     "+"MENÚ");
-		System.out.println("Código | Nombre | Precio");
-		for(Comida r : Comida.getMenu()) {
+		System.out.println("                   "+"MENÚ\n");
+		System.out.println("Código |         Nombre          |   Precio ");
+		TreeMap<String, Comida> ordenado = new TreeMap<String, Comida>(Datos.menuComidas);
+		for(Comida r : ordenado.values()) {
 			System.out.println(r);
 		}
 	}

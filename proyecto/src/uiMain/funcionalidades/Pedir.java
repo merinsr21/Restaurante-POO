@@ -17,7 +17,7 @@ public class Pedir extends OpcionDeMenu {
 		System.out.print("Ingrese su nombre de usuario: ");
 		String nombreUsuario = entrada.next();
 		if(Usuario.getUsuarioConNombreUsuario(nombreUsuario).getMesa() != null) {
-			System.out.println("Ingrese la fecha :");
+			System.out.println("Ingrese la fecha actual:");
 			String fecha = entrada.next();
 			Pedido pedido = new Pedido(Usuario.getUsuarioConNombreUsuario(nombreUsuario));
 			Factura factura = new Factura(Usuario.getUsuarioConNombreUsuario(nombreUsuario),pedido,fecha);
@@ -25,10 +25,10 @@ public class Pedir extends OpcionDeMenu {
 			Usuario.getUsuarioConNombreUsuario(nombreUsuario).setFacturasU(factura);
 			factura.setPedido(pedido);
 			pedido.setFactura(factura);
-			System.out.print("Ingrese la cantidad de platos que desee pedir :");
+			System.out.print("Ingrese la cantidad de platos que desee pedir:");
 			int ciclo = entrada.nextInt();
 			for (int i = 1; i <= ciclo; i++) {
-				System.out.print("Ingrese el codigo del plato que desea ordenar: ");
+				System.out.print("Ingrese el código del plato que desea ordenar: ");
 				int codigo = entrada.nextInt();
 				System.out.print("Ingrese la cantidad de unidades de este plato que desea ordenar: ");
 				int cantidad = entrada.nextInt();

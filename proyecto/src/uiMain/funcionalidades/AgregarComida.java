@@ -12,10 +12,10 @@ public class AgregarComida extends OpcionDeMenu {
 	
 	public void ejecutar() {
 		Scanner entrada = new Scanner(System.in);
-		System.out.println("Ingrese el codigo, nombre y precio de la comida que desea agregar en el menu");	
-		int c = entrada.nextInt();
+		System.out.println("Ingrese el código, nombre y precio de la comida que desea agregar en el menú:");	
+		String c = entrada.next();
 		String n = entrada.next();
-		int p = entrada.nextInt();
+		String p = entrada.next();
 		Comida.agregarComida(c, n, p);
 	}
 	
