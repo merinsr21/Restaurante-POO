@@ -12,6 +12,7 @@ public class Pedido {
 	private Usuario usuario;
 	private Mesa mesa;
 	private ArrayList<DetallePedido> detallesP = new ArrayList<DetallePedido>();
+
 	
 	public Pedido() {
 		

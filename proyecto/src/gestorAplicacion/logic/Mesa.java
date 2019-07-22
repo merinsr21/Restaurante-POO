@@ -12,6 +12,7 @@ public class Mesa {
 	public ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 	private ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
 	private static ArrayList<Mesa> mesasM = new ArrayList<Mesa>();
+
 	
 	public Mesa() {
 
@@ -46,6 +47,10 @@ public class Mesa {
 	}
 	public ArrayList<Mesa> getMesasM(){
 		return mesasM;
+	}
+	
+	public HashMap<String, Mesa> getMesasD(){
+		return Datos.mesas;
 	}
 	
 	public HashMap<String, Mesa> getMesasD(){

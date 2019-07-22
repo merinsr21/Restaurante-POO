@@ -49,7 +49,7 @@ public class MenuDeConsola {
 	public void lanzarMenu(){
 		Scanner entrada = new Scanner(System.in);
 		
-		System.out.println();
+		//System.out.println();
 		int i = 1;
 		for (OpcionDeMenu option : opciones) {
 			

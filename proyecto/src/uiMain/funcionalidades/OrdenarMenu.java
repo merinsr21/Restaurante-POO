@@ -19,4 +19,6 @@ public class OrdenarMenu extends OpcionDeMenu {
 		return null;
 	}
 
+	return "Ordenar el menú de comidas y mostrarlo";
+
 }

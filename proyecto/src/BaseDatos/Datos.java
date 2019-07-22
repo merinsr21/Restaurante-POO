@@ -25,6 +25,7 @@ public class Datos {
 	public static HashMap<String, Comida> menuComidas = new HashMap<String, Comida>(); //String= Código de la comida
 	public static HashMap<String, Pedido> pedidos = new HashMap<String, Pedido>(); //String = codigo del pedido
 	public static HashMap<String, Factura> facturas = new HashMap<String, Factura>(); //String = codigo de la factura
+
 	
 	public static void cargarDatos() {
 		crearArchivosYDirs();
