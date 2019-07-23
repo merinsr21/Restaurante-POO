@@ -3,6 +3,7 @@ import java.util.*;
 
 public class DetallePedido {
 	
+
 	private String codigoD;
 	private String cantidad;
 	private Comida comida;

@@ -2,6 +2,8 @@ package uiMain.funcionalidades;
 
 import uiMain.*; 
 import java.util.*;
+
+import BaseDatos.Datos;
 import gestorAplicacion.logic.*;
 import gestorAplicacion.users.*;;
 
@@ -22,7 +24,9 @@ public class HacerPedido extends OpcionDeMenu {
 			Pedido pedido = new Pedido(Usuario.getUsuarioConNombreUsuario(nombreUsuario));
 			Factura factura = new Factura(Usuario.getUsuarioConNombreUsuario(nombreUsuario),pedido,fecha);
 			Usuario.getUsuarioConNombreUsuario(nombreUsuario).setPedidosU(pedido);
+			Datos.pedidos.put(nombreUsuario,pedido);
 			Usuario.getUsuarioConNombreUsuario(nombreUsuario).setFacturasU(factura);
+			Datos.facturas.put(nombreUsuario,factura);
 			factura.setPedido(pedido);
 			pedido.setFactura(factura);
 			Chef.setPedidos(pedido);

@@ -23,7 +23,9 @@ public class Datos {
 	public static HashMap<String, OpcionDeMenu> funcionalidades = new HashMap<String, OpcionDeMenu>();
 	public static HashMap<String, Mesa> mesas = new HashMap<String, Mesa>();   //String= Código de la mesa
 	public static HashMap<String, Comida> menuComidas = new HashMap<String, Comida>(); //String= Código de la comida
-	public static HashMap<String, Pedido> pedidos = new HashMap<String, Pedido>();
+	public static HashMap<String, Pedido> pedidos = new HashMap<String, Pedido>(); //String = codigo del pedido
+	public static HashMap<String, Factura> facturas = new HashMap<String, Factura>(); //String = codigo de la factura
+
 	
 	public static void cargarDatos() {
 		crearArchivosYDirs();
@@ -124,9 +126,10 @@ public class Datos {
 			while((line = br.readLine()) != null) {
 				if(!line.isEmpty()) {
 					String [] pedido = line.split(";");
-					String codigo = pedido[0];
-					String precioTotal = pedido[3];
-					
+					Usuario usuario = Usuario.getUsuarioConNombreUsuario(pedido[0]);
+					String codigo = pedido[1];
+					Factura factura = Factura.getFacturaConCodigo(pedido[2]);
+					String precioTotal = pedido[3];					
 				}
 			}
 			br.close();

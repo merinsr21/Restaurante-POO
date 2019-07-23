@@ -1,10 +1,12 @@
 package gestorAplicacion.logic;
 import java.util.*;
+
+import BaseDatos.Datos;
 import gestorAplicacion.users.*;
 
 public class Factura {
 	
-	private int codigo;
+	private String codigo;
 	private String fecha;
 	private Usuario usuario;
 	private Pedido pedido;
@@ -18,10 +20,10 @@ public class Factura {
 	public Factura() {
 		
 	}
-	public int getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(int codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 	public Usuario getUsuario() {
@@ -46,8 +48,11 @@ public class Factura {
 	public ArrayList<Calificacion> getCalificaciones() {
 		return calificaciones;
 	}
-	public void setCalificaciones(ArrayList<Calificacion> calificaciones) {
-		this.calificaciones = calificaciones;
+	public void setCalificaciones(Calificacion calificacion) {
+		calificaciones.add(calificacion);
+	}
+	public static Factura getFacturaConCodigo(String codigo) {
+		return Datos.facturas.get(codigo);
 	}
 	
 

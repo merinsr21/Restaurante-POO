@@ -1,3 +1,2 @@
 laura;usuarioInvitado;laura@gmail.com;12345
 chef;Chef;soyelchef@gmail.com;666
-chef2;chef2;chef2@gmail.com;12345
