@@ -11,7 +11,9 @@ public class Pedido {
 	private Factura factura;
 	private Usuario usuario;
 	private Mesa mesa;
-	private  ArrayList<DetallePedido> detallesP = new ArrayList<DetallePedido>();
+	private ArrayList<DetallePedido> detallesP = new ArrayList<DetallePedido>();
+
+	
 	
 	
 	public Pedido() {
@@ -78,7 +80,7 @@ public class Pedido {
 			int pt = Integer.parseInt(r.getPrecioTotal());
 			sumatoria += pt;
 			s = Integer.toString(sumatoria);
-                }
+		}
 		pedido.setPrecioTotal(s);
 		return sumatoria;
 	}

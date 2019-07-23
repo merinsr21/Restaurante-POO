@@ -11,7 +11,8 @@ public class Mesa {
 	private String ocupada; //ocupada = true, no ocupada = false
 	public ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 	private ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
-	private static ArrayList<Mesa> mesas = new ArrayList<Mesa>();
+	private static ArrayList<Mesa> mesasM = new ArrayList<Mesa>();
+
 	
 	public Mesa() {
 
@@ -27,6 +28,7 @@ public class Mesa {
 		Mesa mesa = new Mesa(codigo,numeroDeSillas,ocupada);               
 		mesas.add(mesa);  
 		Datos.mesas.put(codigo, mesa);
+
 	}
 	
 	public String getCodigo() {
@@ -45,7 +47,11 @@ public class Mesa {
 		this.ocupada = ocupada;
 	}
 	public ArrayList<Mesa> getMesasM(){
-		return mesas;
+		return mesasM;
+	}
+	
+	public HashMap<String, Mesa> getMesasD(){
+		return Datos.mesas;
 	}
 	
 	public HashMap<String, Mesa> getMesasD(){
@@ -59,22 +65,21 @@ public class Mesa {
 	
 	public static String ocuparMesa(String codigo, String numeroSillas, String nombreUsuario) {              //A una mesa solo se le puede asignar un usuario. REVISAR!
 		String print = "La mesa que desea ocupar no existe";
-		for(Mesa buscador : mesas) {
-			if(buscador.codigo.equals(codigo)) {
-				String bs = buscador.getNumeroDeSillas();
-				int bs1 = Integer.parseInt(bs);
-				int bs2 = Integer.parseInt(buscador.getNumeroDeSillas());
-				int bs3 = Integer.parseInt(numeroSillas);
-				if((bs2 >= bs3) && bs1 > 0) {
-					if(buscador.ocupada.equals("true")) {
+		for(Map.Entry<String, Mesa> mesa : Datos.mesas.entrySet()) {
+			Mesa mesaOb = mesa.getValue();
+			if(mesaOb.getCodigo().equals(codigo)) {
+				int bs1 = Integer.parseInt(mesaOb.getNumeroDeSillas());
+				int bs2 = Integer.parseInt(numeroSillas);
+				if((bs1 >= bs2) && bs1 > 0) {
+					if(mesaOb.getOcupada().equals("true")) {
 						print = "La mesa ya se encuentra ocupada.";
 						break;
 					}
 					else {
-						buscador.setOcupada("true");
-						Usuario.getUsuarioConNombreUsuario(nombreUsuario).setMesa(buscador);
-						buscador.usuarios.add(Usuario.getUsuarioConNombreUsuario(nombreUsuario));
-						print = "La mesa"+" "+buscador.getCodigo()+" "+"ha sido ocupada.";
+						mesaOb.setOcupada("true");
+						Usuario.getUsuarioConNombreUsuario(nombreUsuario).setMesa(mesaOb);
+						mesaOb.usuarios.add(Usuario.getUsuarioConNombreUsuario(nombreUsuario));
+						print = "La mesa"+" "+mesaOb.getCodigo()+" "+"ha sido ocupada.";
 						break;
 					}
 				}
@@ -85,10 +90,11 @@ public class Mesa {
 	}
 	
 	public void liberarMesa(String codigo) {
-		for(Mesa buscador: mesas) {
-			if(buscador.codigo.equals(codigo)) {
+		for(Map.Entry<String, Mesa> mesa : Datos.mesas.entrySet()) {
+			Mesa mesaOb = mesa.getValue();
+			if(mesaOb.codigo.equals(codigo)) {
 				usuarios.get(0).setMesa(null);
-				buscador.usuarios = null;
+				mesaOb.usuarios = null;
 			}
 		}
 	}

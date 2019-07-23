@@ -49,6 +49,7 @@ public class Chef extends Usuario{
 		MenuDeConsola.nuevoMenu(chef, funcionalidades);
 		Datos.usuarios.put(nombreUsuario,chef);
 		return "Ha sido creado";
+
 	}
 	
 	public static String calcularCalorias(Pedido pedido) {
