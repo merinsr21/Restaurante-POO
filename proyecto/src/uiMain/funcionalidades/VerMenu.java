@@ -16,7 +16,7 @@ public class VerMenu extends OpcionDeMenu {
 	}
 	public void ejecutar() {
 		System.out.println("                   "+"MENÚ\n");
-		System.out.println("Código |         Nombre          |   Precio ");
+		System.out.println("Código |           Nombre            |   Precio ");
 		TreeMap<String, Comida> ordenado = new TreeMap<String, Comida>(Datos.menuComidas);
 		for(Comida r : ordenado.values()) {
 			System.out.println(r);

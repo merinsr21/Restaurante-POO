@@ -23,7 +23,11 @@ public class Datos {
 	public static HashMap<String, OpcionDeMenu> funcionalidades = new HashMap<String, OpcionDeMenu>();
 	public static HashMap<String, Mesa> mesas = new HashMap<String, Mesa>();   //String= Código de la mesa
 	public static HashMap<String, Comida> menuComidas = new HashMap<String, Comida>(); //String= Código de la comida
-	public static HashMap<String, Pedido> pedidos = new HashMap<String, Pedido>();
+	public static HashMap<String, Pedido> pedidos = new HashMap<String, Pedido>();//
+	public static HashMap<String, Calificacion> calificaciones = new HashMap<String, Calificacion>(); //String= Codigo de la comida(calificación)
+	public static HashMap<String, Factura> facturas = new HashMap<String, Factura>();
+	//public static HashMap<String, DetallePedido> detallesPedido = new HashMap<String, DetallePedido>();
+
 	
 	public static void cargarDatos() {
 		crearArchivosYDirs();
@@ -32,6 +36,9 @@ public class Datos {
 		cargarAdmins(ruta);
 		cargarMesas(ruta);
 		cargarMenuComidas(ruta);
+		//cargarDetallesPedido(ruta);
+		cargarPedidos(ruta);
+		//cargarFacturas(ruta)
 		cargarMenus(ruta);
 	}
 	
@@ -47,7 +54,11 @@ public class Datos {
             		String nombre = usuario[1];
             		String correo = usuario[2];
             		String contraseña = usuario[3];
-            		new Usuario(nombre, nombreUsuario, correo, contraseña);
+            		String pedidosP = Pedido.getNombreArreglo(usuario[4]);
+            		Usuario usuario1 = new Usuario(nombre, nombreUsuario, correo, contraseña);
+            		for(Pedido r : Pedido.getPedidosP(pedidosP)){
+            			usuario1.setPedidosU(r);
+            		}
             	}
             }
             br.close();
@@ -86,8 +97,12 @@ public class Datos {
 					String [] comidas = line.split(";");
 					String codigo = comidas[0];
 					String nombre = comidas[1];
-					String precio = comidas[2];	
-					new Comida(codigo, nombre, precio);
+					String precio = comidas[2];
+					String calorias = comidas[3];
+					//new Comida(codigo, nombre, precio, calorias);
+					Comida comida = new Comida(codigo,nombre,precio,calorias);
+					menuComidas.put(codigo, comida);
+					Comida.setMenuC(comida);
 				}
 			}
 			br.close();
@@ -107,7 +122,9 @@ public class Datos {
 					String codigo = mesa[0];		
 					String numeroDeSillas = mesa[1];							
 					String ocupada = mesa[2];
-					new Mesa(codigo, numeroDeSillas, ocupada);
+					Mesa mesam = new Mesa(codigo, numeroDeSillas, ocupada);
+					mesas.put(codigo, mesam);
+					Mesa.setMesasM(mesam);
 				}
 			}
 			br.close();
@@ -115,6 +132,17 @@ public class Datos {
 			
 		}
 	}
+	/*private static void cargarDetallesPedido(String ruta){
+	    try{
+	        FileReader fr = new FileReader(ruta + "detallesPedido.txt");
+			BufferedReader br = new BufferedReader(fr);
+			String line;
+			while((line = br.readLine()) != null) {
+				if(!line.isEmpty()) {
+				    String [] detalles = line.split(";");
+				    */
+	
+	
 	private static void cargarPedidos(String ruta) {
 		try {
 			FileReader fr = new FileReader(ruta + "pedidos.txt");
@@ -125,7 +153,9 @@ public class Datos {
 					String [] pedido = line.split(";");
 					String codigo = pedido[0];
 					String precioTotal = pedido[3];
-					
+					Factura factura = Factura.getFacturaConCodigo(pedido[1]);
+            		Usuario usuario = Usuario.getUsuarioConNombreUsuario(pedido[2]);
+            		Pedido pedidop = new Pedido(codigo, factura, precioTotal, usuario);
 				}
 			}
 			br.close();
@@ -159,6 +189,8 @@ public class Datos {
 		guardarUsuarios(ruta);
 		guardarMesas(ruta);
 		guardarMenuDeComidas(ruta);
+		//guardarDetallesPedido(ruta);
+		//guardarPedidos(ruta);
 		guardarMenus(ruta);
 	}
 	
@@ -212,7 +244,8 @@ public class Datos {
 				Comida comidaOb = comida.getValue();
 				String line = comidaOb.getCodigo() + ";";
 				line += comidaOb.getNombre() + ";";
-				line+= comidaOb.getPrecio();
+				line+= comidaOb.getPrecio() + ";";
+				line += comidaOb.getCalorias();
 				pw.println(line);
 			}
 			pw.close();

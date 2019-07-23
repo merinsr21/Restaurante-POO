@@ -10,23 +10,21 @@ public class Mesa {
 	private String numeroDeSillas;
 	private String ocupada; //ocupada = true, no ocupada = false
 	public ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-	private ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
-	private static ArrayList<Mesa> mesas = new ArrayList<Mesa>();
+	private static ArrayList<Mesa> mesasM = new ArrayList<Mesa>();
 	
 	public Mesa() {
 
 	}
-	public Mesa(String codigo, String numeroDeSillas, String ocupada) {
+	public Mesa(String codigo, String numeroDeSillas, String ocupada) {      
 		this.codigo = codigo;
 		this.numeroDeSillas = numeroDeSillas;
 		this.ocupada = ocupada;
-		Datos.mesas.put(codigo, this);
 	}
 	
-	public void crearMesa(String codigo, String numeroDeSillas, String ocupada) {
-		Mesa mesa = new Mesa(codigo,numeroDeSillas,ocupada);
-		mesas.add(mesa);   //no sé si si sea necesario
-		Datos.mesas.put(codigo, this);
+	public static void crearMesa(String codigo, String numeroDeSillas, String ocupada) {
+		Mesa mesam = new Mesa(codigo,numeroDeSillas,ocupada);               
+		mesasM.add(mesam);  
+		Datos.mesas.put(codigo, mesam);
 	}
 	
 	public String getCodigo() {
@@ -44,8 +42,11 @@ public class Mesa {
 	public void setOcupada(String ocupada) {
 		this.ocupada = ocupada;
 	}
-	public ArrayList<Mesa> getMesasM(){
-		return mesas;
+	public  static ArrayList<Mesa> getMesasM(){
+		return mesasM;
+	}
+	public static void setMesasM(Mesa mesa){
+		mesasM.add(mesa);
 	}
 	
 	public HashMap<String, Mesa> getMesasD(){
@@ -59,7 +60,7 @@ public class Mesa {
 	
 	public static String ocuparMesa(String codigo, String numeroSillas, String nombreUsuario) {              //A una mesa solo se le puede asignar un usuario. REVISAR!
 		String print = "La mesa que desea ocupar no existe";
-		for(Mesa buscador : mesas) {
+		for(Mesa buscador : mesasM) {
 			if(buscador.codigo.equals(codigo)) {
 				String bs = buscador.getNumeroDeSillas();
 				int bs1 = Integer.parseInt(bs);
@@ -85,7 +86,7 @@ public class Mesa {
 	}
 	
 	public void liberarMesa(String codigo) {
-		for(Mesa buscador: mesas) {
+		for(Mesa buscador: mesasM) {
 			if(buscador.codigo.equals(codigo)) {
 				usuarios.get(0).setMesa(null);
 				buscador.usuarios = null;
