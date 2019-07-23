@@ -1,0 +1,5 @@
+1;Carne a la plancha ;15000
+2;Cazuela de frijoles;10000
+3;Jugo de mango      ;3000
+4;Filete de pescado  ;13000
+5;Bandeja Paisa      ;14000

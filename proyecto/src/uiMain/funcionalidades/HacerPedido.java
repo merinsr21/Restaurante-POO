@@ -3,7 +3,7 @@ package uiMain.funcionalidades;
 import uiMain.*; 
 import java.util.*;
 import gestorAplicacion.logic.*;
-import gestorAplicacion.users.Usuario;
+import gestorAplicacion.users.*;;
 
 public class HacerPedido extends OpcionDeMenu {
 	
@@ -25,13 +25,15 @@ public class HacerPedido extends OpcionDeMenu {
 			Usuario.getUsuarioConNombreUsuario(nombreUsuario).setFacturasU(factura);
 			factura.setPedido(pedido);
 			pedido.setFactura(factura);
+			Chef.setPedidos(pedido);
+			// asignarle al pedido un chef.
 			System.out.print("Ingrese la cantidad de platos que desee pedir:");
 			int ciclo = entrada.nextInt();
 			for (int i = 1; i <= ciclo; i++) {
 				System.out.print("Ingrese el código del plato que desea ordenar: ");
 				int codigo = entrada.nextInt();
 				System.out.print("Ingrese la cantidad de unidades de este plato que desea ordenar: ");
-				int cantidad = entrada.nextInt();
+				String cantidad = entrada.next();
 				pedido.setPedidosP(DetallePedido.crearDetallePedido(codigo,cantidad));
 			}
 		}

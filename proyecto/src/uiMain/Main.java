@@ -57,6 +57,7 @@ public class Main {
 		Datos.funcionalidades.put("11", new EliminarOpcion("11"));
 		Datos.funcionalidades.put("12", new CerrarSesion("12"));
 		Datos.funcionalidades.put("13", new VerFuncionalidades("13"));
+		Datos.funcionalidades.put("14", new NuevoChef("14"));
 		
 		//Cargar los datos
 		Datos.cargarDatos();

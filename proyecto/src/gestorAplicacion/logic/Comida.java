@@ -9,6 +9,7 @@ public class Comida implements Comparable<Comida> {
 	private String codigo;
 	private String nombre;
 	private String precio;
+	private String calorias;
 	private ArrayList<DetallePedido> pedidos = new ArrayList<DetallePedido>();
 	private ArrayList<Calificacion> calificaciones = new ArrayList<Calificacion>();
 	private static ArrayList<Comida> menuC = new ArrayList<Comida>();
@@ -17,15 +18,16 @@ public class Comida implements Comparable<Comida> {
 		
 	}
 	
-	public Comida(String codigo, String nombre, String precio) {
+	public Comida(String codigo, String nombre, String calorias, String precio) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.precio = precio;
-		Datos.menuComidas.put(codigo, this);
+		this.calorias = calorias;
+		Datos.menuComidas.put(codigo, this);      // necesario ? REVISAR!
 	}
 	
-	public static void agregarComida(String codigo, String nombre, String precio) {
-		Comida comida = new Comida(codigo,nombre,precio);
+	public static void agregarComida(String codigo, String nombre, String precio, String calorias) {
+		Comida comida = new Comida(codigo,nombre,precio,calorias);
 		getMenuC().add(comida);
 		Datos.menuComidas.put(codigo, comida);
 	}
@@ -50,21 +52,15 @@ public class Comida implements Comparable<Comida> {
 		return precio;
 	}
 	
-	public int compareTo(Comida c) {   // como hacer para que el collections.sort() entre el compareTo que yo quiera.
-		int codigo1 = Integer.parseInt(codigo);
-		int codigo2 = Integer.parseInt(c.codigo);
-		if(codigo1 < codigo2) {
-			return -1;
-		}
-		if(codigo1 > codigo2) {
-			return 1;
-		}
-		else {
-			return 0;
-		}
+	public String getCalorias() {
+		return calorias;
 	}
 	
-	public int compareToByPrecio(Comida c) {                    // como hacer para que el collections.sort() entre el compareTo que yo quiera ?
+	public void setCalorias(String calorias) {
+		this.calorias = calorias;
+	}
+	
+	public int compareTo(Comida c) {  
 		int precio1 = Integer.parseInt(precio);
 		int precio2 = Integer.parseInt(c.precio);
 		if(precio1 < precio2) {
@@ -76,6 +72,7 @@ public class Comida implements Comparable<Comida> {
 		else {
 			return 0;
 		}
+		
 	}
 
 }

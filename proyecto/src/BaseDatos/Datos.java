@@ -86,8 +86,9 @@ public class Datos {
 					String [] comidas = line.split(";");
 					String codigo = comidas[0];
 					String nombre = comidas[1];
-					String precio = comidas[2];	
-					new Comida(codigo, nombre, precio);
+					String precio = comidas[2];
+					String calorias = comidas[3];
+					new Comida(codigo, nombre, precio, calorias);
 				}
 			}
 			br.close();

@@ -16,16 +16,16 @@ public class Mesa {
 	public Mesa() {
 
 	}
-	public Mesa(String codigo, String numeroDeSillas, String ocupada) {
+	public Mesa(String codigo, String numeroDeSillas, String ocupada) {      
 		this.codigo = codigo;
 		this.numeroDeSillas = numeroDeSillas;
 		this.ocupada = ocupada;
 		Datos.mesas.put(codigo, this);
 	}
 	
-	public void crearMesa(String codigo, String numeroDeSillas, String ocupada) {
-		Mesa mesa = new Mesa(codigo,numeroDeSillas,ocupada);
-		mesas.add(mesa);   //no sé si si sea necesario
+	public  void crearMesa(String codigo, String numeroDeSillas, String ocupada) {
+		Mesa mesa = new Mesa(codigo,numeroDeSillas,ocupada);               // este metodo debe ser estatico..
+		mesas.add(mesa);  
 		Datos.mesas.put(codigo, this);
 	}
 	
