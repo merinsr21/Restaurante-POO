@@ -24,6 +24,7 @@ public class Datos {
 	public static HashMap<String, Mesa> mesas = new HashMap<String, Mesa>();   //String= Código de la mesa
 	public static HashMap<String, Comida> menuComidas = new HashMap<String, Comida>(); //String= Código de la comida
 	public static HashMap<String, Pedido> pedidos = new HashMap<String, Pedido>();
+	public static HashMap<String, Calificacion> calificaciones = new HashMap<String, Calificacion>();
 	
 	public static void cargarDatos() {
 		crearArchivosYDirs();
@@ -86,8 +87,9 @@ public class Datos {
 					String [] comidas = line.split(";");
 					String codigo = comidas[0];
 					String nombre = comidas[1];
-					String precio = comidas[2];	
-					new Comida(codigo, nombre, precio);
+					String precio = comidas[2];
+					String calorias = comidas[3];
+					new Comida(codigo, nombre, precio, calorias);
 				}
 			}
 			br.close();
@@ -212,7 +214,8 @@ public class Datos {
 				Comida comidaOb = comida.getValue();
 				String line = comidaOb.getCodigo() + ";";
 				line += comidaOb.getNombre() + ";";
-				line+= comidaOb.getPrecio();
+				line+= comidaOb.getPrecio() + ";";
+				line += comidaOb.getCalorias();
 				pw.println(line);
 			}
 			pw.close();

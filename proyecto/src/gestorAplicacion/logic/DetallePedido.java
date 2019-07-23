@@ -1,15 +1,18 @@
 package gestorAplicacion.logic;
 import java.util.*;
 
+import BaseDatos.Datos;
+
 public class DetallePedido {
 	
-	private int cantidad;
+	private String codigoD;
+	private String cantidad;
 	private Comida comida;
 	private Pedido pedido;
 	private String precioTotal;
 	private ArrayList<DetallePedido> detallesD = new ArrayList<DetallePedido>();
 	
-	public DetallePedido(int cantidad, Comida comida) { 
+	public DetallePedido(String cantidad, Comida comida) { 
 		this.cantidad = cantidad;
 		this.comida = comida;
 	}
@@ -22,10 +25,10 @@ public class DetallePedido {
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
-	public int getCantidad() {
+	public String getCantidad() {
 		return cantidad;
 	}
-	public void setCantidad(int cantidad) {
+	public void setCantidad(String cantidad) {
 		this.cantidad = cantidad;
 	}
 	public Comida getComida() {
@@ -47,14 +50,16 @@ public class DetallePedido {
 	}
 	
 	
-	public static DetallePedido crearDetallePedido(int codigo, int cantidad) {
+	public static DetallePedido crearDetallePedido(int codigo, String cantidad) {
 		DetallePedido t = null;
-		for(Comida r: Comida.getMenuC()) {
-			if(r.getCodigo().equals(codigo)) {
-				DetallePedido detallePedido = new DetallePedido(cantidad,r);
+		for(Map.Entry<String, Comida> menu : Datos.menuComidas.entrySet()) {
+			Comida comidaOb = menu.getValue();
+			if(comidaOb.getCodigo().equals(codigo)) {
+				DetallePedido detallePedido = new DetallePedido(cantidad,comidaOb);
 				t = detallePedido;
-				int gp = Integer.parseInt(r.getPrecio());
-				String gpc = Integer.toString(gp*cantidad);
+				int gp = Integer.parseInt(comidaOb.getPrecio());
+				int c = Integer.parseInt(cantidad);
+				String gpc = Integer.toString(gp*c);
 				detallePedido.setPrecioTotal(gpc);
 				break;
 			}

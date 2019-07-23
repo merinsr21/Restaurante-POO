@@ -1,39 +1,40 @@
 package gestorAplicacion.logic;
 import java.util.ArrayList;
 
+import BaseDatos.Datos;
 import gestorAplicacion.users.*;
 
 public class Calificacion {
 	
-	private int codigo;
-	private int puntaje;
+	private String codigo;        //identificador = codigo comida a la que califica.
+	private String puntaje;
 	private Comida comida;
 	private Factura factura;
 	private Usuario usuario;	
-	private static ArrayList<Calificacion> calificaciones = new ArrayList<Calificacion>();
+	private static ArrayList<Calificacion> calificaciones = new ArrayList<Calificacion>();  //Necesaria ?? REVISAR
 	
 	public Calificacion() {
 		
 	}
 	
-	public Calificacion(int codigo, int puntaje){
+	public Calificacion (String codigo, String puntaje){
 		this.puntaje=puntaje;
 		this.codigo = codigo;
 	}
 	
-	public int getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 	
-	public void setCodigo(int codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 	
-	public int getPuntaje() {
+	public String getPuntaje() {
 		return puntaje;
 	}
 	
-	public void setPuntaje(int puntaje) {
+	public void setPuntaje(String puntaje) {
 		this.puntaje = puntaje;
 	}
 	
@@ -61,10 +62,18 @@ public class Calificacion {
 		this.usuario = usuario;
 	}
 	
-	public static void crearCalificacion(int codigo, int puntaje) {                // REVISAR
+	public static ArrayList<Calificacion> getCalificaciones(){
+		return calificaciones;
+	}
+	
+	public static void setCalificaciones(Calificacion calificacion) {
+		calificaciones.add(calificacion);
+	}
+	
+	public static void crearCalificacion(String codigo, String puntaje) {                // REVISAR
 		Calificacion calificacion = new Calificacion(codigo, puntaje);
-		calificaciones.add(calificacion);		
-		
+		Datos.calificaciones.put(codigo, calificacion);	
+		Calificacion.setCalificaciones(calificacion);
 	}
 	
 }

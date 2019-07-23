@@ -4,7 +4,7 @@ import gestorAplicacion.users.*;
 
 public class Pedido {
 	
-	private String codigo;
+	private String codigoP;
 	private String precioTotal;
 	private Boolean preparado;   
 	private Chef chef;
@@ -13,6 +13,7 @@ public class Pedido {
 	private Mesa mesa;
 	private  ArrayList<DetallePedido> detallesP = new ArrayList<DetallePedido>();
 	
+	
 	public Pedido() {
 		
 	}
@@ -20,10 +21,10 @@ public class Pedido {
 		this.usuario = usuario;
 	}
 	public String getCodigo() {
-		return codigo;
+		return codigoP;
 	}
 	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+		this.codigoP = codigo;
 	}
 	public Factura getFactura() {
 		return factura;
@@ -52,7 +53,7 @@ public class Pedido {
 	public ArrayList<DetallePedido> getDetallesP() {
 		return detallesP;
 	}
-	public void setPedidosP(DetallePedido detalle) {
+	public void setDetallesP(DetallePedido detalle) {
 		detallesP.add(detalle);
 	}
 	public Chef getChef() {
