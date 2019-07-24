@@ -1,5 +1,7 @@
 package gestorAplicacion.logic;
 import java.util.*;
+
+import BaseDatos.Datos;
 import gestorAplicacion.users.*;
 import BaseDatos.*;
 

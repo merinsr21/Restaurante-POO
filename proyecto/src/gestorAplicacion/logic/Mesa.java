@@ -72,10 +72,10 @@ public class Mesa {
 						break;
 					}
 					else {
-						buscador.setOcupada("true");
-						Usuario.getUsuarioConNombreUsuario(nombreUsuario).setMesa(buscador);
-						buscador.usuarios.add(Usuario.getUsuarioConNombreUsuario(nombreUsuario));
-						print = "La mesa"+" "+buscador.getCodigo()+" "+"ha sido ocupada.";
+						mesaOb.setOcupada("true");
+						Usuario.getUsuarioConNombreUsuario(nombreUsuario).setMesa(mesaOb);
+						mesaOb.usuarios.add(Usuario.getUsuarioConNombreUsuario(nombreUsuario));
+						print = "La mesa"+" "+mesaOb.getCodigo()+" "+"ha sido ocupada.";
 						break;
 					}
 				}
@@ -89,7 +89,7 @@ public class Mesa {
 		for(Mesa buscador: mesasM) {
 			if(buscador.codigo.equals(codigo)) {
 				usuarios.get(0).setMesa(null);
-				buscador.usuarios = null;
+				mesaOb.usuarios = null;
 			}
 		}
 	}

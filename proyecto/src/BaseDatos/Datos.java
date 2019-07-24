@@ -28,6 +28,7 @@ public class Datos {
 	public static HashMap<String, Factura> facturas = new HashMap<String, Factura>();
 	//public static HashMap<String, DetallePedido> detallesPedido = new HashMap<String, DetallePedido>();
 
+
 	
 	public static void cargarDatos() {
 		crearArchivosYDirs();

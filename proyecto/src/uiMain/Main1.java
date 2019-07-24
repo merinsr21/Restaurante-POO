@@ -30,8 +30,8 @@ public class Main1 {
 		
 		agregar.ejecutar();
 		agregar.ejecutar();
-		//agregar.ejecutar();
-		//agregar.ejecutar();
+		agregar.ejecutar();
+		agregar.ejecutar();
 		mostrar.ejecutar();
 		//ver.ejecutar();
 		//ocupar.ejecutar();
