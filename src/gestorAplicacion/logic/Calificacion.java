@@ -1,39 +1,66 @@
 package gestorAplicacion.logic;
 import java.util.ArrayList;
 
+import BaseDatos.Datos;
 import gestorAplicacion.users.*;
 
 public class Calificacion {
 	
-	private int codigo;
-	private int puntaje;
+	private String codigoCa;        
+	private String puntaje;
 	private Comida comida;
-	private Factura factura;
-	private Usuario usuario;	
-	private static ArrayList<Calificacion> calificaciones = new ArrayList<Calificacion>();
+	private Usuario usuario;
+	private String comentario;
+	private static ArrayList<Calificacion> calificaciones = new ArrayList<Calificacion>();  
 	
 	public Calificacion() {
 		
 	}
 	
-	public Calificacion(int codigo, int puntaje){
+	public Calificacion (String codigoCa, String puntaje, Usuario usuario){
+		this.codigoCa = codigoCa;
 		this.puntaje=puntaje;
-		this.codigo = codigo;
+		this.usuario = usuario;
+	}
+	public Calificacion (String codigoCa, Comida comida, String puntaje, Usuario usuario){
+		this.codigoCa = codigoCa;
+		this.comida = comida;
+		this.puntaje=puntaje;
+		this.usuario = usuario;
+	}
+	public Calificacion (String codigoCa, String puntaje){
+		this.codigoCa = codigoCa;
+		this.puntaje=puntaje;
+	}
+	public Calificacion (String codigoCa, Comida comida, String puntaje, String comentario){
+		this.codigoCa = codigoCa;
+		this.comida = comida;
+		this.puntaje=puntaje;
+		this.comentario = comentario;
 	}
 	
-	public int getCodigo() {
-		return codigo;
+	
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+
+	public String getCodigoCa() {
+		return codigoCa;
 	}
 	
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
+	public void setCodigoCa(String codigo) {
+		this.codigoCa = codigo;
 	}
 	
-	public int getPuntaje() {
+	public String getPuntaje() {
 		return puntaje;
 	}
 	
-	public void setPuntaje(int puntaje) {
+	public void setPuntaje(String puntaje) {
 		this.puntaje = puntaje;
 	}
 	
@@ -45,13 +72,6 @@ public class Calificacion {
 		this.comida = comida;
 	}
 	
-	public Factura getFactura() {
-		return factura;
-	}
-	
-	public void setFactura(Factura factura) {
-		this.factura = factura;
-	}
 	
 	public Usuario getUsuario() {
 		return usuario;
@@ -61,10 +81,19 @@ public class Calificacion {
 		this.usuario = usuario;
 	}
 	
-	public static void crearCalificacion(int codigo, int puntaje) {                // REVISAR
-		Calificacion calificacion = new Calificacion(codigo, puntaje);
-		calificaciones.add(calificacion);		
-		
+	public static ArrayList<Calificacion> getCalificaciones(){
+		return calificaciones;
+	}
+	
+	public static void setCalificaciones(Calificacion calificacion) {
+		calificaciones.add(calificacion);
+	}
+	
+	public static Calificacion crearCalificacion(String codigo, String puntaje, Usuario usuario) {                
+		Calificacion calificacion = new Calificacion(codigo, puntaje, usuario);   //No podemos guardar datos en la hash(se sobreescriben)
+		Datos.calificaciones.add(calificacion);	        
+		Calificacion.setCalificaciones(calificacion);
+		return calificacion;
 	}
 	
 }

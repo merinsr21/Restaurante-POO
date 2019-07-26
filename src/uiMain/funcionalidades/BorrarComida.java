@@ -14,17 +14,19 @@ public class BorrarComida extends OpcionDeMenu {
 	
 	public void ejecutar() {
 		Scanner entrada = new Scanner(System.in);
-		System.out.println("Ingrese el código de la comida que desea borrar:");
+		System.out.print("Ingrese el código de la comida que desea borrar:");
 		int n = entrada.nextInt();
-		String print = "La comida que desea borrar no se encuentra en el menú.";;
-		for(Comida r :  Comida.getMenuC()) {
-			if(r.getCodigo().equals(n)) {
-				print = r.getNombre()+" "+"ha sido eliminada del menú.";
-				Comida.getMenuC().remove(r);
-				Comida gc = Datos.menuComidas.get(r.getCodigo());
-				Datos.menuComidas.remove(gc);
-				break;
-			}
+		String n1 = Integer.toString(n);
+		String print = "La comida que desea borrar no se encuentra en el menú.";
+		for(Map.Entry<String, Comida> comida : Datos.menuComidas.entrySet()) {
+			String r = comida.getKey();
+			Comida r2 = comida.getValue();
+				if(r.equals(n1)) {
+					print = r2.getNombre()+" "+"ha sido eliminada del menú.";
+					Comida.getMenuC().remove(r2);
+					Datos.menuComidas.remove(r);
+					break;
+				}						
 		}
 		System.out.println(print);
 	}

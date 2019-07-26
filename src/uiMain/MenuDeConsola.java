@@ -50,26 +50,18 @@ public class MenuDeConsola {
 		Scanner entrada = new Scanner(System.in);
 		
 		//System.out.println();
-		System.out.println(" MENÚ DE USUARIO");
-		System.out.println("~.~.~.~.~.~.~.~.~.~");
-		
 		int i = 1;
 		for (OpcionDeMenu option : opciones) {
 			
 			System.out.println(i+" "+option);
 			i++;
 		}
-		//Opcion para terminar el programa, hecho con un try catch.
+		//Opción para terminar el programa, hecho con un try catch.
 		System.out.println(i+" Terminar programa");
-		System.out.println();
 		
-		System.out.print("Por favor ingrese una opción: ");
+		System.out.print("Ingrese una opción: ");
 		int opt = entrada.nextInt();
-		if(opt<=i ) {
 		opciones.get((opt-1)).ejecutar();
-		}else {
-			System.out.println("Por favor ingrese un valor valido");
-		}
 		
 	}
 	
@@ -86,7 +78,7 @@ public class MenuDeConsola {
 	public void verOpcion() {
 		int i = 1;
 		for (OpcionDeMenu opcionDeMenu : opciones) {
-			System.out.println(i+  " "+opcionDeMenu);
+			System.out.println(i + " "+opcionDeMenu);
 			i++;
 		}
 	}

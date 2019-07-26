@@ -17,7 +17,7 @@ public class VerFactura extends OpcionDeMenu {
 		Scanner entrada = new Scanner(System.in);
 		System.out.print("Ingrese su nombre de usuario: ");
 		String nombreUsuario = entrada.next();
-		System.out.print("Ingrese la fecha de su factura:");
+		System.out.print("Ingrese la fecha de su factura(día/mes/año): ");
 		Pedido p = null;
 		String fecha = entrada.next();
 		for(Pedido r: Usuario.getUsuarioConNombreUsuario(nombreUsuario).getPedidosU()) {

@@ -1,19 +1,15 @@
 package uiMain.funcionalidades;
 
 import java.util.Scanner;
+import gestorAplicacion.users.*;
+import uiMain.*;
 
-import BaseDatos.Datos;
-import gestorAplicacion.users.Administrador;
-import gestorAplicacion.users.Usuario;
-import uiMain.OpcionDeMenu;
+public class NuevoChef extends OpcionDeMenu {
 
-public class NuevoAdmin extends OpcionDeMenu {
-	
-	public NuevoAdmin(String pos){
+	public NuevoChef(String pos) {
 		super(pos);
 	}
 	
-	@Override
 	public void ejecutar() {
 		Scanner entrada = new Scanner(System.in);
 		System.out.print("Ingrese su nombre: ");
@@ -24,13 +20,11 @@ public class NuevoAdmin extends OpcionDeMenu {
 		String correo = entrada.next();
 		System.out.print("Ingrese su contraseña: ");
 		String contraseña = entrada.next();
-		Administrador.nuevoAdministrador(nombre, nombreUsuario, correo, contraseña);
-		System.out.println("Administrador creado.");
+		Chef.nuevoChef(nombre, nombreUsuario, correo, contraseña);
+		System.out.println("Chef creado.");
 	}
-
-	@Override
+	
 	public String toString() {
-		return "Crear nuevo usuario administrador";
+		return "Crear nuevo chef";
 	}
-
 }

@@ -19,7 +19,6 @@ public class Registrarse extends OpcionDeMenu {
 		System.out.print("Ingrese su contraseña: ");
 		String contraseña = entrada.next();
 		Usuario.nuevoUsuario(nombre, nombreUsuario, correo, contraseña);
-		System.out.println("Su usuario ha sido registrado");
 	}
 
 	@Override

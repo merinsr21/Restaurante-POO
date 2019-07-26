@@ -2,6 +2,9 @@ package uiMain.funcionalidades;
 
 import uiMain.Main;
 import uiMain.OpcionDeMenu;
+import java.util.*;
+import gestorAplicacion.logic.*;
+import gestorAplicacion.users.Usuario;
 
 public class CerrarSesion  extends OpcionDeMenu{
 	
@@ -11,8 +14,15 @@ public class CerrarSesion  extends OpcionDeMenu{
 	
 	@Override
 	public void ejecutar() {
-		System.out.println("Su cuenta cerró exitosamente");
+		Scanner entrada = new Scanner(System.in);
+		System.out.print("Ingrese su nombre de usuario: ");
+		String nombreUsuario = entrada.next();
+		Usuario usuario = Usuario.getUsuarioConNombreUsuario(nombreUsuario);
+		Mesa mesa = usuario.getMesa();
+		Mesa.liberarMesa(mesa.getCodigoM());
+		System.out.println("Adiós");
 		Main.usuario = null;
+		
 		
 	}
 

@@ -1,42 +1,46 @@
 package gestorAplicacion.logic;
 import java.util.*;
-
-import BaseDatos.Datos;
 import gestorAplicacion.users.*;
+import BaseDatos.*;
 
 public class Factura {
 	
-	private String codigo;
+	private static int cont = 300;    //para generar el código
+	private String codigoF;  
 	private String fecha;
-	private Usuario usuario;
-	private Pedido pedido;
-	private ArrayList<Calificacion> calificaciones = new ArrayList<Calificacion>();
+	private Pedido pedidoF;
+	private  static ArrayList<Factura> facturasF = new ArrayList<Factura>();
+
 	
-	public Factura(Usuario usuario, Pedido pedido, String fecha) {
-		this.usuario = usuario;
-		this.pedido = pedido;
+	public Factura(String codigo, String fecha) {
+		this.codigoF = codigo;
 		this.fecha = fecha;
+	}
+	public Factura(String codigo, String fecha, Pedido pedido) {
+		this.codigoF = codigo;
+		this.fecha = fecha;
+		this.pedidoF = pedido;
+	}
+	public static String generarCodigoF() {
+		int cont1 = cont;
+		cont++;
+		String conts = Integer.toString(cont1);
+		return conts;	
 	}
 	public Factura() {
 		
 	}
-	public String getCodigo() {
-		return codigo;
+	public String getCodigoF() {
+		return codigoF;
 	}
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+	public void setCodigoF(String codigo) {
+		this.codigoF = codigo;
 	}
-	public Usuario getUsuario() {
-		return usuario;
+	public Pedido getPedidoF() {
+		return pedidoF;
 	}
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-	public Pedido getPedido() {
-		return pedido;
-	}
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
+	public void setPedidoF(Pedido pedido) {
+		this.pedidoF = pedido;
 	}
 	public String getFecha() {
 		return fecha;
@@ -44,16 +48,11 @@ public class Factura {
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-	
-	public ArrayList<Calificacion> getCalificaciones() {
-		return calificaciones;
+	public static void setFacturasF(Factura factura) {
+		facturasF.add(factura);
+	} 
+	public static Factura getFacturaConCodigo(String codigof){
+		return Datos.facturas.get(codigof);	
 	}
-	public void setCalificaciones(Calificacion calificacion) {
-		calificaciones.add(calificacion);
-	}
-	public static Factura getFacturaConCodigo(String codigo) {
-		return Datos.facturas.get(codigo);
-	}
-	
 
 }

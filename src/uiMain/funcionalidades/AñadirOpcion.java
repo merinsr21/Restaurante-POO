@@ -14,14 +14,14 @@ public class AñadirOpcion extends OpcionDeMenu{
 	@Override
 	public void ejecutar() {
 		Scanner entrada = new Scanner(System.in);
-		System.out.print("Ingrese el nombre de usuario: ");
+		System.out.print("Ingrese el nombre de usuario al cual le quiere añadir la funcionalidad: ");
 		String nombreUsuario = entrada.next();
 		Usuario usuario = Usuario.getUsuarioConNombreUsuario(nombreUsuario);
 		OpcionDeMenu.mostrarFuncionalidades();
 		System.out.print("Ingrese el número de la funcionalidad a añadir: ");
 		String op = entrada.next();
 		usuario.getMenu().añadirOpcion(op);
-		System.out.println("La funcionalidad ha sido agregada exitosamente");
+		System.out.println("La funcionalidad ha sido añadida al usuario.");
 	}
 
 	@Override

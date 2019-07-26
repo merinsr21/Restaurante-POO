@@ -21,7 +21,6 @@ public class EliminarOpcion extends OpcionDeMenu{
 		System.out.print("Ingrese el número de la funcionalidad a remover: ");
 		int i = entrada.nextInt();
 		usuario.getMenu().eliminarOpcion(i);
-		System.out.println("La funcionalidad ha sido eliminada con exito");
 	}
 
 	@Override

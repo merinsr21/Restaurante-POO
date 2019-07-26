@@ -4,6 +4,7 @@ import gestorAplicacion.users.Usuario;
 import uiMain.funcionalidades.*;
 
 
+
 import java.util.*;
 
 import BaseDatos.Datos;
@@ -20,20 +21,21 @@ public class Main {
 			
 			try {
 				if(Main.usuario != null){
-					
 					System.out.println("\n");
 					Main.usuario.getMenu().lanzarMenu();
-				}else {
 					System.out.println("\n");
+				}else {
 					Main.menuInvitado.lanzarMenu();
+					System.out.println("\n");
 				}
 			
 			}
 			catch(Exception e){            //Si ocurre una excepcion al ejecutar el programa, lo terminara.
+				System.out.println(e);
 				
-				Datos.guardarDatos();     //Al terminar el programa ejecutara el guardad
+				Datos.guardarDatos();     //Al terminar el programa ejecutara el guardado
 				
-				System.out.println("El programa cerró exitosamente");
+				System.out.println("Adiós");
 				System.exit(0);
 			}
 		}
@@ -58,12 +60,22 @@ public class Main {
 		Datos.funcionalidades.put("11", new EliminarOpcion("11"));
 		Datos.funcionalidades.put("12", new CerrarSesion("12"));
 		Datos.funcionalidades.put("13", new VerFuncionalidades("13"));
+		Datos.funcionalidades.put("14", new NuevoChef("14"));
+		Datos.funcionalidades.put("15", new EditarUsuario("15"));
+		Datos.funcionalidades.put("16", new EliminarUsuario("16"));
+		Datos.funcionalidades.put("17", new OrdenarMenu("17"));
+		Datos.funcionalidades.put("18", new CalcularCalorias("18"));
+		Datos.funcionalidades.put("19", new VerCalificacion("19"));
+		Datos.funcionalidades.put("20", new VerComentarios("20"));
+
+
+		
 		
 		//Cargar los datos
 		Datos.cargarDatos();
 		
 		//Operaciones del usuario por defecto
-		@SuppressWarnings("serial")                                                      //creación de objetos dentro de otro objeto, para que nosalga una advertencia
+		@SuppressWarnings("serial")                                                      //creación de objetos dentro de otro objeto, para que no salga una advertencia
 		ArrayList<OpcionDeMenu> opcionesInvitado = new ArrayList<OpcionDeMenu>(){
 			{
 				add(new IniciarSesion());
@@ -73,6 +85,5 @@ public class Main {
 		};
 		
 		Main.menuInvitado = new MenuDeConsola(opcionesInvitado);
-		
 	}
 }

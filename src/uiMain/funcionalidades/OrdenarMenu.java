@@ -1,24 +1,23 @@
 package uiMain.funcionalidades;
+
 import uiMain.*;
+import gestorAplicacion.logic.*;
+import java.util.*;
 
-public class OrdenarMenu extends OpcionDeMenu {
-
+public class OrdenarMenu extends OpcionDeMenu{
+	
 	public OrdenarMenu(String pos) {
 		super(pos);
 	}
-
-	@Override
+	
 	public void ejecutar() {
-		// TODO Auto-generated method stub
-		
+		Collections.sort(Comida.getMenuC());
+		for(Comida r: Comida.getMenuC()) {
+			System.out.println(r);
+		}
 	}
-
-	@Override
+	
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Ordenar el menú de acuerdo al precio y mostrarlo";
 	}
-
-	return "Ordenar el menú de comidas y mostrarlo";
-
 }

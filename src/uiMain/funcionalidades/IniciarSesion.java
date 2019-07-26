@@ -15,7 +15,6 @@ public class IniciarSesion extends OpcionDeMenu{
 		String contraseña = entrada.next();
 		
 		System.out.println(Usuario.iniciarSesion(nombreUsuario, contraseña));
-		
 	}
 
 	@Override

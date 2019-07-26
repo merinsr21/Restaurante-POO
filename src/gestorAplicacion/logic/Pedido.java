@@ -1,30 +1,54 @@
 package gestorAplicacion.logic;
 import java.util.*;
+
+import BaseDatos.Datos;
 import gestorAplicacion.users.*;
+import uiMain.OpcionDeMenu;
 
 public class Pedido {
 	
-	private String codigo;
+	private static int cont = 400;
+	private String codigoP;
 	private String precioTotal;
-	private Boolean preparado;   
-	private Chef chef;
 	private Factura factura;
 	private Usuario usuario;
-	private Mesa mesa;
-	private ArrayList<DetallePedido> detallesP = new ArrayList<DetallePedido>();
+	private static ArrayList<DetallePedido> detallesP = new ArrayList<DetallePedido>();
+	private static ArrayList<Pedido> pedidosP = new ArrayList<Pedido>();
 
 	
 	public Pedido() {
 		
 	}
-	public Pedido(Usuario usuario) {
+
+	public Pedido(String codigo, Factura factura, Usuario usuario ) {
+		this.codigoP = codigo;
+		this.factura = factura;
 		this.usuario = usuario;
 	}
-	public String getCodigo() {
-		return codigo;
+	public Pedido(String codigo, Factura factura, String precio ) {
+		this.codigoP = codigo;
+		this.factura = factura;
+		this.precioTotal = precio;
 	}
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+	public static void crearPedido(String codigoP, Factura factura, Usuario usuario) {
+		Pedido pedidop = new Pedido(codigoP, factura, usuario);
+		Datos.pedidos.put(codigoP,pedidop);
+		pedidosP.add(pedidop);
+		Pedido.calcularPrecioTotal(pedidop);
+		
+	}
+	public static String generarCodigoP() {
+		int cont1 = cont;
+		cont++;
+		String conts = Integer.toString(cont1);
+		return conts;
+		
+	}
+	public String getCodigoP() {
+		return codigoP;
+	}
+	public void setCodigoP(String codigo) {
+		this.codigoP = codigo;
 	}
 	public Factura getFactura() {
 		return factura;
@@ -38,31 +62,12 @@ public class Pedido {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	public Mesa getMesa() {
-		return mesa;
-	}
-	public void setMesa(Mesa mesa) {
-		this.mesa = mesa;
-	}
-	public Boolean getPreparado() {
-		return preparado;
-	}
-	public void setPreparado(Boolean preparado) {
-		this.preparado = preparado;
-	}
 	public ArrayList<DetallePedido> getDetallesP() {
 		return detallesP;
 	}
-	public void setPedidosP(DetallePedido detalle) {
+	public void setDetallesP(DetallePedido detalle) {
 		detallesP.add(detalle);
 	}
-	public Chef getChef() {
-		return chef;
-	}
-	public void setChef(Chef chef) {
-		this.chef = chef;
-	}
-	
 	public String getPrecioTotal() {
 		return precioTotal;
 	}
@@ -70,7 +75,18 @@ public class Pedido {
 	public void setPrecioTotal(String precioTotal) {
 		this.precioTotal = precioTotal;
 	}
-	
+	public static String getNombreArreglo(String noSeUsa) {
+		return "pedidosP";
+	}
+	public static String getNombreArreglo() {
+		return "pedidosP";
+	}
+	public static ArrayList<Pedido> getPedidosP(String nombre){
+		return pedidosP;
+	}
+	public static void setPedidosP(Pedido p){
+		pedidosP.add(p);
+	}
 	public static int calcularPrecioTotal(Pedido pedido) {
 		int sumatoria = 0;
 		String s = null;
@@ -78,8 +94,17 @@ public class Pedido {
 			int pt = Integer.parseInt(r.getPrecioTotal());
 			sumatoria += pt;
 			s = Integer.toString(sumatoria);
-		}
+        }
 		pedido.setPrecioTotal(s);
 		return sumatoria;
+	}
+	
+	public static void Pedidop(Pedido pedidop, String [] detalles) {
+		for (String dp : detalles) {
+			detallesP.add(DetallePedido.getDetalleConCodigo(dp));
+			DetallePedido.getDetalleConCodigo(dp).setPedido(pedidop);
+			DetallePedido pointer = DetallePedido.getDetalleConCodigo(dp);
+			DetallePedido detdet = new DetallePedido(pointer.getCodigoD(),pointer.getCantidad(), pointer.getComida(), pointer.getPrecioTotal(), pointer.getPedidoD());
+		}
 	}
 }

@@ -1,6 +1,7 @@
 package uiMain.funcionalidades;
 import uiMain.*;
 
+import java.util.Map;
 import java.util.TreeMap;
 
 import BaseDatos.Datos;
@@ -16,10 +17,10 @@ public class VerMenu extends OpcionDeMenu {
 	}
 	public void ejecutar() {
 		System.out.println("                   "+"MENÚ\n");
-		System.out.println("Código |         Nombre          |   Precio ");
-		TreeMap<String, Comida> ordenado = new TreeMap<String, Comida>(Datos.menuComidas);
-		for(Comida r : ordenado.values()) {
-			System.out.println(r);
+		System.out.println("Código |           Nombre            |   Precio    |    Calorías   ");
+		for(Map.Entry<String, Comida> co : Datos.menuComidas.entrySet()) {
+			Comida c = co.getValue();
+			System.out.println(c);
 		}
 	}
 	
