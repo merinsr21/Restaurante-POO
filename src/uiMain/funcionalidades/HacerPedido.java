@@ -46,7 +46,6 @@ public class HacerPedido extends OpcionDeMenu {
 				String codigo = entrada.next();
 				System.out.print("Ingrese la cantidad de unidades de este plato que desea ordenar: ");
 				String cantidad = entrada.next();
-				String coded = DetallePedido.generarCodigoD();
 				pedido.setDetallesP(DetallePedido.crearDetallePedido(coded, cantidad,codigo,pedido));			
 			}
 			System.out.println("Su pedido ha sido creado.");

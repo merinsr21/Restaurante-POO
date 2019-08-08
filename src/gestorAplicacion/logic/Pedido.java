@@ -7,12 +7,12 @@ import uiMain.OpcionDeMenu;
 
 public class Pedido {
 	
-	private static int cont = 400;
+	private static int consecutivo = 0;
+	private int consecutivoDetalle = 0;
 	private String codigoP;
-	private String precioTotal;
 	private Factura factura;
 	private Usuario usuario;
-	private static ArrayList<DetallePedido> detallesP = new ArrayList<DetallePedido>();
+	private ArrayList<DetallePedido> detallesP = new ArrayList<DetallePedido>();
 	private static ArrayList<Pedido> pedidosP = new ArrayList<Pedido>();
 
 	
@@ -25,25 +25,40 @@ public class Pedido {
 		this.factura = factura;
 		this.usuario = usuario;
 	}
-	public Pedido(String codigo, Factura factura, String precio ) {
+	public Pedido(String codigo, Usuario usuario ) {
 		this.codigoP = codigo;
-		this.factura = factura;
-		this.precioTotal = precio;
-	}
-	public static void crearPedido(String codigoP, Factura factura, Usuario usuario) {
-		Pedido pedidop = new Pedido(codigoP, factura, usuario);
-		Datos.pedidos.put(codigoP,pedidop);
-		pedidosP.add(pedidop);
-		Pedido.calcularPrecioTotal(pedidop);
+		this.usuario = usuario;
 		
 	}
-	public static String generarCodigoP() {
-		int cont1 = cont;
-		cont++;
-		String conts = Integer.toString(cont1);
-		return conts;
+	public static void crearPedido(Usuario usuario, String detalles []) {
+		String codigo = generarCodigoPedido();
+		Pedido pedido = new Pedido(codigo, usuario);
+		//Se debe crear el pedido primero y luego crear cada uno de los detalles y setterarselos a los detalles
+		for (int i = 0; i < detalles.length; i +=2) {
+			DetallePedido detalleDelPedido = DetallePedido.crearDetallePedido(generarCodigoPedido(), detalles[i+1], detalles[i], pedido);
+		
+		}
+		
+		
+		Datos.pedidos.put(codigo,pedido);
+		pedidosP.add(pedido);
+		Pedido.calcularPrecioTotal(pedido);
 		
 	}
+	private static String generarCodigoPedido() {
+		String  codigo = Integer.toString(consecutivo);
+		consecutivo++;
+		return codigo;
+		
+	}
+	
+	private String generarCodigoDetalle() {
+		String  codigo = Integer.toString(consecutivoDetalle);
+		consecutivoDetalle++;
+		return codigo;
+		
+	}
+	
 	public String getCodigoP() {
 		return codigoP;
 	}
@@ -67,13 +82,6 @@ public class Pedido {
 	}
 	public void setDetallesP(DetallePedido detalle) {
 		detallesP.add(detalle);
-	}
-	public String getPrecioTotal() {
-		return precioTotal;
-	}
-	
-	public void setPrecioTotal(String precioTotal) {
-		this.precioTotal = precioTotal;
 	}
 	public static String getNombreArreglo(String noSeUsa) {
 		return "pedidosP";
