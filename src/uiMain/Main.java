@@ -30,8 +30,7 @@ public class Main {
 				}
 			
 			}
-			catch(Exception e){            //Si ocurre una excepcion al ejecutar el programa, lo terminara.
-				System.out.println(e);
+			catch(IndexOutOfBoundsException e){            //Si ocurre una excepcion al ejecutar el programa, lo terminara.
 				
 				Datos.guardarDatos();     //Al terminar el programa ejecutara el guardado
 				
@@ -72,7 +71,8 @@ public class Main {
 		
 		
 		//Cargar los datos
-		Datos.cargarDatos();
+		Datos datos = new Datos();
+		datos.cargarDatos();
 		
 		//Operaciones del usuario por defecto
 		@SuppressWarnings("serial")                                                      //creación de objetos dentro de otro objeto, para que no salga una advertencia

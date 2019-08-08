@@ -14,12 +14,16 @@ public class CerrarSesion  extends OpcionDeMenu{
 	
 	@Override
 	public void ejecutar() {
+		//no es necesario, poner nul al atributo usuario que hay en el main
 		Scanner entrada = new Scanner(System.in);
 		System.out.print("Ingrese su nombre de usuario: ");
 		String nombreUsuario = entrada.next();
 		Usuario usuario = Usuario.getUsuarioConNombreUsuario(nombreUsuario);
+		//organizar tambien lo del null
 		Mesa mesa = usuario.getMesa();
-		Mesa.liberarMesa(mesa.getCodigoM());
+		if(mesa != null) {
+			Mesa.liberarMesa(mesa.getCodigoM());
+		}
 		System.out.println("Adiós");
 		Main.usuario = null;
 		

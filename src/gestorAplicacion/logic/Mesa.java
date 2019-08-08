@@ -81,6 +81,7 @@ public class Mesa {
 					else {
 						buscador.setOcupada("true");
 						Usuario.getUsuarioConNombreUsuario(nombreUsuario).setMesa(buscador);
+						buscador.setUsuario(Usuario.getUsuarioConNombreUsuario(nombreUsuario));
 						print = "La mesa"+" "+buscador.getCodigoM()+" "+"ha sido ocupada.";
 						break;
 					}

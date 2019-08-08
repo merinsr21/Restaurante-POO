@@ -18,6 +18,8 @@ public class HacerPedido extends OpcionDeMenu {
 		Scanner entrada = new Scanner(System.in);
 		System.out.print("Ingrese su nombre de usuario: ");
 		String nombreUsuario = entrada.next();
+		
+		//Meter todo esto en un metodo
 		if(Usuario.getUsuarioConNombreUsuario(nombreUsuario).getMesa() != null) {
 			System.out.print("Ingrese la fecha actual(día/mes/año): ");
 			String fecha = entrada.next();
@@ -35,6 +37,7 @@ public class HacerPedido extends OpcionDeMenu {
 			
 			Datos.pedidos.put(code,pedido);
 			Datos.facturas.put(codef,factura);
+			
 			
 			System.out.print("Ingrese la cantidad de platos que desee pedir: ");
 			int ciclo = entrada.nextInt();

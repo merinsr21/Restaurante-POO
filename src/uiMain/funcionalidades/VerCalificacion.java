@@ -17,6 +17,7 @@ public class VerCalificacion extends OpcionDeMenu {
 		String codigo = entrada.next();
 		int cont = 0;
 		int sum = 0;
+		//poner el metodo en la clase Calificacion 
 		for(Calificacion r: Calificacion.getCalificaciones()) {
 			if(r.getCodigoCa().equals(codigo)) {
 				cont ++;

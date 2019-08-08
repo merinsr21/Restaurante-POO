@@ -1,4 +1,0 @@
-1;Cazuela_de_frijoles;1000;13000
-2;jugo_de_mora;500;2000
-3;Papas_a_la_francesa;3000;4000
-4;Ensalada_de_frutas;3000;100

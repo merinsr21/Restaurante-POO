@@ -87,13 +87,14 @@ public class DetallePedido {
 	}
 	
 	public static DetallePedido crearDetallePedido(String codigoD, String cantidad, String codigo, Pedido pedido) {  //BIEN
+		
 		DetallePedido t = null;
 		for(Map.Entry<String, Comida> menu : Datos.menuComidas.entrySet()) {       //Es necesario hacer que el detallePedido este asociado a una comida existente.
 			Comida comidaOb = menu.getValue();
 			if(comidaOb.getCodigo().equals(codigo)) {
 				DetallePedido detallePedido = new DetallePedido(codigoD,cantidad,comidaOb,pedido);
 				t = detallePedido;
-				int gp = Integer.parseInt(comidaOb.getPrecio());
+				int gp = Integer.parseInt(comidaOb.getPrecio().trim());
 				int cant = Integer.parseInt(cantidad);
 				String gpc = Integer.toString(gp*cant);
 				detallePedido.setPrecioTotal(gpc);

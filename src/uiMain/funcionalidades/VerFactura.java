@@ -20,11 +20,15 @@ public class VerFactura extends OpcionDeMenu {
 		System.out.print("Ingrese la fecha de su factura(día/mes/año): ");
 		Pedido p = null;
 		String fecha = entrada.next();
+		//cambiar solo algunas cosas, organizar lo del null
 		for(Pedido r: Usuario.getUsuarioConNombreUsuario(nombreUsuario).getPedidosU()) {
 			if(r.getFactura().getFecha().equals(fecha)) {
 				System.out.println("Factura:");
 				for(DetallePedido t : r.getDetallesP()) {
-					System.out.println(t);
+					if(t !=null) {
+						System.out.println(t);
+					}
+					
 				}
 				System.out.println("Precio total: " + Pedido.calcularPrecioTotal(r));
 				break;

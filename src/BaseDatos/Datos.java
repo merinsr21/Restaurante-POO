@@ -9,9 +9,6 @@ import java.io.PrintWriter;
 import java.io.IOException;
 import java.util.*;
 
-
-import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
-
 import gestorAplicacion.users.*;
 import uiMain.MenuDeConsola;
 import uiMain.OpcionDeMenu;
@@ -25,11 +22,11 @@ public class Datos {
 	public static HashMap<String, Comida> menuComidas = new HashMap<String, Comida>(); //String= Código de la comida
 	public static HashMap<String, Pedido> pedidos = new HashMap<String, Pedido>();//String= Códigodel pedido	
 	public static HashMap<String, Factura> facturas = new HashMap<String, Factura>(); //String = código de la factura
-	public static HashMap<String, DetallePedido> detallesPedido = new HashMap<String, DetallePedido>(); //String = codigo de el detalle
+	public static HashMap<String, DetallePedido> detallesPedido = new HashMap<String, DetallePedido>(); //String = codigo de el detalle                          
 	public static ArrayList<Calificacion> calificaciones = new ArrayList<Calificacion>(); 
 
 	
-	public static void cargarDatos() {
+	public  void cargarDatos() {
 		crearArchivosYDirs();
 		String ruta = System.getProperty("user.dir")+"\\src\\temp\\";
 		cargarMesas(ruta);
@@ -50,7 +47,7 @@ public class Datos {
             String line;
             String line3;
             String line2;
-            while(((line = br.readLine()) != null) && ((line3 = br.readLine()) != null) && (line2 = br.readLine()) != null){
+            while(((line = br.readLine()) != null)/* && ((line3 = br.readLine()) != null) && ((line2 = br.readLine()) != null)*/){
             	if (!line.isEmpty()) {
             		String [] usuario = line.split(";");
             		String nombreUsuario = usuario[0];
@@ -58,7 +55,9 @@ public class Datos {
             		String correo = usuario[2];
             		String contraseña = usuario[3];
             		Usuario usuario1 = new Usuario(nombre, nombreUsuario, correo, contraseña);
-            		String [] ped = line3.split(";");
+            		
+            		/*TODO: FElipe arregle esto
+            		 * String [] ped = line3.split(";");
             		for(String x : ped) {
             			for (Map.Entry<String, Pedido> p : pedidos.entrySet()) {
                 			Pedido pO = p.getValue();
@@ -78,13 +77,13 @@ public class Datos {
                 					f.setUsuario(usuario1);
                 			}
             			}	
-            		}
+            		}*/
             	}
             }
             br.close();
         }catch(Exception e){
-            //Error al leer
-        }
+        	//System.out.println(e);   este no es
+         }
 	}
 	
 	private static void cargarAdmins(String ruta) {
@@ -104,7 +103,7 @@ public class Datos {
             }
             br.close();
         }catch(Exception e){
-        	//Error al leer
+        	//System.out.println(e);  no es
         }
 	}
 	private static void cargarMenuComidas(String ruta) {
@@ -126,7 +125,7 @@ public class Datos {
 			}
 			br.close();
 		}catch(Exception e) {
-			
+			//System.out.println(e); not
 		}
 	}
 	
@@ -151,9 +150,9 @@ public class Datos {
 			
 		}
 	}
-	private static void cargarDetallesPedido(String ruta){  //**********************************************DETALLE********************************************************
+	private static void cargarDetallesPedido(String ruta){ 
 	    try{
-	        FileReader fr = new FileReader(ruta + "detallesPedido.txt");
+	        FileReader fr = new FileReader(ruta + "detallesPedidos.txt");
 			BufferedReader br = new BufferedReader(fr);
 			String line;
 			while((line = br.readLine()) != null) {
@@ -170,11 +169,11 @@ public class Datos {
 			}
 			br.close();
 	    }catch(Exception e) {
-	    	
+	    	//System.out.println(e); not
 	    }
 	}
 		
-	private static void cargarPedidos(String ruta) {  //********************************************PEDIDO********************************************************
+	private static void cargarPedidos(String ruta) {  
 		try {
 			FileReader fr = new FileReader(ruta + "pedidos.txt");
 			BufferedReader br = new BufferedReader(fr);
@@ -204,11 +203,11 @@ public class Datos {
 			}
 			br.close();
 		}catch(Exception e) {
-			
+			//System.out.println(e);
 		}
 	}
 	
-	private static void cargarFacturas(String ruta){  //********************************************FACTURA*********************************************************
+	private static void cargarFacturas(String ruta){  
 	    try{
 	        FileReader fr = new FileReader(ruta + "facturas.txt");
 			BufferedReader br = new BufferedReader(fr);
@@ -225,11 +224,11 @@ public class Datos {
 			}
 			br.close();
 	    }catch(Exception e) {
-	    	
+	    	//System.out.println(e);  no es
 	    }
 	}
 	
-	private static void cargarCalificaciones(String ruta){     //**************************************CALIFICACIONES************************************************
+	private static void cargarCalificaciones(String ruta){     
 	    try{
 	        FileReader fr = new FileReader(ruta + "calificaciones.txt");
 			BufferedReader br = new BufferedReader(fr);
@@ -248,18 +247,18 @@ public class Datos {
 			}
 			br.close();
 	    }catch(Exception e) {
-	    	
+	    	//System.out.println(e);  no es
 	    }
 	}
 	private static void cargarMenus(String ruta) {
 		try{
-            FileReader fr = new FileReader(ruta+"menusUsuarios.txt");
+            FileReader fr = new FileReader(ruta + "menusUsuarios.txt");
             BufferedReader br = new BufferedReader(fr);
             String line;
             while((line = br.readLine()) != null){
             	if (!line.isEmpty()) {
             		String [] menu = line.split(";");
-            		Usuario usuario = Usuario.getUsuarioConNombreUsuario(menu[0]);
+            		Usuario usuario = Usuario.getUsuarioConNombreUsuario(menu[0]);           		
             		//slice de arrays
             		String[] funcionalidades = Arrays.copyOfRange(menu, 1, menu.length);
             		MenuDeConsola.nuevoMenu(usuario, funcionalidades);
@@ -267,7 +266,7 @@ public class Datos {
             }
             br.close();
         }catch(Exception e){
-        	//Error de lectura
+        	e.printStackTrace();
         }
 	}
 	
@@ -309,8 +308,8 @@ public class Datos {
 					
 				}else {
 					pw.println(line);
-					pw.println(line3);
-					pw.println(line2);
+					pw.println(line3.substring(0,(line3.length()-1)));
+					pw.println(line2.substring(0,(line2.length()-1)));
     			}
     		}
             pw.close();
@@ -354,7 +353,7 @@ public class Datos {
 		}
 	}
 
-	private static void guardarDetallesPedido(String ruta) { //*****************************************DETALLES****************************************************
+	private static void guardarDetallesPedido(String ruta) { 
 		try {
 			FileWriter fw = new FileWriter(ruta + "detallesPedidos.txt");
 			PrintWriter pw = new PrintWriter(fw);
@@ -374,7 +373,7 @@ public class Datos {
 		}
 	}
 	
-	private static void guardarPedidos(String ruta) {       //********************************************PEDIDO**********************************************
+	private static void guardarPedidos(String ruta) {       
 		try {
 			FileWriter fw = new FileWriter(ruta + "pedidos.txt");
 			PrintWriter pw = new PrintWriter(fw);
@@ -383,7 +382,10 @@ public class Datos {
 				String line = pedidoOb.getCodigoP() + ";";
 				line += pedidoOb.getFactura().getCodigoF() + ";";
 				for(DetallePedido dp : pedidoOb.getDetallesP()) {
-					line += dp.getCodigoD() + ";";
+					if(dp != null) {
+						line += dp.getCodigoD() + ";";
+					}
+					
 				}
 				line += pedidoOb.getPrecioTotal();
 				pw.println(line.substring(0,(line.length()-1)));
@@ -393,7 +395,7 @@ public class Datos {
 			
 		}
 	}
-	private static void guardarFacturas(String ruta) {  //********************************************FACTURA*********************************************************
+	private static void guardarFacturas(String ruta) {  
 		try {
 			FileWriter fw = new FileWriter(ruta + "facturas.txt");
 			PrintWriter pw = new PrintWriter(fw);
@@ -409,9 +411,9 @@ public class Datos {
 		}
 	}
 	
-	private static void guardarCalificaciones(String ruta) {     //**********************************CALIFICACIÓN****************************************
+	private static void guardarCalificaciones(String ruta) {     
 		try {
-			FileWriter fw = new FileWriter(ruta + "calficaciones.txt");
+			FileWriter fw = new FileWriter(ruta + "calificaciones.txt");
 			PrintWriter pw = new PrintWriter(fw);
 			for(Calificacion cali : calificaciones) {
 				String line = cali.getCodigoCa() + ";";				

@@ -91,9 +91,11 @@ public class Pedido {
 		int sumatoria = 0;
 		String s = null;
 		for(DetallePedido r: pedido.getDetallesP()) {
-			int pt = Integer.parseInt(r.getPrecioTotal());
-			sumatoria += pt;
-			s = Integer.toString(sumatoria);
+			if(r != null) {
+				int pt = Integer.parseInt(r.getPrecioTotal());
+				sumatoria += pt;
+				s = Integer.toString(sumatoria);
+			}
         }
 		pedido.setPrecioTotal(s);
 		return sumatoria;

@@ -27,11 +27,9 @@ public class Administrador extends Usuario{
 		String [] funcionalidades = {"1","3","7","14","9","10","11","13","15","16","17","19","20","12"};   //admin;1;3;7;14;8;9;10;11;13;15;16;17;12
 		MenuDeConsola.nuevoMenu(usuario, funcionalidades);
 		
-		if(true){
+		
 			Datos.usuarios.put(nombreUsuario, usuario);
 			return "Ha sido creado";
-		}else{
-			return "No ha sido creado.";   //para que no genere error con respecto al tipo de retorno del método
-		}
+		
 	}
 }

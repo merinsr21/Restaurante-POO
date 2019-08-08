@@ -20,6 +20,7 @@ public class AgregarComida extends OpcionDeMenu {
 		String p = entrada.next();
 		String ca = entrada.next();
 		String print = "El código no se encuentra en el intervalo exigido, 100-199";
+		//hacer un metodo a parte
 		if(Integer.parseInt(c) >= 100 && Integer.parseInt(c) <= 199) {
 			if(!Datos.menuComidas.containsKey(c)) {
 				Comida.agregarComida(c, n, p, ca);
