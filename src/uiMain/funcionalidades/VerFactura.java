@@ -15,22 +15,24 @@ public class VerFactura extends OpcionDeMenu {
 	
 	public void ejecutar() {                             //el usuario solo puede hacer un pedido por dia.
 		Scanner entrada = new Scanner(System.in);
-		System.out.print("Ingrese su nombre de usuario: ");
-		String nombreUsuario = entrada.next();
 		System.out.print("Ingrese la fecha de su factura(día/mes/año): ");
-		Pedido p = null;
 		String fecha = entrada.next();
-		//cambiar solo algunas cosas, organizar lo del null
-		for(Pedido r: Usuario.getUsuarioConNombreUsuario(nombreUsuario).getPedidosU()) {
-			if(r.getFactura().getFecha().equals(fecha)) {
+		
+		//esa variable no se está usando ¿es necesaria?
+		Pedido pedido1 = null;
+		
+		
+		//cambiar solo lo del null
+		for(Pedido pedido: Main.usuario.getPedidosUsuario()) {
+			if(pedido.getFactura().getFecha().equals(fecha)) {
 				System.out.println("Factura:");
-				for(DetallePedido t : r.getDetallesP()) {
-					if(t !=null) {
-						System.out.println(t);
+				for(DetallePedido detalle : pedido.getDetallesPedido()) {
+					if(detalle !=null) {
+						System.out.println(detalle);
 					}
 					
 				}
-				System.out.println("Precio total: " + Pedido.calcularPrecioTotal(r));
+				System.out.println("Precio total: " + Pedido.calcularPrecioTotal(pedido));
 				break;
 			}
 		}

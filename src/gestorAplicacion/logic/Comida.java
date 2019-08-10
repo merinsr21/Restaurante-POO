@@ -6,65 +6,65 @@ import BaseDatos.*;
 
 public class Comida implements Comparable<Comida> {
 	
-	private String codigo;
-	private String nombre;
-	private String precio;
+	private String codigoComida;
+	private String nombreComida;
+	private String precioComida;
 	private String calorias;
-	private DetallePedido detallePedido;
+	private DetallePedido detallePedidoComida;
 	private ArrayList<Calificacion> calificaciones = new ArrayList<Calificacion>();
-	private static ArrayList<Comida> menuC = new ArrayList<Comida>();
+	private static ArrayList<Comida> menuComida = new ArrayList<Comida>();
 	
 	public Comida() {
 		
 	}
 	
 	public Comida(String codigo, String nombre, String calorias, String precio) {
-		this.codigo = codigo;
-		this.nombre = nombre;
-		this.precio = precio;
+		this.codigoComida = codigo;
+		this.nombreComida = nombre;
+		this.precioComida = precio;
 		this.calorias = calorias;
 	}
 	
-	public static void agregarComida(String codigo, String nombre, String precio, String calorias) {
-		Comida comida = new Comida(codigo,nombre,precio,calorias);
-		setMenuC(comida);
-		Datos.menuComidas.put(codigo, comida);
+	public static void agregarComida(String codigoComida, String nombre, String precio, String calorias) {
+		Comida comida = new Comida(codigoComida,nombre,precio,calorias);
+		setMenuComida(comida);
+		Datos.menuComidas.put(codigoComida, comida);
 	}
 	
 	public String toString() {
-		return "   "+codigo+"      "+nombre+"            "+precio+"         " + calorias;
+		return "   "+codigoComida+"      "+nombreComida+"            "+precioComida+"         " + calorias;
 	}
 	
-	public static ArrayList<Comida> getMenuC() {
-		return menuC;
+	public static ArrayList<Comida> getMenuComida() {
+		return menuComida;
 	}
 	
-	public String getCodigo() {
-		return codigo;
+	public String getCodigoComida() {
+		return codigoComida;
 	}
 	
-	public String getNombre() {
-		return nombre;
+	public String getNombreComida() {
+		return nombreComida;
 	}
 	
-	public String getPrecio() {
-		return precio;
+	public String getPrecioComida() {
+		return precioComida;
 	}
 	
 	public String getCalorias() {
 		return calorias;
 	}
 	
-	public DetallePedido getDetallePedido() {
-		return detallePedido;
+	public DetallePedido getDetallePedidoComida() {
+		return detallePedidoComida;
 	}
 
-	public void setDetallePedido(DetallePedido detallePedido) {
-		this.detallePedido = detallePedido;
+	public void setDetallePedidoComida(DetallePedido detallePedido) {
+		this.detallePedidoComida = detallePedido;
 	}
 
-	public static void setMenuC(Comida comida) {
-		Comida.menuC.add(comida);
+	public static void setMenuComida(Comida comida) {
+		Comida.menuComida.add(comida);
 	}
 
 	public void setCalorias(String calorias) {
@@ -72,8 +72,8 @@ public class Comida implements Comparable<Comida> {
 	}
 	
 	public int compareTo(Comida c) {  
-		int precio1 = Integer.parseInt(precio);
-		int precio2 = Integer.parseInt(c.precio);
+		int precio1 = Integer.parseInt(precioComida);
+		int precio2 = Integer.parseInt(c.precioComida);
 		if(precio1 < precio2) {
 			return -1;
 		}
@@ -86,8 +86,8 @@ public class Comida implements Comparable<Comida> {
 		
 	}
 	public int compareTo1(Comida c) {      
-		int codigo1 = Integer.parseInt(codigo);
-		int codigo2 = Integer.parseInt(c.codigo);
+		int codigo1 = Integer.parseInt(codigoComida);
+		int codigo2 = Integer.parseInt(c.codigoComida);
 		if(codigo1 < codigo2) {
 			return -1;
 		}
@@ -98,8 +98,23 @@ public class Comida implements Comparable<Comida> {
 			return 0;
 		}
 	}
-	public static Comida getComidaConCodigo(String codigo) {
-		return Datos.menuComidas.get(codigo);
+	public static Comida getComidaConCodigo(String codigoComida) {
+		return Datos.menuComidas.get(codigoComida);
+	}
+	
+	public static String borrarComida(String codigoComida) {
+		String print = "La comida que desea borrar no se encuentra en el menú.";
+		for(Map.Entry<String, Comida> comida : Datos.menuComidas.entrySet()) {
+			String comida1 = comida.getKey();
+			Comida comida12 = comida.getValue();
+				if(comida1.equals(codigoComida)) {
+					print = comida12.getNombreComida()+" "+"ha sido eliminada del menú.";
+					Comida.getMenuComida().remove(comida12);  
+					Datos.menuComidas.remove(comida1);
+					break;
+				}						
+		}
+		return print;
 	}
 
 }

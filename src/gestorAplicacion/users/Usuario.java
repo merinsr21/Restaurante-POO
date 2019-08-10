@@ -17,8 +17,8 @@ public class Usuario {
 	private String correo;
 	private Mesa mesa;
 	private MenuDeConsola menu;
-	private ArrayList<Pedido> pedidosU = new ArrayList<Pedido>();
-	private ArrayList<Calificacion> calificacionesU = new ArrayList<Calificacion>();
+	private ArrayList<Pedido> pedidosUsuario = new ArrayList<Pedido>();
+	private ArrayList<Calificacion> calificacionesUsuario = new ArrayList<Calificacion>();
 	
 	
 	public Usuario() {
@@ -68,17 +68,17 @@ public class Usuario {
 	public void setMesa(Mesa mesa) {
 		this.mesa = mesa;
 	}
-	public ArrayList<Pedido> getPedidosU() {
-		return pedidosU;
+	public ArrayList<Pedido> getPedidosUsuario() {
+		return pedidosUsuario;
 	}
-	public void setPedidosU(Pedido pedido) {
-		pedidosU.add(pedido);
+	public void setPedidosUsuario(Pedido pedido) {
+		pedidosUsuario.add(pedido);
 	}
-	public ArrayList<Calificacion> getCalificacionesU() {
-		return calificacionesU;
+	public ArrayList<Calificacion> getCalificacionesUsuario() {
+		return calificacionesUsuario;
 	}
-	public void setCalificacionesU(Calificacion calificacion) {
-		calificacionesU.add(calificacion);
+	public void setCalificacionesUsuario(Calificacion calificacion) {
+		calificacionesUsuario.add(calificacion);
 	}
 	
 	public MenuDeConsola getMenu() {
@@ -104,12 +104,8 @@ public class Usuario {
 		//Menu por defecto al crear un nuevo usuario
 		String [] funcionalidades = {"1","2","3","4","5","6","15","12"};
 		MenuDeConsola.nuevoMenu(usuario, funcionalidades);
-		if(true){
-			Datos.usuarios.put(nombreUsuario,usuario);
-			return "Ha sido creado";
-		}else{
-			return "No ha sido creado";    //para que no genere error con respecto al tipo de retorno del método
-		}
+		Datos.usuarios.put(nombreUsuario,usuario);
+		return "Ha sido creado";
 	}
 	
 	public static String editarUsuario(Usuario uusuario,int opcion, String valor){ //editar un usuario en específico

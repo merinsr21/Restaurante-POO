@@ -5,56 +5,51 @@ import BaseDatos.Datos;
 
 public class DetallePedido {
 	
-	private static int cont = 500;
-	private String codigoD;
+	private static int consecutivoDetalle = 500;
+	private String codigoDetalle;
 	private String cantidad;
 	private Comida comida;
-	private Pedido pedidoD;
+	private Pedido pedidoDetalle;
 	private String precioTotal;
-	private static ArrayList<DetallePedido> detallesD = new ArrayList<DetallePedido>();
+	private static ArrayList<DetallePedido> detallesDetalle = new ArrayList<DetallePedido>();
 	
-	public DetallePedido(String cantidad, Comida comida) { 
+	public DetallePedido(Comida comida, String cantidad) { 
 		this.cantidad = cantidad;
 		this.comida = comida;
 	}
-	public DetallePedido(String codigoD, String cantidad, Comida comida, Pedido pedidoD) { 
-		this.codigoD = codigoD;
+	public DetallePedido(String codigoD, Comida comida, String cantidad, Pedido pedidoD) { 
+		this.codigoDetalle = codigoD;
 		this.cantidad = cantidad;
 		this.comida = comida;
-		this.pedidoD = pedidoD;
+		this.pedidoDetalle = pedidoD;
 	}
 	
-	public DetallePedido(String codigoD, String cantidad, Comida comida, String precioTotal, Pedido pedidoD) { 
-		this.codigoD = codigoD;
+	public DetallePedido(String codigoD, Comida comida, String cantidad, String precioTotal, Pedido pedidoD) { 
+		this.codigoDetalle = codigoD;
 		this.cantidad = cantidad;
 		this.comida = comida;
 		this.precioTotal = precioTotal;
-		this.pedidoD = pedidoD;
+		this.pedidoDetalle = pedidoD;
 	}
-	public DetallePedido(String codigoD, String cantidad, Comida comida, String precioTotal) { 
-		this.codigoD = codigoD;
+	public DetallePedido(String codigoD, Comida comida, String cantidad, String precioTotal) { 
+		this.codigoDetalle = codigoD;
 		this.cantidad = cantidad;
 		this.comida = comida;
 		this.precioTotal = precioTotal;
 	}
 	
-	public static String generarCodigoD() {
-		int cont1 = cont;
-		cont++;
-		String conts = Integer.toString(cont1);
-		return conts;	
-	}
+	
 	public DetallePedido() {
 		
 	}
-	public String getCodigoD() {
-		return codigoD;
+	public String getCodigoDetalle() {
+		return codigoDetalle;
 	}
-	public Pedido getPedidoD() {
-		return pedidoD;
+	public Pedido getPedidoDetalle() {
+		return pedidoDetalle;
 	}
-	public void setPedido(Pedido pedido) {
-		this.pedidoD = pedido;
+	public void setPedidoDetalle(Pedido pedido) {
+		this.pedidoDetalle = pedido;
 	}
 	public String getCantidad() {
 		return cantidad;
@@ -68,11 +63,11 @@ public class DetallePedido {
 	public void setComida(Comida comida) {
 		this.comida = comida;
 	}
-	public ArrayList<DetallePedido> getDetallesD() {
-		return detallesD;
+	public ArrayList<DetallePedido> getDetallesDetalle() {
+		return detallesDetalle;
 	}
-	public static void setDetallesD(DetallePedido detP) {
-		 detallesD.add(detP);
+	public static void setDetallesDetalle(DetallePedido detallePedido) {
+		 detallesDetalle.add(detallePedido);
 	}
 	
 	public String getPrecioTotal() {
@@ -86,27 +81,26 @@ public class DetallePedido {
 		return Datos.detallesPedido.get(codigoDet);
 	}
 	
-	public static DetallePedido crearDetallePedido(String codigoD, String cantidad, String codigo, Pedido pedido) {  //BIEN
-		
-		DetallePedido t = null;
+	public static DetallePedido crearDetallePedido(String codigoDetalle, String codigoComida, String cantidad, Pedido pedido) {  //BIEN
+		DetallePedido detallito = null;
 		for(Map.Entry<String, Comida> menu : Datos.menuComidas.entrySet()) {    //Es necesario hacer que el detallePedido este asociado a una comida existente.
-			Comida comidaOb = menu.getValue();
-			if(comidaOb.getCodigo().equals(codigo)) {
-				DetallePedido detallePedido = new DetallePedido(codigoD,cantidad,comidaOb,pedido);
-				t = detallePedido;
-				int gp = Integer.parseInt(comidaOb.getPrecio().trim());
-				int cant = Integer.parseInt(cantidad);
-				String gpc = Integer.toString(gp*cant);
-				detallePedido.setPrecioTotal(gpc);
-				Datos.detallesPedido.put(codigoD,detallePedido);
+			Comida comidaBuscador = menu.getValue();
+			if(comidaBuscador.getCodigoComida().equals(codigoComida)) {
+				DetallePedido detallePedido = new DetallePedido(codigoDetalle,comidaBuscador,cantidad,pedido);
+				detallito = detallePedido;
+				int precioComida = Integer.parseInt(comidaBuscador.getPrecioComida().trim());
+				int cantidadComida = Integer.parseInt(cantidad);
+				String precioTotalComida = Integer.toString(precioComida*cantidadComida);
+				detallePedido.setPrecioTotal(precioTotalComida);
+				Datos.detallesPedido.put(codigoDetalle,detallePedido);
 				break;
 			}
 		}
-		return t;
+		return detallito;
 	}
 	
 	public String toString() {
-		return "Código: "+comida.getCodigo()+"| Nombre: "+comida.getNombre()+"| Cantidad: "+cantidad+"| Precio: "+comida.getPrecio()+"| Precio Total: "+precioTotal; 
+		return "Código: "+comida.getCodigoComida()+"| Nombre: "+comida.getNombreComida()+"| Cantidad: "+cantidad+"| Precio: "+comida.getPrecioComida()+"| Precio Total: "+precioTotal; 
 	}
 	
 	

@@ -5,42 +5,41 @@ import BaseDatos.*;
 
 public class Factura {
 	
-	private static int cont = 300;    //para generar el código
-	private String codigoF;  
+	private static int consecutivoFactura = 0;    //para generar el código
+	private String codigoFactura;  
 	private String fecha;
-	private Pedido pedidoF;
-	private  static ArrayList<Factura> facturasF = new ArrayList<Factura>();
+	private Pedido pedidoFactura;
+	private  static ArrayList<Factura> facturasFactura = new ArrayList<Factura>();
 
 	
 	public Factura(String codigo, String fecha) {
-		this.codigoF = codigo;
+		this.codigoFactura = codigo;
 		this.fecha = fecha;
 	}
 	public Factura(String codigo, String fecha, Pedido pedido) {
-		this.codigoF = codigo;
+		this.codigoFactura = codigo;
 		this.fecha = fecha;
-		this.pedidoF = pedido;
+		this.pedidoFactura = pedido;
 	}
-	public static String generarCodigoF() {
-		int cont1 = cont;
-		cont++;
-		String conts = Integer.toString(cont1);
-		return conts;	
+	public static String generarCodigoFactura() {
+		String  codigoFactura = Integer.toString(consecutivoFactura);
+		consecutivoFactura++;
+		return codigoFactura;	
 	}
 	public Factura() {
 		
 	}
-	public String getCodigoF() {
-		return codigoF;
+	public String getCodigoFactura() {
+		return codigoFactura;
 	}
-	public void setCodigoF(String codigo) {
-		this.codigoF = codigo;
+	public void setCodigoFactura(String codigo) {
+		this.codigoFactura = codigo;
 	}
-	public Pedido getPedidoF() {
-		return pedidoF;
+	public Pedido getPedidoFactura() {
+		return pedidoFactura;
 	}
-	public void setPedidoF(Pedido pedido) {
-		this.pedidoF = pedido;
+	public void setPedidoFactura(Pedido pedido) {
+		this.pedidoFactura = pedido;
 	}
 	public String getFecha() {
 		return fecha;
@@ -48,11 +47,11 @@ public class Factura {
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-	public static void setFacturasF(Factura factura) {
-		facturasF.add(factura);
+	public static void setFacturasFactura(Factura factura) {
+		facturasFactura.add(factura);
 	} 
-	public static Factura getFacturaConCodigo(String codigof){
-		return Datos.facturas.get(codigof);	
+	public static Factura getFacturaConCodigo(String codigoFactura){
+		return Datos.facturas.get(codigoFactura);	
 	}
 
 }

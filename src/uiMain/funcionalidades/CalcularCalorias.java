@@ -19,9 +19,9 @@ public class CalcularCalorias extends OpcionDeMenu {
 		String fecha = entrada.next();
 		Usuario usuario = Usuario.getUsuarioConNombreUsuario(nombreUsuario);
 		Pedido pedido = null;
-		for(Pedido r: usuario.getPedidosU()) {
-			if(r.getFactura().getFecha().equals(fecha)) {
-				pedido = r;
+		for(Pedido buscadorPedido: usuario.getPedidosUsuario()) {
+			if(buscadorPedido.getFactura().getFecha().equals(fecha)) {
+				pedido = buscadorPedido;
 			}
 		}
 		Chef.calcularCalorias(pedido);

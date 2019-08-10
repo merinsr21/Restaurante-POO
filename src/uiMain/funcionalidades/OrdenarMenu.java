@@ -11,9 +11,9 @@ public class OrdenarMenu extends OpcionDeMenu{
 	}
 	
 	public void ejecutar() {
-		Collections.sort(Comida.getMenuC());
-		for(Comida r: Comida.getMenuC()) {
-			System.out.println(r);
+		Collections.sort(Comida.getMenuComida());
+		for(Comida comida: Comida.getMenuComida()) {
+			System.out.println(comida);
 		}
 	}
 	

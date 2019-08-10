@@ -15,9 +15,9 @@ public class VerComentarios extends OpcionDeMenu {
 		Scanner entrada = new Scanner(System.in);
 		System.out.print("Ingrese el código de la comida: ");
 		String codigo = entrada.next();
-		for(Calificacion r: Calificacion.getCalificaciones()) {
-			if(r.getComida().getCodigo().equals(codigo)){
-				System.out.println(r.getComentario());
+		for(Calificacion calificacion: Calificacion.getCalificaciones()) {
+			if(calificacion.getComida().getCodigoComida().equals(codigo)){
+				System.out.println(calificacion.getComentario());
 			}
 		}
 	}
