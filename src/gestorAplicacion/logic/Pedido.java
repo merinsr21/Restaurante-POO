@@ -7,7 +7,7 @@ import uiMain.OpcionDeMenu;
 
 public class Pedido {
 	
-	private static int consecutivo = 0;
+	private static int consecutivoPedido = 0;
 	private static int consecutivoDetalle = 0;
 	private String codigoPedido;
 	private Factura factura;
@@ -45,9 +45,9 @@ public class Pedido {
 	}
 	
 	private static String generarCodigoPedido() {
-		String  codigo = Integer.toString(consecutivo);
-		consecutivo++;
-		return codigo;		
+		String  codigoPedido = Integer.toString(consecutivoPedido);
+		consecutivoPedido++;
+		return codigoPedido;		
 	}
 	
 	private static String generarCodigoDetalle() {

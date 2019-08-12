@@ -22,7 +22,7 @@ public class CerrarSesion  extends OpcionDeMenu{
 		//organizar tambien lo del null
 		Mesa mesa = usuario.getMesa();
 		if(mesa != null) {
-			Mesa.liberarMesa(mesa.getCodigoM());
+			Mesa.liberarMesa(mesa.getCodigoMesa());
 		}
 		System.out.println("Adiós");
 		Main.usuario = null;

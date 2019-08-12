@@ -9,6 +9,7 @@ import gestorAplicacion.users.*;;
 
 public class HacerPedido extends OpcionDeMenu {
 	
+	// Solo se puede realizar un pedido por dia      // un usuario no puede tener varios pedidos con la misma fecha.
 	public HacerPedido(String pos) {
 		super(pos);
 	}

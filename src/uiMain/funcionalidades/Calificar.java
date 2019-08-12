@@ -26,22 +26,22 @@ public class Calificar extends OpcionDeMenu {
 		}
 		//no se si esto con tantos prints y cosas que pide al usuario debería ir en un metodo de una clase
 		System.out.print("Ingrese el código de la comida que desea calificar: ");
-		String codigo = entrada.next();
+		String codigoComida  = entrada.next();
 		String print = "La comida que desea calificar debe estar en su pedido.";
 		for(DetallePedido detalle: pedido.getDetallesPedido()) {
-			if(detalle.getComida().getCodigoComida().equals(codigo)) {
+			if(detalle.getComida().getCodigoComida().equals(codigoComida)) {
 				System.out.print("Ingrese la calificación de la comida: ");
 				String puntaje = entrada.next();
-				Calificacion calificacion = Calificacion.crearCalificacion(codigo, puntaje, usuario);
+				Calificacion calificacion = Calificacion.crearCalificacion(//////, puntaje);
 				print = "Gracias por calificar, vuelva pronto.";
 				if(!print.equals("La comida que desea calificar debe estar en su pedido.")){
 					System.out.print("¿Desea añadir un comentario a su calificación? Ingrese 1 = Si , 2 = No  : ");
 					int opcion  = entrada.nextInt();
 					if(opcion == 1) {
-						System.out.println("Ingrese un breve comentario sobre la comida:");
+						System.out.print("Ingrese un breve comentario sobre la comida: ");
 						String comentario = entrada.next();
 						calificacion.setComentario(comentario);
-						System.out.println("Su cometario ha sido añadido.");
+						System.out.print("Su cometario ha sido añadido.");
 					}
 					else {
 						break;

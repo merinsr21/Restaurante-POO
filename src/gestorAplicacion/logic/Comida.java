@@ -24,7 +24,7 @@ public class Comida implements Comparable<Comida> {
 		this.precioComida = precio;
 		this.calorias = calorias;
 	}
-	
+
 	public static void agregarComida(String codigoComida, String nombre, String precio, String calorias) {
 		Comida comida = new Comida(codigoComida,nombre,precio,calorias);
 		setMenuComida(comida);
@@ -85,6 +85,8 @@ public class Comida implements Comparable<Comida> {
 		}
 		
 	}
+	
+	// LAURA (REVSAR)
 	public int compareTo1(Comida c) {      
 		int codigo1 = Integer.parseInt(codigoComida);
 		int codigo2 = Integer.parseInt(c.codigoComida);
@@ -102,19 +104,35 @@ public class Comida implements Comparable<Comida> {
 		return Datos.menuComidas.get(codigoComida);
 	}
 	
+	// Elimina la comida cuyo codigo corresponda por el ingresado por el admin.
 	public static String borrarComida(String codigoComida) {
 		String print = "La comida que desea borrar no se encuentra en el menú.";
 		for(Map.Entry<String, Comida> comida : Datos.menuComidas.entrySet()) {
-			String comida1 = comida.getKey();
-			Comida comida12 = comida.getValue();
-				if(comida1.equals(codigoComida)) {
-					print = comida12.getNombreComida()+" "+"ha sido eliminada del menú.";
-					Comida.getMenuComida().remove(comida12);  
-					Datos.menuComidas.remove(comida1);
+			String comidaLlave = comida.getKey();
+			Comida comidaValor = comida.getValue();
+				if(comidaLlave.equals(codigoComida)) {
+					print = comidaValor.getNombreComida()+" "+"ha sido eliminada del menú.";
+					Comida.getMenuComida().remove(comidaValor);  
+					Datos.menuComidas.remove(comidaLlave);
 					break;
 				}						
 		}
 		return print;
 	}
-
+	
+	// Verifica que los datos ingresados por el admin sean validos para agregar una comida.
+	public static String ValidacionComida(String codigoComida, String nombreComida, String precioComida, String calorias) {
+		if(Integer.parseInt(codigoComida) >= 100 && Integer.parseInt(codigoComida) <= 199) {
+			if(!Datos.menuComidas.containsKey(codigoComida)) {
+				Comida.agregarComida(codigoComida, nombreComida, precioComida, calorias);
+				return "La comida se ha agregado en el menú.";
+	
+			}else {
+				return "Este código ya se encuenta en el menú. La comida no ha sido agregada al menú.";
+			}
+		}
+		else {
+			return "El código no se encuentra en el intervalo exigido, 100-199";
+		}
+	}
 }

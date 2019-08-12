@@ -3,10 +3,12 @@ import java.util.ArrayList;
 
 import BaseDatos.Datos;
 import gestorAplicacion.users.*;
+import uiMain.Main;
 
 public class Calificacion {
 	
-	private String codigoCa;        
+	private static int consecutivoCalificacion = 900;
+	private String codigoCalificacion;        
 	private String puntaje;
 	private Comida comida;
 	private Usuario usuario;
@@ -17,28 +19,33 @@ public class Calificacion {
 		
 	}
 	
-	public Calificacion (String codigoCa, String puntaje, Usuario usuario){
-		this.codigoCa = codigoCa;
+	public Calificacion (String codigoCalificacion, String puntaje, Usuario usuario){
+		this.codigoCalificacion = codigoCalificacion;
 		this.puntaje=puntaje;
 		this.usuario = usuario;
 	}
-	public Calificacion (String codigoCa, Comida comida, String puntaje, Usuario usuario){
-		this.codigoCa = codigoCa;
+	public Calificacion (String codigoCalificacion, Comida comida, String puntaje, Usuario usuario){
+		this.codigoCalificacion = codigoCalificacion;
 		this.comida = comida;
 		this.puntaje=puntaje;
 		this.usuario = usuario;
 	}
-	public Calificacion (String codigoCa, String puntaje){
-		this.codigoCa = codigoCa;
+	public Calificacion (String codigoCalificacion, String puntaje){
+		this.codigoCalificacion = codigoCalificacion;
 		this.puntaje=puntaje;
 	}
-	public Calificacion (String codigoCa, Comida comida, String puntaje, String comentario){
-		this.codigoCa = codigoCa;
+	public Calificacion (String codigoCalificacion, Comida comida, String puntaje, String comentario){
+		this.codigoCalificacion = codigoCalificacion;
 		this.comida = comida;
 		this.puntaje=puntaje;
 		this.comentario = comentario;
 	}
 	
+	public static String generarCodigoCalificacion() {
+		String  codigoCalificacion = Integer.toString(consecutivoCalificacion);
+		consecutivoCalificacion++;
+		return codigoCalificacion;	
+	}
 	
 	public String getComentario() {
 		return comentario;
@@ -49,11 +56,11 @@ public class Calificacion {
 	}
 
 	public String getCodigoCa() {
-		return codigoCa;
+		return codigoCalificacion;
 	}
 	
 	public void setCodigoCa(String codigo) {
-		this.codigoCa = codigo;
+		this.codigoCalificacion = codigo;
 	}
 	
 	public String getPuntaje() {
@@ -89,8 +96,8 @@ public class Calificacion {
 		calificaciones.add(calificacion);
 	}
 	
-	public static Calificacion crearCalificacion(String codigo, String puntaje, Usuario usuario) {                
-		Calificacion calificacion = new Calificacion(codigo, puntaje, usuario);   //No podemos guardar datos en la hash(se sobreescriben)
+	public static Calificacion crearCalificacion(String codigoCalificacion, String puntaje) {                
+		Calificacion calificacion = new Calificacion(codigoCalificacion, puntaje, Main.usuario); 
 		Datos.calificaciones.add(calificacion);	        
 		Calificacion.setCalificaciones(calificacion);
 		return calificacion;
