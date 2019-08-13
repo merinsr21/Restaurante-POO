@@ -10,7 +10,6 @@ public class Mesa {
 	private String numeroDeSillas;
 	private String ocupada; //ocupada = true, no ocupada = false
 	private Usuario usuario;
-	private static ArrayList<Mesa> mesasM = new ArrayList<Mesa>();
 	public static HashMap<String, Mesa> mesas = new HashMap<String, Mesa>();   //String= Código de la mesa
 
 	public Mesa() {
@@ -25,7 +24,6 @@ public class Mesa {
 	// el codigo de la mesa lo ingresa el admin al momento de crearla.
 	public static void crearMesa(String codigoMesa, String numeroDeSillas, String ocupada) {
 		Mesa mesam = new Mesa(codigoMesa,numeroDeSillas,ocupada);               
-		mesasM.add(mesam);  
 		Mesa.mesas.put(codigoMesa, mesam);
 	}
 	
@@ -43,12 +41,6 @@ public class Mesa {
 	
 	public void setOcupada(String ocupada) {
 		this.ocupada = ocupada;
-	}
-	public static ArrayList<Mesa> getMesasM(){
-		return mesasM;
-	}
-	public static void setMesasM(Mesa mesa){
-		mesasM.add(mesa);
 	}
 	
 	public Usuario getUsuario() {

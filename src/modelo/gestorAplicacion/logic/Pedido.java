@@ -13,8 +13,7 @@ public class Pedido {
 	private Factura factura;
 	private Usuario usuario;
 	public static HashMap<String, Pedido> pedidos = new HashMap<String, Pedido>();//String= Códigodel pedido	
-	private ArrayList<DetallePedido> detallesPedido1 = new ArrayList<DetallePedido>();
-	private static ArrayList<Pedido> pedidosPedido = new ArrayList<Pedido>();
+	private ArrayList<DetallePedido> detallesPedidoDeCadaPedido = new ArrayList<DetallePedido>();
 
 	
 	public Pedido() {
@@ -31,6 +30,7 @@ public class Pedido {
 		
 		Pedido.pedidos.put(codigoPedido, pedido);
 		pedidosPedido.add(pedido);
+		//ver si se pone en detalle pedido o como corregirlo
 		Pedido.calcularPrecioTotal(pedido);		
 	}
 	
@@ -64,28 +64,17 @@ public class Pedido {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	public ArrayList<DetallePedido> getDetallesPedido() {
-		return detallesPedido1;
+	public ArrayList<DetallePedido> getDetallesPedidoDeCadaPedido() {
+		return detallesPedidoDeCadaPedido;
 	}
-	public void setDetallesPedido(DetallePedido detalle) {
-		detallesPedido1.add(detalle);
+	public void setDetallesPedidoDeCadaPedido(DetallePedido detalle) {
+		detallesPedidoDeCadaPedido.add(detalle);
 	}
-	public static String getNombreArreglo(String noSeUsa) {
-		return "pedidosP";
-	}
-	public static String getNombreArreglo() {
-		return "pedidosP";
-	}
-	public static ArrayList<Pedido> getPedidosPedido(String nombre){
-		return pedidosPedido;
-	}
-	public static void setPedidosPedido(Pedido pedido){
-		pedidosPedido.add(pedido);
-	}
+	
 	public int calcularPrecioTotal(Pedido pedido) {
 		int sumatoria = 0;
 		String sumaAString = null;
-		for(DetallePedido buscador: pedido.getDetallesPedido()) {
+		for(DetallePedido buscador: pedido.getDetallesPedidoDeCadaPedido()) {
 			if(buscador != null) {
 				int precioTotal = Integer.parseInt(buscador.getPrecioTotal());
 				sumatoria += precioTotal;
@@ -100,7 +89,7 @@ public class Pedido {
 		for (String detalle : detalles) {
 			
 			//no sé por que pasa esto
-			detallesPedido1.add(DetallePedido.getDetalleConCodigo(detalle));
+			detallesPedidoDeCadaPedido.add(DetallePedido.getDetalleConCodigo(detalle));
 			DetallePedido.getDetalleConCodigo(detalle).setPedidoDetalle(pedido1);
 			DetallePedido pointer = DetallePedido.getDetalleConCodigo(detalle);
 			DetallePedido detdet = new DetallePedido(pointer.getCodigoDetalle(), pointer.getComida(), pointer.getCantidad(), pointer.getPrecioTotal(), pointer.getPedidoDetalle());

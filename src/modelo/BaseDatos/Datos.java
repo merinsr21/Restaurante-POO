@@ -110,7 +110,7 @@ public class Datos {
 					String nombre = comidas[1];
 					String precio = comidas[2];
 					String calorias = comidas[3];
-					Comida comida = new Comida(codigo,nombre,precio,calorias);
+					Comida comida = new Comida(codigo,nombre,calorias,Integer.parseInt(precio));
 					Comida.menuComidas.put(codigo, comida);
 					Comida.setMenuComida(comida);
 				}
@@ -288,7 +288,8 @@ public class Datos {
     			String line = usuarioO.getNombreUsuario()+";";
     			line += usuarioO.getNombre()+";";
     			line += usuarioO.getCorreo()+";";
-    			line += usuarioO.getContraseña();
+    			line += usuarioO.getContraseña()+";";
+    			line += usuarioO.getMiCarrito();
     			/*String line2 = "";
     			String line3 = "";
     			for(Calificacion f : usuarioO.getCalificacionesUsuario()) {//en una tercera línea del txt muestra las calificaciones asociados al usuario
@@ -337,7 +338,8 @@ public class Datos {
 				Comida comidaOb = comida.getValue();
 				String line = comidaOb.getCodigoComida() + ";";
 				line += comidaOb.getNombreComida() + ";";
-				line+= comidaOb.getPrecioComida() + ";";
+				String precioComida = Integer.toString(comidaOb.getPrecioComida());
+				line+= precioComida + ";";
 				line += comidaOb.getCalorias();
 				pw.println(line);
 			}
@@ -381,7 +383,8 @@ public class Datos {
 					}
 					
 				}
-				line += pedidoOb.getPrecioTotal();
+				//ver que  hacer con la variable precioTotal de pedido que fue borrad porque se implementará en detalle
+				line += pedidoOb.getPrecioTotal(); 
 				pw.println(line.substring(0,(line.length()-1)));
 			}
 			pw.close();

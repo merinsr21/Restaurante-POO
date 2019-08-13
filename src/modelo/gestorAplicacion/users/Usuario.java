@@ -34,11 +34,12 @@ public class Usuario {
 		Usuario.usuarios.put(nombreUsuario, this);
 	}
 
-	public Usuario(String nombre, String nombreUsuario, String correo, String contraseña) {
+	public Usuario(String nombre, String nombreUsuario, String correo, String contraseña, Carrito miCarrito) {
 		this.nombre = nombre;
 		this.nombreUsuario = nombreUsuario;
 		this.correo = correo;
 		this.contraseña = contraseña;
+		this.miCarrito = miCarrito;
 		Usuario.usuarios.put(nombreUsuario, this);
 	}
 	

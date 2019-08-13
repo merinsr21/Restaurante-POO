@@ -2,7 +2,6 @@ package uiMain.funcionalidades;
 
 import uiMain.*;
 import java.util.*;
-import gestorAplicacion.*;
 import modelo.gestorAplicacion.logic.DetallePedido;
 import modelo.gestorAplicacion.logic.Pedido;
 import modelo.gestorAplicacion.users.Usuario;
@@ -32,6 +31,7 @@ public class VerFactura extends OpcionDeMenu {
 					}
 					
 				}
+				//ver si este metodo si estaria en detalle o como se orgaizaria
 				System.out.println("Precio total: " + Pedido.calcularPrecioTotal(pedido));
 				break;
 			}

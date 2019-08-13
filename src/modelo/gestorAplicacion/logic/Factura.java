@@ -11,7 +11,6 @@ public class Factura {
 	private String fecha;
 	private Pedido pedidoFactura;
 	public static HashMap<String, Factura> facturas = new HashMap<String, Factura>(); //String = código de la factura
-	private  static ArrayList<Factura> facturasFactura = new ArrayList<Factura>();
 
 	
 	public Factura(String codigo, String fecha) {
@@ -49,9 +48,7 @@ public class Factura {
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-	public static void setFacturasFactura(Factura factura) {
-		facturasFactura.add(factura);
-	} 
+	
 	public static Factura getFacturaConCodigo(String codigoFactura){
 		return Factura.facturas.get(codigoFactura);	
 	}

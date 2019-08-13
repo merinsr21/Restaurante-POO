@@ -17,6 +17,7 @@ public class Chef extends Usuario{
 	}
 
 	public Chef(String nombre, String nombreUsuario, String correo, String contraseña) {
+		//organizar lo del carrito
 		super(nombre, nombreUsuario, correo, contraseña);
 		Usuario.usuarios.put(nombreUsuario, this);
 	}

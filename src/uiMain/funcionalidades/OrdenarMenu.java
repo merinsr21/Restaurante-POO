@@ -13,6 +13,7 @@ public class OrdenarMenu extends OpcionDeMenu{
 	}
 	
 	public void ejecutar() {
+		//ver que se puede hacer con esto, porque esos son metodos del arreglo que habia en Comida y se necesita usar solo la hash
 		Collections.sort(Comida.getMenuComida());
 		for(Comida comida: Comida.getMenuComida()) {
 			System.out.println(comida);

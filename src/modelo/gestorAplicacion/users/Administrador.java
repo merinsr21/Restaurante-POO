@@ -11,6 +11,7 @@ public class Administrador extends Usuario{
 	}
 	
 	public Administrador(String nombre, String nombreUsuario, String correo, String contraseña) {
+		//pober lo del carrito
 		super(nombre, nombreUsuario, correo, contraseña);
 		Usuario.usuarios.put(nombreUsuario, this);
 	}

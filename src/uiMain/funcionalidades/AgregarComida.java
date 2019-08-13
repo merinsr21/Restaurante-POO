@@ -17,7 +17,7 @@ public class AgregarComida extends OpcionDeMenu {
 		System.out.println("Ingrese el código(100-199), nombre, precio y calorias de la comida que desea agregar en el menú: ");	
 		String codigoComida = entrada.next();
 		String nombreComida = entrada.next();
-		String precioComida = entrada.next();
+		int precioComida = entrada.nextInt();
 		String calorias = entrada.next();
 		System.out.print(Comida.ValidacionComida(codigoComida, nombreComida, precioComida, calorias));
 	}

@@ -5,39 +5,35 @@ import modelo.BaseDatos.Datos;
 
 public class DetallePedido {
 	
-	private static int consecutivoDetalle = 500;
 	private String codigoDetalle;
 	private String cantidad;
 	private Comida comida;
 	private Pedido pedidoDetalle;
 	private int precioUnitario;
-	private String precioTotal;
 	public static HashMap<String, DetallePedido> detallesPedido = new HashMap<String, DetallePedido>(); //String = codigo de el detalle                          
-	private static ArrayList<DetallePedido> detallesDetalle = new ArrayList<DetallePedido>();
+	//private static ArrayList<DetallePedido> detallesDetalle = new ArrayList<DetallePedido>();
 	
 	public DetallePedido(Comida comida, String cantidad) { 
 		this.cantidad = cantidad;
 		this.comida = comida;
 	}
-	public DetallePedido(String codigoD, Comida comida, String cantidad, Pedido pedidoD) { 
-		this.codigoDetalle = codigoD;
+	public DetallePedido(String codigoDetalle, Comida comida, String cantidad, Pedido pedidoDetalle) { 
+		this.codigoDetalle = codigoDetalle;
 		this.cantidad = cantidad;
 		this.comida = comida;
-		this.pedidoDetalle = pedidoD;
+		this.pedidoDetalle = pedidoDetalle;
 	}
 	
-	public DetallePedido(String codigoD, Comida comida, String cantidad, String precioTotal, Pedido pedidoD) { 
-		this.codigoDetalle = codigoD;
+	public DetallePedido(String codigoDetalle, Comida comida, String cantidad, String precioTotal, Pedido pedidoDetalle) { 
+		this.codigoDetalle = codigoDetalle;
 		this.cantidad = cantidad;
 		this.comida = comida;
-		this.precioTotal = precioTotal;
-		this.pedidoDetalle = pedidoD;
+		this.pedidoDetalle = pedidoDetalle;
 	}
 	public DetallePedido(String codigoD, Comida comida, String cantidad, String precioTotal) { 
 		this.codigoDetalle = codigoD;
 		this.cantidad = cantidad;
 		this.comida = comida;
-		this.precioTotal = precioTotal;
 	}
 	
 	
@@ -65,19 +61,7 @@ public class DetallePedido {
 	public void setComida(Comida comida) {
 		this.comida = comida;
 	}
-	public ArrayList<DetallePedido> getDetallesDetalle() {
-		return detallesDetalle;
-	}
-	public static void setDetallesDetalle(DetallePedido detallePedido) {
-		 detallesDetalle.add(detallePedido);
-	}
 	
-	public String getPrecioTotal() {
-		return precioTotal;
-	}
-	public void setPrecioTotal(String precioTotal) {
-		this.precioTotal = precioTotal;
-	}
 	public int precioUnitario(int precioUnitario) {
 		this.precioUnitario = comida.getPrecioComida();
 		return this.precioUnitario;
@@ -93,9 +77,11 @@ public class DetallePedido {
 			if(comidaBuscador.getCodigoComida().equals(codigoComida)) {
 				DetallePedido detallePedido = new DetallePedido(codigoDetalle,comidaBuscador,cantidad,pedido);
 				detallito = detallePedido;
-				int precioComida = Integer.parseInt(comidaBuscador.getPrecioComida().trim());
+				int precioComida = comidaBuscador.getPrecioComida(); //habia un .trim() no se que hace pero tiene que ver con String
 				int cantidadComida = Integer.parseInt(cantidad);
 				String precioTotalComida = Integer.toString(precioComida*cantidadComida);
+				
+				//hacer metodo del precio total
 				detallePedido.setPrecioTotal(precioTotalComida);
 				DetallePedido.detallesPedido.put(codigoDetalle,detallePedido);
 				break;

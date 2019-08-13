@@ -13,7 +13,7 @@ public class Comida implements Comparable<Comida> {
 	private DetallePedido detallePedidoComida;
 	public static HashMap<String, Comida> menuComidas = new HashMap<String, Comida>(); //String= Código de la comida
 	private ArrayList<Calificacion> calificaciones = new ArrayList<Calificacion>();
-	private static ArrayList<Comida> menuComida = new ArrayList<Comida>();
+	//private static ArrayList<Comida> menuComida = new ArrayList<Comida>();
 	
 	public Comida() {
 		
@@ -28,7 +28,6 @@ public class Comida implements Comparable<Comida> {
 
 	public static void agregarComida(String codigoComida, String nombre, String calorias, int precio) {
 		Comida comida = new Comida(codigoComida,nombre,calorias,precio);
-		setMenuComida(comida);
 		Comida.menuComidas.put(codigoComida, comida);
 	}
 	
@@ -36,9 +35,7 @@ public class Comida implements Comparable<Comida> {
 		return "   "+codigoComida+"      "+nombreComida+"            "+precioComida+"         " + calorias;
 	}
 	
-	public static ArrayList<Comida> getMenuComida() {
-		return menuComida;
-	}
+	
 	
 	public String getCodigoComida() {
 		return codigoComida;
@@ -64,9 +61,7 @@ public class Comida implements Comparable<Comida> {
 		this.detallePedidoComida = detallePedido;
 	}
 
-	public static void setMenuComida(Comida comida) {
-		Comida.menuComida.add(comida);
-	}
+	
 
 	public void setCalorias(String calorias) {
 		this.calorias = calorias;
@@ -99,7 +94,6 @@ public class Comida implements Comparable<Comida> {
 			Comida comidaValor = comida.getValue();
 				if(comidaLlave.equals(codigoComida)) {
 					print = comidaValor.getNombreComida()+" "+"ha sido eliminada del menú.";
-					Comida.getMenuComida().remove(comidaValor);  
 					Comida.menuComidas.remove(comidaLlave);
 					break;
 				}						
