@@ -1,16 +1,18 @@
-package gestorAplicacion.users;
+package modelo.gestorAplicacion.users;
 
 import java.util.*;
 import java.util.HashMap;
 
-import gestorAplicacion.logic.*;
-import BaseDatos.Datos;
+import modelo.BaseDatos.Datos;
+import modelo.gestorAplicacion.logic.*;
 import uiMain.MenuDeConsola;
 import uiMain.OpcionDeMenu;
 import uiMain.Main;
 
 public class Usuario {
 	
+	public static Usuario usuario;
+	private Carrito miCarrito;
 	private String nombre;
 	private String nombreUsuario;
 	private String contraseña;
@@ -19,6 +21,8 @@ public class Usuario {
 	private MenuDeConsola menu;
 	private ArrayList<Pedido> pedidosUsuario = new ArrayList<Pedido>();
 	private ArrayList<Calificacion> calificacionesUsuario = new ArrayList<Calificacion>();
+	public static HashMap<String, Usuario> usuarios = new HashMap<String, Usuario>();  //String = nombreUsuario
+
 	
 	
 	public Usuario() {
@@ -27,7 +31,7 @@ public class Usuario {
 	protected Usuario(String nombreUsuario, MenuDeConsola menu) {
 		this.nombreUsuario = nombreUsuario;
 		this.menu = menu;
-		Datos.usuarios.put(nombreUsuario, this);
+		Usuario.usuarios.put(nombreUsuario, this);
 	}
 
 	public Usuario(String nombre, String nombreUsuario, String correo, String contraseña) {
@@ -35,7 +39,7 @@ public class Usuario {
 		this.nombreUsuario = nombreUsuario;
 		this.correo = correo;
 		this.contraseña = contraseña;
-		Datos.usuarios.put(nombreUsuario, this);
+		Usuario.usuarios.put(nombreUsuario, this);
 	}
 	
 	public String getNombre() {
@@ -90,7 +94,11 @@ public class Usuario {
 	}
 	
 	public HashMap<String, Usuario> getUsuarios(){
-		return Datos.usuarios;
+		return Usuario.usuarios;
+	}
+	
+	public Carrito getMiCarrito(){
+		return miCarrito;
 	}
 	
 	public static String nuevoUsuario(String nombre, String nombreUsuario, String correo, String contraseña){
@@ -104,7 +112,7 @@ public class Usuario {
 		//Menu por defecto al crear un nuevo usuario
 		String [] funcionalidades = {"1","2","3","4","5","6","15","12"};
 		MenuDeConsola.nuevoMenu(usuario, funcionalidades);
-		Datos.usuarios.put(nombreUsuario,usuario);
+		Usuario.usuarios.put(nombreUsuario,usuario);
 		return "Ha sido creado";
 	}
 	
@@ -122,12 +130,12 @@ public class Usuario {
 	}
 	
 	public static String eliminarUsuario(String nombreUsuario){
-		Datos.usuarios.remove(nombreUsuario);
+		Usuario.usuarios.remove(nombreUsuario);
 		return "El usuario se ha eliminado";
 	}
 	
 	public static Usuario getUsuarioConNombreUsuario(String nombreUsuario){
-        return Datos.usuarios.get(nombreUsuario);
+        return Usuario.usuarios.get(nombreUsuario);
     }
 
     public static String iniciarSesion(String nombreUsuario, String contraseña){

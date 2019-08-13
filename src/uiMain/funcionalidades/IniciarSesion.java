@@ -2,7 +2,7 @@ package uiMain.funcionalidades;
 
 import java.util.Scanner;
 
-import gestorAplicacion.users.Usuario;
+import modelo.gestorAplicacion.users.Usuario;
 import uiMain.OpcionDeMenu;
 
 public class IniciarSesion extends OpcionDeMenu{

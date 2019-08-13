@@ -1,8 +1,9 @@
 package uiMain.funcionalidades;
 
 import uiMain.*;
-import gestorAplicacion.logic.*;
-import BaseDatos.*;
+import modelo.BaseDatos.*;
+import modelo.gestorAplicacion.logic.*;
+
 import java.util.*;
 
 public class VerCalificacion extends OpcionDeMenu {

@@ -1,7 +1,8 @@
 package uiMain.funcionalidades;
 
 import java.util.Scanner;
-import gestorAplicacion.users.*;
+
+import modelo.gestorAplicacion.users.*;
 import uiMain.*;
 
 public class NuevoChef extends OpcionDeMenu {

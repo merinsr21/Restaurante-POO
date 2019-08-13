@@ -3,7 +3,7 @@ package uiMain.funcionalidades;
 import uiMain.*;
 import java.util.*;
 
-import gestorAplicacion.logic.Calificacion;
+import modelo.gestorAplicacion.logic.Calificacion;
 
 public class VerComentarios extends OpcionDeMenu {
 

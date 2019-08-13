@@ -1,8 +1,9 @@
 package uiMain.funcionalidades;
 
 import java.util.Scanner;
-import gestorAplicacion.logic.*;
-import gestorAplicacion.users.*;
+
+import modelo.gestorAplicacion.logic.*;
+import modelo.gestorAplicacion.users.*;
 import uiMain.*;
 
 public class CalcularCalorias extends OpcionDeMenu {

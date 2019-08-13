@@ -2,8 +2,8 @@ package uiMain.funcionalidades;
 
 import java.util.*;
 
-import BaseDatos.Datos;
-import gestorAplicacion.logic.Comida;
+import modelo.BaseDatos.Datos;
+import modelo.gestorAplicacion.logic.Comida;
 import uiMain.*;
 
 public class AgregarComida extends OpcionDeMenu {

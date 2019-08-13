@@ -1,13 +1,15 @@
 package uiMain;
 
+import java.util.HashMap;
 import java.util.Map;
 
-import BaseDatos.Datos;
+import modelo.BaseDatos.Datos;
 
 public abstract class OpcionDeMenu {
 	
 	private String pos;
-	
+	public static HashMap<String, OpcionDeMenu> funcionalidades = new HashMap<String, OpcionDeMenu>();
+
 	
 	public OpcionDeMenu() {
 		
@@ -31,7 +33,7 @@ public abstract class OpcionDeMenu {
 	
 	public static void mostrarFuncionalidades() {
 		int i = 1;
-		for (Map.Entry<String, OpcionDeMenu> opcionDeMenu : Datos.funcionalidades.entrySet()) {   //mostrar funcionalidades de la opción de menú.
+		for (Map.Entry<String, OpcionDeMenu> opcionDeMenu : OpcionDeMenu.funcionalidades.entrySet()) {   //mostrar funcionalidades de la opción de menú.
 			System.out.println(i + " "+opcionDeMenu.getValue());
 			i++;
 		}

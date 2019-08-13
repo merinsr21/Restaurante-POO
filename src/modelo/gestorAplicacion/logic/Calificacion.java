@@ -1,19 +1,19 @@
-package gestorAplicacion.logic;
+package modelo.gestorAplicacion.logic;
 import java.util.ArrayList;
 
-import BaseDatos.Datos;
-import gestorAplicacion.users.*;
+import modelo.BaseDatos.Datos;
+import modelo.gestorAplicacion.users.*;
 import uiMain.Main;
 
 public class Calificacion {
 	
-	private static int consecutivoCalificacion = 900;
+	private static int consecutivoCalificacion = 0;
 	private String codigoCalificacion;        
 	private String puntaje;
 	private Comida comida;
 	private Usuario usuario;
 	private String comentario;
-	private static ArrayList<Calificacion> calificaciones = new ArrayList<Calificacion>();  
+	public static ArrayList<Calificacion> calificaciones = new ArrayList<Calificacion>(); 
 	
 	public Calificacion() {
 		
@@ -98,7 +98,7 @@ public class Calificacion {
 	
 	public static Calificacion crearCalificacion(String codigoCalificacion, String puntaje) {                
 		Calificacion calificacion = new Calificacion(codigoCalificacion, puntaje, Main.usuario); 
-		Datos.calificaciones.add(calificacion);	        
+		Calificacion.calificaciones.add(calificacion);	        
 		Calificacion.setCalificaciones(calificacion);
 		return calificacion;
 	}

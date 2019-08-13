@@ -1,7 +1,8 @@
-package gestorAplicacion.logic;
+package modelo.gestorAplicacion.logic;
 import java.util.*;
-import gestorAplicacion.users.*;
-import BaseDatos.*;
+
+import modelo.BaseDatos.*;
+import modelo.gestorAplicacion.users.*;
 
 public class Factura {
 	
@@ -9,6 +10,7 @@ public class Factura {
 	private String codigoFactura;  
 	private String fecha;
 	private Pedido pedidoFactura;
+	public static HashMap<String, Factura> facturas = new HashMap<String, Factura>(); //String = código de la factura
 	private  static ArrayList<Factura> facturasFactura = new ArrayList<Factura>();
 
 	
@@ -51,7 +53,7 @@ public class Factura {
 		facturasFactura.add(factura);
 	} 
 	public static Factura getFacturaConCodigo(String codigoFactura){
-		return Datos.facturas.get(codigoFactura);	
+		return Factura.facturas.get(codigoFactura);	
 	}
 
 }

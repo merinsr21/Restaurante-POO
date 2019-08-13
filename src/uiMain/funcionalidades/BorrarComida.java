@@ -2,8 +2,8 @@ package uiMain.funcionalidades;
 
 import java.util.*;
 
-import BaseDatos.Datos;
-import gestorAplicacion.logic.*;
+import modelo.BaseDatos.Datos;
+import modelo.gestorAplicacion.logic.*;
 import uiMain.*;
 
 public class BorrarComida extends OpcionDeMenu {

@@ -3,9 +3,9 @@ package uiMain.funcionalidades;
 import uiMain.*;
 import java.util.*;
 import gestorAplicacion.*;
-import gestorAplicacion.logic.DetallePedido;
-import gestorAplicacion.logic.Pedido;
-import gestorAplicacion.users.Usuario;
+import modelo.gestorAplicacion.logic.DetallePedido;
+import modelo.gestorAplicacion.logic.Pedido;
+import modelo.gestorAplicacion.users.Usuario;
 
 public class VerFactura extends OpcionDeMenu {
 	

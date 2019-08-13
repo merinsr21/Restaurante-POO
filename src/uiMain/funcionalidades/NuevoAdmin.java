@@ -2,9 +2,9 @@ package uiMain.funcionalidades;
 
 import java.util.Scanner;
 
-import BaseDatos.Datos;
-import gestorAplicacion.users.Administrador;
-import gestorAplicacion.users.Usuario;
+import modelo.BaseDatos.Datos;
+import modelo.gestorAplicacion.users.Administrador;
+import modelo.gestorAplicacion.users.Usuario;
 import uiMain.OpcionDeMenu;
 
 public class NuevoAdmin extends OpcionDeMenu {

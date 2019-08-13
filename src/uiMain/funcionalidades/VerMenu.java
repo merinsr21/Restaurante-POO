@@ -4,8 +4,8 @@ import uiMain.*;
 import java.util.Map;
 import java.util.TreeMap;
 
-import BaseDatos.Datos;
-import gestorAplicacion.logic.Comida;
+import modelo.BaseDatos.Datos;
+import modelo.gestorAplicacion.logic.Comida;
 
 public class VerMenu extends OpcionDeMenu {
 	
@@ -18,7 +18,7 @@ public class VerMenu extends OpcionDeMenu {
 	public void ejecutar() {
 		System.out.println("                   "+"MENÚ\n");
 		System.out.println("Código |           Nombre            |   Precio    |    Calorías   ");
-		for(Map.Entry<String, Comida> co : Datos.menuComidas.entrySet()) {
+		for(Map.Entry<String, Comida> co : Comida.menuComidas.entrySet()) {
 			Comida c = co.getValue();
 			System.out.println(c);
 		}

@@ -1,4 +1,4 @@
-package BaseDatos;
+package modelo.BaseDatos;
 
 
 import java.io.BufferedReader;
@@ -9,22 +9,13 @@ import java.io.PrintWriter;
 import java.io.IOException;
 import java.util.*;
 
-import gestorAplicacion.users.*;
+import modelo.gestorAplicacion.logic.*;
+import modelo.gestorAplicacion.users.*;
 import uiMain.MenuDeConsola;
 import uiMain.OpcionDeMenu;
-import gestorAplicacion.logic.*;
 
 public class Datos {
 	//¿esto se debería poner en cada clase?
-	public static HashMap<String, Usuario> usuarios = new HashMap<String, Usuario>();  //String = nombreUsuario
-	public static HashMap<String, MenuDeConsola> menus = new HashMap<String, MenuDeConsola>();  //String = nombreUsuario
-	public static HashMap<String, OpcionDeMenu> funcionalidades = new HashMap<String, OpcionDeMenu>();
-	public static HashMap<String, Mesa> mesas = new HashMap<String, Mesa>();   //String= Código de la mesa
-	public static HashMap<String, Comida> menuComidas = new HashMap<String, Comida>(); //String= Código de la comida
-	public static HashMap<String, Pedido> pedidos = new HashMap<String, Pedido>();//String= Códigodel pedido	
-	public static HashMap<String, Factura> facturas = new HashMap<String, Factura>(); //String = código de la factura
-	public static HashMap<String, DetallePedido> detallesPedido = new HashMap<String, DetallePedido>(); //String = codigo de el detalle                          
-	public static ArrayList<Calificacion> calificaciones = new ArrayList<Calificacion>(); 
 
 	
 	public  void cargarDatos() {
@@ -120,7 +111,7 @@ public class Datos {
 					String precio = comidas[2];
 					String calorias = comidas[3];
 					Comida comida = new Comida(codigo,nombre,precio,calorias);
-					menuComidas.put(codigo, comida);
+					Comida.menuComidas.put(codigo, comida);
 					Comida.setMenuComida(comida);
 				}
 			}
@@ -142,7 +133,7 @@ public class Datos {
 					String numeroDeSillas = mesa[1];							
 					String ocupada = mesa[2];
 					Mesa mesam = new Mesa(codigo, numeroDeSillas, ocupada);
-					mesas.put(codigo, mesam);
+					Mesa.mesas.put(codigo, mesam);
 					Mesa.setMesasM(mesam);
 				}
 			}
@@ -164,7 +155,7 @@ public class Datos {
 				    Comida comidac = Comida.getComidaConCodigo(detalles[2]);
 				    String precioTotal = detalles[3];
 				    DetallePedido detallePedido = new DetallePedido(codigo, comidac, cantidad, precioTotal);
-				    detallesPedido.put(codigo, detallePedido);
+				    DetallePedido.detallesPedido.put(codigo, detallePedido);
 				    DetallePedido.setDetallesDetalle(detallePedido);
 				}
 			}
@@ -192,16 +183,16 @@ public class Datos {
 					Pedido pedidop = new Pedido(codigo, factura, precioTotal);
 					
 					Pedido.Pedidopedido(pedidop, detalles);
-		    		pedidos.put(codigo, pedidop);
+		    		Pedido.pedidos.put(codigo, pedidop);
             		Pedido.setPedidosPedido(pedidop);
             		
             		factura.setPedidoFactura(pedidop);  //asignarle al atributo factura creado, el pedido
             		Factura factura2 = new Factura(factura.getCodigoFactura(), factura.getFecha(), factura.getPedidoFactura()); //sobreescribir el objeto factura con los atributos ya organizados 
-            		facturas.put(factura.getCodigoFactura(), factura2);
+            		Factura.facturas.put(factura.getCodigoFactura(), factura2);
             		
             		pedidop.setFactura(factura2);  //asignarle al atributo pedido creado, la factura
             		Pedido pedido2 = new Pedido(pedidop.getCodigoPedido(), pedidop.getFactura(), pedidop.getPrecioTotal());
-            		pedidos.put(pedidop.getCodigoPedido(), pedido2);
+            		Pedido.pedidos.put(pedidop.getCodigoPedido(), pedido2);
 				}
 			}
 			br.close();
@@ -221,7 +212,7 @@ public class Datos {
 				    String codigoF = facturas1[0];
 				    String fecha = facturas1[1];
 				    Factura fact = new Factura(codigoF, fecha);
-				    facturas.put(codigoF, fact);
+				    Factura.facturas.put(codigoF, fact);
 				    Factura.setFacturasFactura(fact);
 				}
 			}
@@ -244,7 +235,7 @@ public class Datos {
 				    String comentario = calificacion[3];
 					Comida comida = Comida.getComidaConCodigo(calificacion[1]);
 				    Calificacion cal = new Calificacion(codigo,comida,puntaje,comentario); 
-				    calificaciones.add(cal);
+				    Calificacion.calificaciones.add(cal);
 				    
 				}
 			}
@@ -292,27 +283,27 @@ public class Datos {
             FileWriter fwAdmin = new FileWriter(ruta+"administradores.txt");
             PrintWriter pw = new PrintWriter(fwU);
             PrintWriter pwAdmin = new PrintWriter(fwAdmin);
-    		for (Map.Entry<String, Usuario> usuario : usuarios.entrySet()) {
+    		for (Map.Entry<String, Usuario> usuario : Usuario.usuarios.entrySet()) {
     			Usuario usuarioO = usuario.getValue();
     			String line = usuarioO.getNombreUsuario()+";";
     			line += usuarioO.getNombre()+";";
     			line += usuarioO.getCorreo()+";";
     			line += usuarioO.getContraseña();
-    			String line2 = "";
+    			/*String line2 = "";
     			String line3 = "";
     			for(Calificacion f : usuarioO.getCalificacionesUsuario()) {//en una tercera línea del txt muestra las calificaciones asociados al usuario
     				line2 += f.getCodigoCa()+";";
     			}
     			for(Pedido p : usuarioO.getPedidosUsuario()) { //en una segunda línea del txt muestra los pedidos asociados al usuario
     				line3 += p.getCodigoPedido()+";";
-    			}
+    			}*/
     			if(usuarioO instanceof Administrador) {
     				pwAdmin.println(line);
 					
 				}else {
 					pw.println(line);
-					pw.println(line3.substring(0,(line3.length()-1)));
-					pw.println(line2.substring(0,(line2.length()-1)));
+					/*pw.println(line3.substring(0,(line3.length()-1)));
+					pw.println(line2.substring(0,(line2.length()-1)));*/
     			}
     		}
             pw.close();
@@ -326,9 +317,9 @@ public class Datos {
 		try {
 			FileWriter fw = new FileWriter(ruta + "mesas.txt");
 			PrintWriter pw = new PrintWriter(fw);
-			for(Map.Entry<String, Mesa> mesa : mesas.entrySet()) {
+			for(Map.Entry<String, Mesa> mesa : Mesa.mesas.entrySet()) {
 				Mesa mesaOb = mesa.getValue();
-				String line = mesaOb.getCodigoM() + ";";
+				String line = mesaOb.getCodigoMesa() + ";";
 				line += mesaOb.getNumeroDeSillas() + ";";
 				line += mesaOb.getOcupada();
 				pw.println(line);
@@ -342,7 +333,7 @@ public class Datos {
 		try {
 			FileWriter fw = new FileWriter(ruta + "menuDeComidas.txt");
 			PrintWriter pw = new PrintWriter(fw);
-			for(Map.Entry<String, Comida> comida : menuComidas.entrySet()) {
+			for(Map.Entry<String, Comida> comida : Comida.menuComidas.entrySet()) {
 				Comida comidaOb = comida.getValue();
 				String line = comidaOb.getCodigoComida() + ";";
 				line += comidaOb.getNombreComida() + ";";
@@ -360,7 +351,7 @@ public class Datos {
 		try {
 			FileWriter fw = new FileWriter(ruta + "detallesPedidos.txt");
 			PrintWriter pw = new PrintWriter(fw);
-			for(Map.Entry<String, DetallePedido> detPedido :detallesPedido.entrySet()) {
+			for(Map.Entry<String, DetallePedido> detPedido : DetallePedido.detallesPedido.entrySet()) {
 				DetallePedido dpedidoOb = detPedido.getValue();
 				String line = dpedidoOb.getCodigoDetalle() + ";";
 				line += dpedidoOb.getPedidoDetalle().getCodigoPedido() + ";";
@@ -380,7 +371,7 @@ public class Datos {
 		try {
 			FileWriter fw = new FileWriter(ruta + "pedidos.txt");
 			PrintWriter pw = new PrintWriter(fw);
-			for(Map.Entry<String, Pedido> pedido : pedidos.entrySet()) {
+			for(Map.Entry<String, Pedido> pedido : Pedido.pedidos.entrySet()) {
 				Pedido pedidoOb = pedido.getValue();
 				String line = pedidoOb.getCodigoPedido() + ";";
 				line += pedidoOb.getFactura().getCodigoFactura() + ";";
@@ -402,7 +393,7 @@ public class Datos {
 		try {
 			FileWriter fw = new FileWriter(ruta + "facturas.txt");
 			PrintWriter pw = new PrintWriter(fw);
-			for(Map.Entry<String, Factura> factura : facturas.entrySet()) {
+			for(Map.Entry<String, Factura> factura : Factura.facturas.entrySet()) {
 				Factura facturaOb = factura.getValue();
 				String line = facturaOb.getCodigoFactura() + ";";
 				line += facturaOb.getFecha();
@@ -418,7 +409,7 @@ public class Datos {
 		try {
 			FileWriter fw = new FileWriter(ruta + "calificaciones.txt");
 			PrintWriter pw = new PrintWriter(fw);
-			for(Calificacion cali : calificaciones) {
+			for(Calificacion cali : Calificacion.calificaciones) {
 				String line = cali.getCodigoCa() + ";";				
 				line += cali.getComida().getCodigoComida() + ";";
 				line += cali.getPuntaje() + ";";
@@ -435,7 +426,7 @@ public class Datos {
 		try {
             FileWriter fw = new FileWriter(ruta+"menusUsuarios.txt");
             PrintWriter pw = new PrintWriter(fw);
-    		for (Map.Entry<String, MenuDeConsola> menu : menus.entrySet()) {
+    		for (Map.Entry<String, MenuDeConsola> menu : MenuDeConsola.menus.entrySet()) {
     			MenuDeConsola menuObj = menu.getValue();
     			String line = menuObj.getUsuario().getNombreUsuario()+";";
     			for (String  op : menuObj.getFuncionalidades()) {

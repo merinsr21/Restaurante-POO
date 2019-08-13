@@ -2,7 +2,7 @@ package uiMain.funcionalidades;
 
 import java.util.*;
 
-import gestorAplicacion.users.*;
+import modelo.gestorAplicacion.users.*;
 import uiMain.OpcionDeMenu;
 
 public class EditarUsuario extends OpcionDeMenu {

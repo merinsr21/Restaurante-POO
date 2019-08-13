@@ -1,6 +1,6 @@
-package gestorAplicacion.users;
+package modelo.gestorAplicacion.users;
 
-import BaseDatos.Datos;
+import modelo.BaseDatos.Datos;
 import uiMain.MenuDeConsola;
 
 
@@ -12,7 +12,7 @@ public class Administrador extends Usuario{
 	
 	public Administrador(String nombre, String nombreUsuario, String correo, String contraseña) {
 		super(nombre, nombreUsuario, correo, contraseña);
-		Datos.usuarios.put(nombreUsuario, this);
+		Usuario.usuarios.put(nombreUsuario, this);
 	}
 	
 	public static String nuevoAdministrador(String nombre, String nombreUsuario, String correo, String contraseña){
@@ -28,7 +28,7 @@ public class Administrador extends Usuario{
 		MenuDeConsola.nuevoMenu(usuario, funcionalidades);
 		
 		
-			Datos.usuarios.put(nombreUsuario, usuario);
+			Usuario.usuarios.put(nombreUsuario, usuario);
 			return "Ha sido creado";
 		
 	}

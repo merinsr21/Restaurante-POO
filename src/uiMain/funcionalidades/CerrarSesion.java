@@ -3,8 +3,9 @@ package uiMain.funcionalidades;
 import uiMain.Main;
 import uiMain.OpcionDeMenu;
 import java.util.*;
-import gestorAplicacion.logic.*;
-import gestorAplicacion.users.Usuario;
+
+import modelo.gestorAplicacion.logic.*;
+import modelo.gestorAplicacion.users.Usuario;
 
 public class CerrarSesion  extends OpcionDeMenu{
 	

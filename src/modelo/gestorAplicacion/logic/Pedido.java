@@ -1,45 +1,35 @@
-package gestorAplicacion.logic;
+package modelo.gestorAplicacion.logic;
 import java.util.*;
 
-import BaseDatos.Datos;
-import gestorAplicacion.users.*;
+import modelo.BaseDatos.Datos;
+import modelo.gestorAplicacion.users.*;
 import uiMain.OpcionDeMenu;
 
 public class Pedido {
 	
 	private static int consecutivoPedido = 0;
-	private static int consecutivoDetalle = 0;
+	private int consecutivoDetalle = 0;
 	private String codigoPedido;
 	private Factura factura;
 	private Usuario usuario;
-	private String precioTotal; //es necesario para mostrar la factura, pero debe ir en Pedido
+	public static HashMap<String, Pedido> pedidos = new HashMap<String, Pedido>();//String= Códigodel pedido	
 	private ArrayList<DetallePedido> detallesPedido1 = new ArrayList<DetallePedido>();
 	private static ArrayList<Pedido> pedidosPedido = new ArrayList<Pedido>();
 
 	
 	public Pedido() {
-		
+		this.codigoPedido = generarCodigoPedido();
 	}
 
-	public Pedido(String codigoPedido, Factura factura, Usuario usuario ) {
-		this.codigoPedido = codigoPedido;
-		this.factura = factura;
-		this.usuario = usuario;
-	}
-	public Pedido(String codigoPedido, Usuario usuario ) {
-		this.codigoPedido = codigoPedido;
-		this.usuario = usuario;	
-	}
-	public static void crearPedido(Usuario usuario, String detalles []) {
-		String codigo = generarCodigoPedido();
-		Pedido pedido = new Pedido(codigo, usuario);
+	public static void crearPedido(Usuario usuario) {
+		Pedido pedido = new Pedido();
+		pedido.setUsuario(Usuario.usuario);
 		//Se debe crear el pedido primero y luego crear cada uno de los detalles y setterarselos a los detalles
 		for (int i = 0; i < detalles.length; i +=2) {                                                         //codigoComida  /cantidadDeEsaComida
-			DetallePedido detalleDelPedido = DetallePedido.crearDetallePedido(codigo+"-"+generarCodigoDetalle(), detalles[i], detalles[i+1], pedido);
-		
+			DetallePedido detalleDelPedido = DetallePedido.crearDetallePedido(pedido.generarCodigoDetalle(), detalles[i], detalles[i+1], pedido);
 		}	
 		
-		Datos.pedidos.put(codigo,pedido);
+		Pedido.pedidos.put(codigoPedido, pedido);
 		pedidosPedido.add(pedido);
 		Pedido.calcularPrecioTotal(pedido);		
 	}
@@ -50,10 +40,10 @@ public class Pedido {
 		return codigoPedido;		
 	}
 	
-	private static String generarCodigoDetalle() {
+	private String generarCodigoDetalle() {
 		String  codigo = Integer.toString(consecutivoDetalle);
 		consecutivoDetalle++;
-		return codigo;	
+		return this.codigoPedido+"-"+codigo ;	
 	}
 	
 	public String getCodigoPedido() {
@@ -74,12 +64,6 @@ public class Pedido {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	public String getPrecioTotal() {
-		return precioTotal;
-	}
-	public void setPrecioTotal(String precioTotal) {
-		this.precioTotal = precioTotal;
-	}
 	public ArrayList<DetallePedido> getDetallesPedido() {
 		return detallesPedido1;
 	}
@@ -98,7 +82,7 @@ public class Pedido {
 	public static void setPedidosPedido(Pedido pedido){
 		pedidosPedido.add(pedido);
 	}
-	public static int calcularPrecioTotal(Pedido pedido) {
+	public int calcularPrecioTotal(Pedido pedido) {
 		int sumatoria = 0;
 		String sumaAString = null;
 		for(DetallePedido buscador: pedido.getDetallesPedido()) {

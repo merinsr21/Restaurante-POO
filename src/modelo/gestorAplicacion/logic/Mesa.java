@@ -1,8 +1,8 @@
-package gestorAplicacion.logic;
+package modelo.gestorAplicacion.logic;
 import java.util.*;
 import uiMain.Main;
-import BaseDatos.Datos;
-import gestorAplicacion.users.*;
+import modelo.BaseDatos.Datos;
+import modelo.gestorAplicacion.users.*;
 
 public class Mesa {
 	
@@ -11,7 +11,8 @@ public class Mesa {
 	private String ocupada; //ocupada = true, no ocupada = false
 	private Usuario usuario;
 	private static ArrayList<Mesa> mesasM = new ArrayList<Mesa>();
-	
+	public static HashMap<String, Mesa> mesas = new HashMap<String, Mesa>();   //String= Código de la mesa
+
 	public Mesa() {
 
 	}
@@ -25,7 +26,7 @@ public class Mesa {
 	public static void crearMesa(String codigoMesa, String numeroDeSillas, String ocupada) {
 		Mesa mesam = new Mesa(codigoMesa,numeroDeSillas,ocupada);               
 		mesasM.add(mesam);  
-		Datos.mesas.put(codigoMesa, mesam);
+		Mesa.mesas.put(codigoMesa, mesam);
 	}
 	
 	public String getCodigoMesa() {
@@ -63,7 +64,7 @@ public class Mesa {
 	// Le asigna a un usuario una mesa, en caso de que esta este disponible.
 	public static String ocuparMesa(String codigo, String numeroSillas) {             
 		String print = "La mesa que desea ocupar no existe";
-		for(Map.Entry<String, Mesa> m : Datos.mesas.entrySet()) {
+		for(Map.Entry<String, Mesa> m : Mesa.mesas.entrySet()) {
 			Mesa buscador = m.getValue();
 			if(buscador.getCodigoMesa().equals(codigo)) {
 				String numeroDeSillas = buscador.getNumeroDeSillas();
@@ -92,7 +93,7 @@ public class Mesa {
 	// Al cerrar sesion se desocupa la mesa correspondiente a ese usuario y esta queda disponible para ser ocupada por otro usuario.
 	// Es necesario hacer el mismo proceso en mesasM ??
 	public static void liberarMesa(String codigo) {
-		for(Map.Entry<String, Mesa> m : Datos.mesas.entrySet()) {
+		for(Map.Entry<String, Mesa> m : Mesa.mesas.entrySet()) {
 			Mesa mesa = m.getValue();
 			if(mesa.getCodigoMesa().equals(codigo)) {
 				mesa.getUsuario().setMesa(null);
@@ -105,7 +106,7 @@ public class Mesa {
 	// Verifica que los datos ingresados por el admin sean validos para crear una mesa.
 	public static String ValidacionMesa(String codigo, String numeroDeSillas) {
 		if(Integer.parseInt(codigo) >= 0 && Integer.parseInt(codigo) <= 99) {
-			if(!Datos.mesas.containsKey(codigo)) {
+			if(!Mesa.mesas.containsKey(codigo)) {
 				Mesa.crearMesa(codigo, numeroDeSillas, "false");
 				return "La mesa ha sido creada con exito";
 			}

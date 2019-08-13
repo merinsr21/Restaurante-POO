@@ -1,8 +1,10 @@
 package uiMain.funcionalidades;
 
 import uiMain.*;
-import gestorAplicacion.logic.*;
+
 import java.util.*;
+
+import modelo.gestorAplicacion.logic.*;
 
 public class OcuparMesa extends OpcionDeMenu{
 

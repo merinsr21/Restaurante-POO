@@ -1,14 +1,16 @@
 package uiMain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
-import BaseDatos.Datos;
-import gestorAplicacion.users.Usuario;
+import modelo.BaseDatos.Datos;
+import modelo.gestorAplicacion.users.Usuario;
 
 public class MenuDeConsola {
 	
 	private Usuario usuario;
+	public static HashMap<String, MenuDeConsola> menus = new HashMap<String, MenuDeConsola>();  //String = nombreUsuario
 	private ArrayList<OpcionDeMenu> opciones = new ArrayList<OpcionDeMenu> ();
 	
 	public MenuDeConsola(ArrayList<OpcionDeMenu> opciones){
@@ -68,11 +70,11 @@ public class MenuDeConsola {
 	public static void nuevoMenu(Usuario usuario, String [] funcionalidades) {
 		ArrayList<OpcionDeMenu> funcionalidadesMenu = new ArrayList<OpcionDeMenu>();
 		for (String op : funcionalidades) {
-			funcionalidadesMenu.add(Datos.funcionalidades.get(op));
+			funcionalidadesMenu.add(OpcionDeMenu.funcionalidades.get(op));
 		}
 		MenuDeConsola menu = new MenuDeConsola(usuario, funcionalidadesMenu);
 		usuario.setMenu(menu);
-		Datos.menus.put(usuario.getNombreUsuario(), menu);
+		MenuDeConsola.menus.put(usuario.getNombreUsuario(), menu);
 	}
 	
 	public void verOpcion() {
@@ -88,6 +90,6 @@ public class MenuDeConsola {
 	}
 	
 	public void añadirOpcion(String optn) {
-		opciones.add(Datos.funcionalidades.get(optn));
+		opciones.add(OpcionDeMenu.funcionalidades.get(optn));
 	}
 }

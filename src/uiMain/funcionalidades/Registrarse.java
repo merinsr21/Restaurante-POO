@@ -2,8 +2,8 @@ package uiMain.funcionalidades;
 
 import java.util.Scanner;
 
-import BaseDatos.Datos;
-import gestorAplicacion.users.Usuario;
+import modelo.BaseDatos.Datos;
+import modelo.gestorAplicacion.users.Usuario;
 import uiMain.OpcionDeMenu;
 
 public class Registrarse extends OpcionDeMenu {

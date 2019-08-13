@@ -1,7 +1,7 @@
-package gestorAplicacion.logic;
+package modelo.gestorAplicacion.logic;
 import java.util.*;
 
-import BaseDatos.Datos;
+import modelo.BaseDatos.Datos;
 
 public class DetallePedido {
 	
@@ -10,7 +10,9 @@ public class DetallePedido {
 	private String cantidad;
 	private Comida comida;
 	private Pedido pedidoDetalle;
+	private int precioUnitario;
 	private String precioTotal;
+	public static HashMap<String, DetallePedido> detallesPedido = new HashMap<String, DetallePedido>(); //String = codigo de el detalle                          
 	private static ArrayList<DetallePedido> detallesDetalle = new ArrayList<DetallePedido>();
 	
 	public DetallePedido(Comida comida, String cantidad) { 
@@ -73,17 +75,20 @@ public class DetallePedido {
 	public String getPrecioTotal() {
 		return precioTotal;
 	}
-	
 	public void setPrecioTotal(String precioTotal) {
 		this.precioTotal = precioTotal;
 	}
+	public int precioUnitario(int precioUnitario) {
+		this.precioUnitario = comida.getPrecioComida();
+		return this.precioUnitario;
+	}
 	public static DetallePedido getDetalleConCodigo(String codigoDet) {
-		return Datos.detallesPedido.get(codigoDet);
+		return DetallePedido.detallesPedido.get(codigoDet);
 	}
 	
 	public static DetallePedido crearDetallePedido(String codigoDetalle, String codigoComida, String cantidad, Pedido pedido) {  //BIEN
 		DetallePedido detallito = null;
-		for(Map.Entry<String, Comida> menu : Datos.menuComidas.entrySet()) {    //Es necesario hacer que el detallePedido este asociado a una comida existente.
+		for(Map.Entry<String, Comida> menu : Comida.menuComidas.entrySet()) {    //Es necesario hacer que el detallePedido este asociado a una comida existente.
 			Comida comidaBuscador = menu.getValue();
 			if(comidaBuscador.getCodigoComida().equals(codigoComida)) {
 				DetallePedido detallePedido = new DetallePedido(codigoDetalle,comidaBuscador,cantidad,pedido);
@@ -92,7 +97,7 @@ public class DetallePedido {
 				int cantidadComida = Integer.parseInt(cantidad);
 				String precioTotalComida = Integer.toString(precioComida*cantidadComida);
 				detallePedido.setPrecioTotal(precioTotalComida);
-				Datos.detallesPedido.put(codigoDetalle,detallePedido);
+				DetallePedido.detallesPedido.put(codigoDetalle,detallePedido);
 				break;
 			}
 		}
@@ -102,6 +107,8 @@ public class DetallePedido {
 	public String toString() {
 		return "Código: "+comida.getCodigoComida()+"| Nombre: "+comida.getNombreComida()+"| Cantidad: "+cantidad+"| Precio: "+comida.getPrecioComida()+"| Precio Total: "+precioTotal; 
 	}
+	
+	
 	
 	
 }

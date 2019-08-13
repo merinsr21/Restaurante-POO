@@ -1,8 +1,8 @@
-package gestorAplicacion.users;
+package modelo.gestorAplicacion.users;
 import java.util.ArrayList;
 
-import BaseDatos.Datos;
-import gestorAplicacion.logic.*;
+import modelo.BaseDatos.Datos;
+import modelo.gestorAplicacion.logic.*;
 import uiMain.MenuDeConsola;
 
 public class Chef extends Usuario{
@@ -13,12 +13,12 @@ public class Chef extends Usuario{
 	
 	protected Chef(String nombreUsuario, MenuDeConsola menu) {
 		super(nombreUsuario,menu);
-		Datos.usuarios.put(nombreUsuario, this);
+		Usuario.usuarios.put(nombreUsuario, this);
 	}
 
 	public Chef(String nombre, String nombreUsuario, String correo, String contraseña) {
 		super(nombre, nombreUsuario, correo, contraseña);
-		Datos.usuarios.put(nombreUsuario, this);
+		Usuario.usuarios.put(nombreUsuario, this);
 	}
 	
 	public static String nuevoChef(String nombre, String nombreUsuario, String correo, String contraseña){
@@ -32,7 +32,7 @@ public class Chef extends Usuario{
 		//Menu por defecto al crear un nuevo chef
 		String [] funcionalidades = {"18","8","12"};
 		MenuDeConsola.nuevoMenu(chef, funcionalidades);
-		Datos.usuarios.put(nombreUsuario,chef);
+		Usuario.usuarios.put(nombreUsuario,chef);
 		return "Ha sido creado";
 	}
 	
