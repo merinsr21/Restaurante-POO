@@ -9,7 +9,7 @@ public class Calificacion {
 	
 	private static int consecutivoCalificacion = 0;
 	private String codigoCalificacion;        
-	private String puntaje;
+	private int puntaje;
 	private Comida comida;
 	private Usuario usuario;
 	private String comentario;
@@ -19,22 +19,22 @@ public class Calificacion {
 		
 	}
 	
-	public Calificacion (String codigoCalificacion, String puntaje, Usuario usuario){
+	public Calificacion (String codigoCalificacion, int puntaje, Usuario usuario){
 		this.codigoCalificacion = codigoCalificacion;
 		this.puntaje=puntaje;
 		this.usuario = usuario;
 	}
-	public Calificacion (String codigoCalificacion, Comida comida, String puntaje, Usuario usuario){
+	public Calificacion (String codigoCalificacion, Comida comida, int puntaje, Usuario usuario){
 		this.codigoCalificacion = codigoCalificacion;
 		this.comida = comida;
 		this.puntaje=puntaje;
 		this.usuario = usuario;
 	}
-	public Calificacion (String codigoCalificacion, String puntaje){
+	public Calificacion (String codigoCalificacion, int puntaje){
 		this.codigoCalificacion = codigoCalificacion;
 		this.puntaje=puntaje;
 	}
-	public Calificacion (String codigoCalificacion, Comida comida, String puntaje, String comentario){
+	public Calificacion (String codigoCalificacion, Comida comida, int puntaje, String comentario){
 		this.codigoCalificacion = codigoCalificacion;
 		this.comida = comida;
 		this.puntaje=puntaje;
@@ -63,11 +63,11 @@ public class Calificacion {
 		this.codigoCalificacion = codigo;
 	}
 	
-	public String getPuntaje() {
+	public int getPuntaje() {
 		return puntaje;
 	}
 	
-	public void setPuntaje(String puntaje) {
+	public void setPuntaje(int puntaje) {
 		this.puntaje = puntaje;
 	}
 	
@@ -96,7 +96,7 @@ public class Calificacion {
 		calificaciones.add(calificacion);
 	}
 	
-	public static Calificacion crearCalificacion(String codigoCalificacion, String puntaje) {                
+	public static Calificacion crearCalificacion(String codigoCalificacion, int puntaje) {                
 		Calificacion calificacion = new Calificacion(codigoCalificacion, puntaje, Main.usuario); 
 		Calificacion.calificaciones.add(calificacion);	        
 		Calificacion.setCalificaciones(calificacion);

@@ -1,7 +1,4 @@
 package modelo.gestorAplicacion.users;
-import java.util.ArrayList;
-
-import modelo.BaseDatos.Datos;
 import modelo.gestorAplicacion.logic.*;
 import uiMain.MenuDeConsola;
 
@@ -38,13 +35,12 @@ public class Chef extends Usuario{
 	}
 	
 	public static void calcularCalorias(Pedido pedido) {
-		int sum = 0;
-		for(DetallePedido r: pedido.getDetallesPedido()) {
-			String z1 = r.getComida().getCalorias();
-			int z = Integer.parseInt(z1);
-			sum += z;
-			System.out.println("La cantidad de calorias en "+r.getComida().getNombreComida()+" es: "+r.getComida().getCalorias());
+		int sumaCalorias = 0;
+		for(DetallePedido buscador: pedido.getDetallesPedidoDeCadaPedido()) {
+			int calorias = buscador.getComida().getCalorias();
+			sumaCalorias += calorias;
+			System.out.println("La cantidad de calorias en "+buscador.getComida().getNombreComida()+" es: "+buscador.getComida().getCalorias());
 		}
-		System.out.println("La cantidad total de calorias en el pedido es :"+sum);
+		System.out.println("La cantidad total de calorias en el pedido es :"+sumaCalorias);
 	}
 }

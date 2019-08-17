@@ -1,7 +1,6 @@
 package uiMain.funcionalidades;
 
 import uiMain.*;
-import modelo.BaseDatos.*;
 import modelo.gestorAplicacion.logic.*;
 
 import java.util.*;
@@ -16,16 +15,16 @@ public class VerCalificacion extends OpcionDeMenu {
 		Scanner entrada = new Scanner(System.in); 
 		System.out.print("Ingrese el código de la comida: ");
 		String codigo = entrada.next();
-		int cont = 0;
-		int sum = 0;
+		int contador = 0;
+		int suma = 0;
 		//poner el metodo en la clase Calificacion 
-		for(Calificacion r: Calificacion.getCalificaciones()) {
-			if(r.getCodigoCa().equals(codigo)) {
-				cont ++;
-				sum += Integer.parseInt(r.getPuntaje());
+		for(Calificacion buscador: Calificacion.getCalificaciones()) {
+			if(buscador.getCodigoCa().equals(codigo)) {
+				contador ++;
+				suma += buscador.getPuntaje();
 			}
 		}
-		System.out.println("La comida con código "+codigo+" tiene "+cont+" calificaciones, y un total de "+sum+"/"+(5*cont)+" puntos");
+		System.out.println("La comida con código "+codigo+" tiene "+contador+" calificaciones, y un total de "+suma+"/"+(5*contador)+" puntos");
 	}
 	
 	public String toString() {

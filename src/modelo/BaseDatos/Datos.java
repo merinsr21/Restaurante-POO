@@ -37,16 +37,16 @@ public class Datos {
             FileReader fr = new FileReader(ruta+"usuarios.txt");
             BufferedReader br = new BufferedReader(fr);
             String line;
-            String line3;
-            String line2;
+            //String line3;
+            //String line2;
             while(((line = br.readLine()) != null)/* && ((line3 = br.readLine()) != null) && ((line2 = br.readLine()) != null)*/){
             	if (!line.isEmpty()) {
-            		String [] usuario = line.split(";");
-            		String nombreUsuario = usuario[0];
-            		String nombre = usuario[1];
-            		String correo = usuario[2];
-            		String contraseña = usuario[3];
-            		Usuario usuario1 = new Usuario(nombre, nombreUsuario, correo, contraseña);
+            		String [] usuarioDatos = line.split(";");
+            		String nombreUsuario = usuarioDatos[0];
+            		String nombre = usuarioDatos[1];
+            		String correo = usuarioDatos[2];
+            		String contraseña = usuarioDatos[3];
+            		Usuario usuario = new Usuario(nombre, nombreUsuario, correo, contraseña);
             		
             		/*TODO: FElipe arregle esto
             		 * String [] ped = line3.split(";");
@@ -110,9 +110,8 @@ public class Datos {
 					String nombre = comidas[1];
 					String precio = comidas[2];
 					String calorias = comidas[3];
-					Comida comida = new Comida(codigo,nombre,calorias,Integer.parseInt(precio));
+					Comida comida = new Comida(codigo,nombre,Integer.parseInt(calorias),Integer.parseInt(precio));
 					Comida.menuComidas.put(codigo, comida);
-					Comida.setMenuComida(comida);
 				}
 			}
 			br.close();
@@ -134,7 +133,6 @@ public class Datos {
 					String ocupada = mesa[2];
 					Mesa mesam = new Mesa(codigo, numeroDeSillas, ocupada);
 					Mesa.mesas.put(codigo, mesam);
-					Mesa.setMesasM(mesam);
 				}
 			}
 			br.close();
@@ -152,11 +150,13 @@ public class Datos {
 				    String [] detalles = line.split(";");
 				    String codigo = detalles[0];
 				    String cantidad = detalles[1];
-				    Comida comidac = Comida.getComidaConCodigo(detalles[2]);
-				    String precioTotal = detalles[3];
-				    DetallePedido detallePedido = new DetallePedido(codigo, comidac, cantidad, precioTotal);
+				    Comida comida = Comida.getComidaConCodigo(detalles[2]);
+				    //no se si se va a quitar del todo pero aja
+				    int precioTotal = DetallePedido.precioTotalComida(comida.getPrecioComida(), Integer.parseInt(cantidad));
+				    String precioTotalString = detalles[3];
+				    int cantidadEntero = Integer.parseInt(cantidad);
+				    DetallePedido detallePedido = new DetallePedido(codigo, comida, cantidadEntero);
 				    DetallePedido.detallesPedido.put(codigo, detallePedido);
-				    DetallePedido.setDetallesDetalle(detallePedido);
 				}
 			}
 			br.close();
@@ -184,7 +184,6 @@ public class Datos {
 					
 					Pedido.Pedidopedido(pedidop, detalles);
 		    		Pedido.pedidos.put(codigo, pedidop);
-            		Pedido.setPedidosPedido(pedidop);
             		
             		factura.setPedidoFactura(pedidop);  //asignarle al atributo factura creado, el pedido
             		Factura factura2 = new Factura(factura.getCodigoFactura(), factura.getFecha(), factura.getPedidoFactura()); //sobreescribir el objeto factura con los atributos ya organizados 
@@ -208,12 +207,11 @@ public class Datos {
 			String line;
 			while((line = br.readLine()) != null) {
 				if(!line.isEmpty()) {
-				    String [] facturas1 = line.split(";");
-				    String codigoF = facturas1[0];
-				    String fecha = facturas1[1];
-				    Factura fact = new Factura(codigoF, fecha);
-				    Factura.facturas.put(codigoF, fact);
-				    Factura.setFacturasFactura(fact);
+				    String [] facturas = line.split(";");
+				    String codigoFactura = facturas[0];
+				    String fecha = facturas[1];
+				    Factura factura0 = new Factura(codigoFactura, fecha);
+				    Factura.facturas.put(codigoFactura, factura0);
 				}
 			}
 			br.close();
@@ -230,11 +228,11 @@ public class Datos {
 			while((line = br.readLine()) != null) {
 				if(!line.isEmpty()) {
 				    String [] calificacion = line.split(";");
-				    String codigo = calificacion[0];
+				    String codigoCalificacion = calificacion[0];
 				    String puntaje = calificacion[2];
 				    String comentario = calificacion[3];
 					Comida comida = Comida.getComidaConCodigo(calificacion[1]);
-				    Calificacion cal = new Calificacion(codigo,comida,puntaje,comentario); 
+				    Calificacion cal = new Calificacion(codigoCalificacion,comida,Integer.parseInt(puntaje),comentario); 
 				    Calificacion.calificaciones.add(cal);
 				    
 				}
@@ -338,8 +336,7 @@ public class Datos {
 				Comida comidaOb = comida.getValue();
 				String line = comidaOb.getCodigoComida() + ";";
 				line += comidaOb.getNombreComida() + ";";
-				String precioComida = Integer.toString(comidaOb.getPrecioComida());
-				line+= precioComida + ";";
+				line+= comidaOb.getPrecioComida() + ";";
 				line += comidaOb.getCalorias();
 				pw.println(line);
 			}
@@ -357,8 +354,9 @@ public class Datos {
 				DetallePedido dpedidoOb = detPedido.getValue();
 				String line = dpedidoOb.getCodigoDetalle() + ";";
 				line += dpedidoOb.getPedidoDetalle().getCodigoPedido() + ";";
-				line += dpedidoOb.getCantidad() + ";";
+				line += Integer.toString(dpedidoOb.getCantidad()) + ";";
 				line += dpedidoOb.getComida().getCodigoComida() + ";";
+				//ver si dejar lo del precioTOtalComida y organizarlo ahi
 				line+= dpedidoOb.getPrecioTotal();
 				
 				pw.println(line);

@@ -9,7 +9,7 @@ public class Comida implements Comparable<Comida> {
 	private String codigoComida;
 	private String nombreComida;
 	private int precioComida;
-	private String calorias;
+	private int calorias;
 	private DetallePedido detallePedidoComida;
 	public static HashMap<String, Comida> menuComidas = new HashMap<String, Comida>(); //String= Código de la comida
 	private ArrayList<Calificacion> calificaciones = new ArrayList<Calificacion>();
@@ -19,14 +19,14 @@ public class Comida implements Comparable<Comida> {
 		
 	}
 	
-	public Comida(String codigo, String nombre, String calorias, int precio) {
+	public Comida(String codigo, String nombre, int calorias, int precio) {
 		this.codigoComida = codigo;
 		this.nombreComida = nombre;
 		this.precioComida = precio;
 		this.calorias = calorias;
 	}
 
-	public static void agregarComida(String codigoComida, String nombre, String calorias, int precio) {
+	public static void agregarComida(String codigoComida, String nombre, int calorias, int precio) {
 		Comida comida = new Comida(codigoComida,nombre,calorias,precio);
 		Comida.menuComidas.put(codigoComida, comida);
 	}
@@ -49,8 +49,11 @@ public class Comida implements Comparable<Comida> {
 		return precioComida;
 	}
 	
-	public String getCalorias() {
+	public int getCalorias() {
 		return calorias;
+	}
+	public void setCalorias(int calorias) {
+		this.calorias = calorias;
 	}
 	
 	public DetallePedido getDetallePedidoComida() {
@@ -60,20 +63,12 @@ public class Comida implements Comparable<Comida> {
 	public void setDetallePedidoComida(DetallePedido detallePedido) {
 		this.detallePedidoComida = detallePedido;
 	}
-
-	
-
-	public void setCalorias(String calorias) {
-		this.calorias = calorias;
-	}
 	
 	public int compareTo(Comida c) {  
-		int precio1; 
-		int precio2;
-		if(precio1 < precio2) {
+		if(precioComida < c.precioComida) {
 			return -1;
 		}
-		if(precio1 > precio2) {
+		if(precioComida > c.precioComida) {
 			return 1;
 		}
 		else {
@@ -102,7 +97,7 @@ public class Comida implements Comparable<Comida> {
 	}
 	
 	// Verifica que los datos ingresados por el admin sean validos para agregar una comida.
-	public static String ValidacionComida(String codigoComida, String nombreComida, int precioComida, String calorias) {
+	public static String ValidacionComida(String codigoComida, String nombreComida, int precioComida, int calorias) {
 			if(!Comida.menuComidas.containsKey(codigoComida)) {
 				Comida.agregarComida(codigoComida, nombreComida, calorias, precioComida);
 				return "La comida se ha agregado en el menú.";

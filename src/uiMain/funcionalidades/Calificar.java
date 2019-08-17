@@ -1,10 +1,7 @@
 package uiMain.funcionalidades;
 import java.util.*;
-import gestorAplicacion.logic.Calificacion;
-import gestorAplicacion.logic.Comida;
-import gestorAplicacion.logic.DetallePedido;
-import gestorAplicacion.logic.Pedido;
-import gestorAplicacion.users.Usuario;
+import modelo.gestorAplicacion.logic.*;
+import modelo.gestorAplicacion.users.Usuario;
 import uiMain.*;
 
 public class Calificar extends OpcionDeMenu {

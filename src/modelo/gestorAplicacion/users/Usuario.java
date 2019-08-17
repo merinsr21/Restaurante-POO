@@ -42,6 +42,13 @@ public class Usuario {
 		this.miCarrito = miCarrito;
 		Usuario.usuarios.put(nombreUsuario, this);
 	}
+	public Usuario(String nombre, String nombreUsuario, String correo, String contraseña) {
+		this.nombre = nombre;
+		this.nombreUsuario = nombreUsuario;
+		this.correo = correo;
+		this.contraseña = contraseña;
+		Usuario.usuarios.put(nombreUsuario, this);
+	}
 	
 	public String getNombre() {
 		return nombre;
