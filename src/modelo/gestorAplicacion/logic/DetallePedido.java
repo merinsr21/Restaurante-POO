@@ -77,25 +77,22 @@ public class DetallePedido {
 	}
 	
 	//¿tiene que ser static?
-	public static DetallePedido crearDetallePedido(String codigoDetalle, String codigoComida, int cantidadComida, Pedido pedido) {  //BIEN
+	public static DetallePedido crearDetallePedido(String codigoDetalle, Comida comida, int cantidadComida, Pedido pedido) {  //BIEN
 		DetallePedido detallito = null;
 		for(Map.Entry<String, Comida> menu : Comida.menuComidas.entrySet()) {    //Es necesario hacer que el detallePedido este asociado a una comida existente.
 			Comida comidaBuscador = menu.getValue();
-			if(comidaBuscador.getCodigoComida().equals(codigoComida)) {
-				DetallePedido detallePedido = new DetallePedido(codigoDetalle,comidaBuscador,cantidadComida,pedido);
-				detallito = detallePedido;
-				int precioComida = comidaBuscador.getPrecioComida(); //habia un .trim() no se que hace pero tiene que ver con String
-				precioTotalComida(precioComida, cantidadComida);
-				DetallePedido.detallesPedido.put(codigoDetalle,detallePedido);
-				break;
-			}
+			DetallePedido detallePedido = new DetallePedido(codigoDetalle,comidaBuscador,cantidadComida,pedido);
+			detallito = detallePedido;
+			int precioComida = comidaBuscador.getPrecioComida(); 
+			precioTotalComida(precioComida, cantidadComida);
+			DetallePedido.detallesPedido.put(codigoDetalle,detallePedido);	
 		}
 		return detallito;
 	}
 	
 	//simplemente hace la operacion de la cantidad de comida por el precio para obtener el precio toal del detalle (no se si sea de ayuda)
-	public static int precioTotalComida(int precioComida, int cantidad) {
-		return precioComida*cantidad;
+	public int precioTotalComida() {
+		return precioUnitario*cantidad;
 	}
 	
 	public String toString() {

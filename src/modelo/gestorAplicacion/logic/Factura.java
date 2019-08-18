@@ -6,7 +6,7 @@ import modelo.gestorAplicacion.users.*;
 
 public class Factura {
 	
-	private static int consecutivoFactura = 0;    //para generar el código
+	private static int consecutivoFactura = 0; 
 	private String codigoFactura;  
 	private String fecha;
 	private Pedido pedidoFactura;
@@ -14,11 +14,11 @@ public class Factura {
 
 	
 	public Factura(String codigo, String fecha) {
-		this.codigoFactura = codigo;
+		this.codigoFactura = generarCodigoFactura();
 		this.fecha = fecha;
 	}
 	public Factura(String codigo, String fecha, Pedido pedido) {
-		this.codigoFactura = codigo;
+		this.codigoFactura = generarCodigoFactura();
 		this.fecha = fecha;
 		this.pedidoFactura = pedido;
 	}
@@ -29,6 +29,17 @@ public class Factura {
 	}
 	public Factura() {
 		
+	}
+	public static Factura crearFactura(Pedido pedido) {
+		
+	}
+
+	/public  int AsignacionConsecutivo() {
+		int mayor = 0;
+		for(Map.Entry<String, Factura> factura : facturas.entrySet()) {
+			Factura buscador = factura.getValue();
+			
+		}
 	}
 	public String getCodigoFactura() {
 		return codigoFactura;

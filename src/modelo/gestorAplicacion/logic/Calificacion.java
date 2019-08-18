@@ -11,6 +11,7 @@ public class Calificacion {
 	private String codigoCalificacion;        
 	private int puntaje;
 	private Comida comida;
+	// ASIGANARLE UN PEDIDO
 	private Usuario usuario;
 	private String comentario;
 	public static ArrayList<Calificacion> calificaciones = new ArrayList<Calificacion>(); 

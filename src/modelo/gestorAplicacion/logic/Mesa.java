@@ -8,7 +8,7 @@ public class Mesa {
 	
 	private String codigoMesa;
 	private String numeroDeSillas;
-	private String ocupada; //ocupada = true, no ocupada = false
+	private String ocupada; //ocupada = true, no ocupada = false                 //VERIFICAR(NO ES NECESARIO)
 	private Usuario usuario;
 	public static HashMap<String, Mesa> mesas = new HashMap<String, Mesa>();   //String= Código de la mesa
 
