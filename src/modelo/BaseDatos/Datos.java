@@ -320,7 +320,7 @@ public class Datos {
 				Mesa mesaOb = mesa.getValue();
 				String line = mesaOb.getCodigoMesa() + ";";
 				line += mesaOb.getNumeroDeSillas() + ";";
-				line += mesaOb.getOcupada();
+				line += mesaOb.getUsuario() + ";";
 				pw.println(line);
 			}
 			pw.close();

@@ -10,7 +10,7 @@ public class Comida implements Comparable<Comida> {
 	private String nombreComida;
 	private int precioComida;
 	private int calorias;
-	public boolean disponible = true;
+	public boolean disponible = true;                //Identificar que comidas se pueden ver en el menu del usuario.
 	private DetallePedido detallePedidoComida;
 	public static HashMap<String, Comida> menuComidas = new HashMap<String, Comida>(); //String= Código de la comida
 	private ArrayList<Calificacion> calificaciones = new ArrayList<Calificacion>();

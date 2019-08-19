@@ -10,7 +10,7 @@ public class DetallePedido {
 	private Comida comida;
 	private Pedido pedidoDetalle;
 	private int precioUnitario;
-	private int precioTotalComida;
+	//private int precioTotalComida;
 	public static HashMap<String, DetallePedido> detallesPedido = new HashMap<String, DetallePedido>(); //String = codigo de el detalle                          
 	
 	public DetallePedido(Comida comida, int cantidad) { 

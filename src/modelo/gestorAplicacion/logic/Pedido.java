@@ -24,7 +24,7 @@ public class Pedido {
 	}
 
 	public static void crearPedido(Usuario usuario) {
-		Pedido pedido = new Pedido(generarCodigoPedido(),Factura.crearFactura(),Main.usuario); //creo el pedido. //crear metodo en Factura para crear Factura
+		Pedido pedido = new Pedido(generarCodigoPedido(),Factura. crearFactura(),Main.usuario); //creo el pedido. //crear metodo en Factura para crear Factura
 		for(Map.Entry<Comida, Integer> comida : Main.usuario.getMiCarrito().verCarrito().entrySet()) {
 			int cantidad = comida.getValue();
 			DetallePedido.crearDetallePedido(pedido.generarCodigoDetalle(), comida.getKey(), cantidad, pedido);  //creo detalles y asociarlos al pedido.  
