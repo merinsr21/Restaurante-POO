@@ -22,6 +22,10 @@ public class Pedido {
 		this.factura = factura;
 		this.usuario = usuario;
 	}
+	public Pedido(String codigoPedido, Factura factura) {
+		this.codigoPedido = codigoPedido;
+		this.factura = factura;
+	}
 
 	public static void crearPedido(Usuario usuario) {
 		Pedido pedido = new Pedido(generarCodigoPedido(),Factura. crearFactura(),Main.usuario); //creo el pedido. //crear metodo en Factura para crear Factura
@@ -72,7 +76,7 @@ public class Pedido {
 	public int calcularPrecioTotalPedido() {
 		int sumatoria = 0;
 		for(DetallePedido detalle: detallesPedidoDeCadaPedido) {
-			sumatoria += detalle.precioTotalComida();    // crear este metodo en DetallePedido(PrecioUnitario*cantidad)
+			sumatoria += detalle.precioTotalComida();   
 		}
 		return sumatoria;
 	}

@@ -17,8 +17,8 @@ public class OcuparMesa extends OpcionDeMenu{
 		System.out.print("Ingrese el número de la mesa que desea ocupar: ");
 		String codigo = entrada.next();	
 		System.out.print("Ingrese la cantidad de sillas que desea: ");
-		String numeroSillas = entrada.next();
-		System.out.println(Mesa.ocuparMesa(codigo,numeroSillas));
+		int numeroSillas = entrada.nextInt();
+		System.out.println(Mesa.ocuparMesa(codigo));
 	}
 	
 	public String toString() {

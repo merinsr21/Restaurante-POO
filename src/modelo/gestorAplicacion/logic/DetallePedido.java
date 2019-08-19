@@ -34,7 +34,6 @@ public class DetallePedido {
 		this.codigoDetalle = codigoD;
 		this.cantidad = cantidad;
 		this.comida = comida;
-		this.precioTotalComida = precioTotalComida(comida.getPrecioComida(), cantidad);
 	}
 	
 	public DetallePedido() {
@@ -83,20 +82,19 @@ public class DetallePedido {
 			Comida comidaBuscador = menu.getValue();
 			DetallePedido detallePedido = new DetallePedido(codigoDetalle,comidaBuscador,cantidadComida,pedido);
 			detallito = detallePedido;
-			int precioComida = comidaBuscador.getPrecioComida(); 
-			precioTotalComida(precioComida, cantidadComida);
+			detallePedido.precioTotalComida();
 			DetallePedido.detallesPedido.put(codigoDetalle,detallePedido);	
 		}
 		return detallito;
 	}
 	
-	//simplemente hace la operacion de la cantidad de comida por el precio para obtener el precio toal del detalle (no se si sea de ayuda)
+	//simplemente hace la operacion de la cantidad de comida por el precio para obtener el precio total del detalle (no se si sea de ayuda)
 	public int precioTotalComida() {
 		return precioUnitario*cantidad;
 	}
 	
 	public String toString() {
-		return "Código: "+comida.getCodigoComida()+"| Nombre: "+comida.getNombreComida()+"| Cantidad: "+cantidad+"| Precio: "+comida.getPrecioComida()+"| Precio Total: "+precioTotalComida(comida.getPrecioComida(), cantidad); 
+		return "Código: "+comida.getCodigoComida()+"| Nombre: "+comida.getNombreComida()+"| Cantidad: "+cantidad+"| Precio: "+comida.getPrecioComida()+"| Precio Total: "+precioTotalComida(); 
 	}
 	
 	

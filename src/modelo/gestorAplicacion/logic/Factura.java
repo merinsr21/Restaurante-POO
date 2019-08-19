@@ -31,16 +31,18 @@ public class Factura {
 		
 	}
 	public static Factura crearFactura(Pedido pedido) {
+		Date fechaOb = new Date();
+		fecha = fechaOb; 
 		
 	}
 
-	/public  int AsignacionConsecutivo() {
+	/*public  int AsignacionConsecutivo() {
 		int mayor = 0;
 		for(Map.Entry<String, Factura> factura : facturas.entrySet()) {
 			Factura buscador = factura.getValue();
 			
 		}
-	}
+	}*/
 	public String getCodigoFactura() {
 		return codigoFactura;
 	}

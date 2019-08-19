@@ -131,7 +131,7 @@ public class Datos {
 					String codigo = mesa[0];		
 					String numeroDeSillas = mesa[1];							
 					String ocupada = mesa[2];
-					Mesa mesam = new Mesa(codigo, numeroDeSillas, ocupada);
+					Mesa mesam = new Mesa(codigo, numeroDeSillas);
 					Mesa.mesas.put(codigo, mesam);
 				}
 			}
@@ -151,9 +151,6 @@ public class Datos {
 				    String codigo = detalles[0];
 				    String cantidad = detalles[1];
 				    Comida comida = Comida.getComidaConCodigo(detalles[2]);
-				    //no se si se va a quitar del todo pero aja
-				    int precioTotal = DetallePedido.precioTotalComida(comida.getPrecioComida(), Integer.parseInt(cantidad));
-				    String precioTotalString = detalles[3];
 				    int cantidadEntero = Integer.parseInt(cantidad);
 				    DetallePedido detallePedido = new DetallePedido(codigo, comida, cantidadEntero);
 				    DetallePedido.detallesPedido.put(codigo, detallePedido);
@@ -175,14 +172,11 @@ public class Datos {
 					String [] pedido = line.split(";");
 					String codigo = pedido[0];
 					Factura factura = Factura.getFacturaConCodigo(pedido[1]);
-					String precioTotal = pedido[2];
 					
 					String [] detalles = Arrays.copyOfRange(pedido, 3, pedido.length);
 					
-					//hacer un constructor para esto? REVSISARLO
-					Pedido pedidop = new Pedido(codigo, factura, precioTotal);
+					Pedido pedidop = new Pedido(codigo, factura);
 					
-					Pedido.Pedidopedido(pedidop, detalles);
 		    		Pedido.pedidos.put(codigo, pedidop);
             		
             		factura.setPedidoFactura(pedidop);  //asignarle al atributo factura creado, el pedido
@@ -190,7 +184,7 @@ public class Datos {
             		Factura.facturas.put(factura.getCodigoFactura(), factura2);
             		
             		pedidop.setFactura(factura2);  //asignarle al atributo pedido creado, la factura
-            		Pedido pedido2 = new Pedido(pedidop.getCodigoPedido(), pedidop.getFactura(), pedidop.getPrecioTotal());
+            		Pedido pedido2 = new Pedido(pedidop.getCodigoPedido(), pedidop.getFactura());
             		Pedido.pedidos.put(pedidop.getCodigoPedido(), pedido2);
 				}
 			}
@@ -354,10 +348,9 @@ public class Datos {
 				DetallePedido dpedidoOb = detPedido.getValue();
 				String line = dpedidoOb.getCodigoDetalle() + ";";
 				line += dpedidoOb.getPedidoDetalle().getCodigoPedido() + ";";
-				line += Integer.toString(dpedidoOb.getCantidad()) + ";";
 				line += dpedidoOb.getComida().getCodigoComida() + ";";
-				//ver si dejar lo del precioTOtalComida y organizarlo ahi
-				line+= dpedidoOb.getPrecioTotal();
+				line += Integer.toString(dpedidoOb.getCantidad()) + ";";
+				line+= dpedidoOb.getPrecioUnitario();
 				
 				pw.println(line);
 			}
@@ -375,14 +368,12 @@ public class Datos {
 				Pedido pedidoOb = pedido.getValue();
 				String line = pedidoOb.getCodigoPedido() + ";";
 				line += pedidoOb.getFactura().getCodigoFactura() + ";";
-				for(DetallePedido dp : pedidoOb.getDetallesPedido()) {
-					if(dp != null) {
-						line += dp.getCodigoDetalle() + ";";
+				for(DetallePedido detalle : pedidoOb.getDetallesPedidoDeCadaPedido()) {
+					if(detalle != null) {
+						line += detalle.getCodigoDetalle() + ";";
 					}
 					
 				}
-				//ver que  hacer con la variable precioTotal de pedido que fue borrad porque se implementará en detalle
-				line += pedidoOb.getPrecioTotal(); 
 				pw.println(line.substring(0,(line.length()-1)));
 			}
 			pw.close();
