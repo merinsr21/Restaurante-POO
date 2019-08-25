@@ -4,31 +4,32 @@ import java.util.*;
 import modelo.BaseDatos.*;
 
 
-public class Comida implements Comparable<Comida> {
+public class Comida  {
 	
 	private String codigoComida;
 	private String nombreComida;
-	private int precioComida;
-	private int calorias;
-	public boolean disponible = true;                //Identificar que comidas se pueden ver en el menu del usuario.
+	private String precioComida;
+	private String calorias;
+	public String disponible = "true";                //Identificar que comidas se pueden ver en el menu del usuario.
 	private DetallePedido detallePedidoComida;
-	public static HashMap<String, Comida> menuComidas = new HashMap<String, Comida>(); //String= Código de la comida
-	private ArrayList<Calificacion> calificaciones = new ArrayList<Calificacion>();
+	public static HashMap<String, Comida> menuComidas = new HashMap<String, Comida>(); //String  = Código de la comida
+	private ArrayList<Calificacion> calificacionesComida = new ArrayList<Calificacion>();
 	//private static ArrayList<Comida> menuComida = new ArrayList<Comida>();
 	
 	public Comida() {
 		
 	}
 	
-	public Comida(String codigo, String nombre, int calorias, int precio) {
-		this.codigoComida = codigo;
-		this.nombreComida = nombre;
-		this.precioComida = precio;
+	public Comida(String codigoComida, String nombreComida, String precioComida, String calorias, String disponible) {
+		this.codigoComida = codigoComida;
+		this.nombreComida = nombreComida;
+		this.precioComida = precioComida;
 		this.calorias = calorias;
+		this.disponible = disponible;		
 	}
 
-	public static void agregarComida(String codigoComida, String nombre, int calorias, int precio) {
-		Comida comida = new Comida(codigoComida,nombre,calorias,precio);
+	public static void agregarComida(String codigoComida, String nombreComida, String precioComida, String calorias, String disponible ) {
+		Comida comida = new Comida(codigoComida,nombreComida,precioComida,calorias,disponible);
 		Comida.menuComidas.put(codigoComida, comida);
 	}
 	
@@ -46,14 +47,14 @@ public class Comida implements Comparable<Comida> {
 		return nombreComida;
 	}
 	
-	public int getPrecioComida() {
+	public String getPrecioComida() {
 		return precioComida;
 	}
 	
-	public int getCalorias() {
+	public String getCalorias() {
 		return calorias;
 	}
-	public void setCalorias(int calorias) {
+	public void setCalorias(String calorias) {
 		this.calorias = calorias;
 	}
 	
@@ -65,7 +66,25 @@ public class Comida implements Comparable<Comida> {
 		this.detallePedidoComida = detallePedido;
 	}
 	
-	public int compareTo(Comida c) {  
+	public String getDisponible() {
+		return disponible;
+	}
+	
+	public void setDisponible(String disponible) {
+		this.disponible = disponible;
+	}
+	
+	public ArrayList<Calificacion> getCalificacionesComida() {
+		return calificacionesComida;
+	}
+	
+	public void setCalificacionesComida(Calificacion calificacion) {
+		calificacionesComida.add(calificacion);
+	}
+	
+	
+	//      REVISAR
+	/*public int compareTo(Comida c) {  
 		if(precioComida < c.precioComida) {
 			return -1;
 		}
@@ -76,7 +95,7 @@ public class Comida implements Comparable<Comida> {
 			return 0;
 		}
 		
-	}
+	}*/
 	
 	public static Comida getComidaConCodigo(String codigoComida) {
 		return Comida.menuComidas.get(codigoComida);
@@ -98,9 +117,9 @@ public class Comida implements Comparable<Comida> {
 	}
 	
 	// Verifica que los datos ingresados por el admin sean validos para agregar una comida.
-	public static String ValidacionComida(String codigoComida, String nombreComida, int precioComida, int calorias) {
+	public static String ValidacionComida(String codigoComida, String nombreComida, String precioComida, String calorias, String disponible) {
 			if(!Comida.menuComidas.containsKey(codigoComida)) {
-				Comida.agregarComida(codigoComida, nombreComida, calorias, precioComida);
+				Comida.agregarComida(codigoComida, nombreComida,precioComida,calorias,disponible);
 				return "La comida se ha agregado en el menú.";
 	
 			}else {

@@ -14,12 +14,13 @@ public class AgregarComida extends OpcionDeMenu {
 	
 	public void ejecutar() {
 		Scanner entrada = new Scanner(System.in);
-		System.out.println("Ingrese el código, nombre, precio y calorias de la comida que desea agregar en el menú: ");	
+		System.out.println("Ingrese el código, nombre, precio, calorias y disponibilidad de la comida que desea agregar en el menú: ");	
 		String codigoComida = entrada.next();
 		String nombreComida = entrada.next();
-		int precioComida = entrada.nextInt();
-		int calorias = entrada.nextInt();
-		System.out.print(Comida.ValidacionComida(codigoComida, nombreComida, precioComida, calorias));
+		String precioComida = entrada.next();
+		String calorias = entrada.next();
+		String disponible = entrada.next();
+		System.out.print(Comida.ValidacionComida(codigoComida, nombreComida, precioComida, calorias, disponible));
 	}
 	
 	public String toString() {

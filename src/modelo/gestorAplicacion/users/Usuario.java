@@ -109,6 +109,10 @@ public class Usuario {
 		return miCarrito;
 	}
 	
+	public void setMiCarrito(Carrito carrito) {
+		this.miCarrito = carrito;
+	}
+	
 	public static String nuevoUsuario(String nombre, String nombreUsuario, String correo, String contraseña){
 		Usuario usuario = new Usuario();
 		//Validaciones de cada parámetro porque son private en la clase

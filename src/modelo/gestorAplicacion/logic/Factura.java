@@ -1,4 +1,5 @@
 package modelo.gestorAplicacion.logic;
+import java.util.Date;
 import java.util.*;
 
 import modelo.BaseDatos.*;
@@ -12,37 +13,57 @@ public class Factura {
 	private Pedido pedidoFactura;
 	public static HashMap<String, Factura> facturas = new HashMap<String, Factura>(); //String = código de la factura
 
-	
-	public Factura(String codigo, String fecha) {
-		this.codigoFactura = generarCodigoFactura();
-		this.fecha = fecha;
+	public Factura() {
+		
 	}
+	
 	public Factura(String codigo, String fecha, Pedido pedido) {
 		this.codigoFactura = generarCodigoFactura();
 		this.fecha = fecha;
 		this.pedidoFactura = pedido;
 	}
+	
+	public Factura(Pedido pedido) {
+		this.pedidoFactura = pedido;
+	}
+	
 	public static String generarCodigoFactura() {
 		String  codigoFactura = Integer.toString(consecutivoFactura);
 		consecutivoFactura++;
 		return codigoFactura;	
 	}
-	public Factura() {
-		
-	}
+	
 	public static Factura crearFactura(Pedido pedido) {
-		Date fechaOb = new Date();
-		fecha = fechaOb; 
+		Factura factura = new Factura(pedido);
+		String fecha = factura.obtenerFechaActual();
+		String codigoFactura = factura.generarCodigoFactura();
 		
+		factura.setFecha(fecha);
+		factura.setCodigoFactura(codigoFactura);
+		
+		Factura.facturas.put(codigoFactura, factura);
+		
+		return factura;
 	}
-
-	/*public  int AsignacionConsecutivo() {
+	
+	// Devuelve la fecha actual
+	public String obtenerFechaActual() {
+		Date fechaActual = new Date();
+		return fechaActual.toString();
+	}
+	
+	public static int asignacionConsecutivoFactura() {
 		int mayor = 0;
-		for(Map.Entry<String, Factura> factura : facturas.entrySet()) {
-			Factura buscador = factura.getValue();
-			
+		for(Map.Entry<String, Factura> p : Factura.facturas.entrySet()) {
+			String c = p.getKey();
+			int codigo =Integer.parseInt(c);
+			if(codigo > mayor) {
+				mayor = codigo;
+			}
 		}
-	}*/
+		return mayor;
+	}
+	
 	public String getCodigoFactura() {
 		return codigoFactura;
 	}
@@ -64,6 +85,14 @@ public class Factura {
 	
 	public static Factura getFacturaConCodigo(String codigoFactura){
 		return Factura.facturas.get(codigoFactura);	
+	}
+	
+	public static int getConsecutivoFactura() {
+		return consecutivoFactura;
+	}
+	
+	public static void setConsecutivoFactura(int consecutivoFactura) {
+		Factura.consecutivoFactura = consecutivoFactura;
 	}
 
 }

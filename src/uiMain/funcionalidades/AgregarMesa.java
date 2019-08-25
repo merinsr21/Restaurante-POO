@@ -14,7 +14,7 @@ public class AgregarMesa extends OpcionDeMenu{
 		
 		public void ejecutar() {
 			Scanner entrada = new Scanner(System.in);
-			System.out.println("Ingrese codigo(0-99) y el numero de sillas de la mesa que desea agregar");
+			System.out.println("Ingrese el codigo y el numero de sillas de la mesa que desea agregar");
 			String codigo = entrada.next();
 			String numeroDeSillas = entrada.next();
 			System.out.println(Mesa.ValidacionMesa(codigo,numeroDeSillas));

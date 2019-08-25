@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Carrito {
 	private Usuario usuario;
-	private HashMap<Comida, Integer> carrito = new HashMap<Comida,Integer>();
+	private HashMap<Comida, Integer> carrito = new HashMap<Comida,Integer>();   // key = comida, value = cantidad
 	
 	//Añadir comida al carrito
 	public void AñadirComida(Comida comida, int cantidad) {
@@ -20,5 +20,9 @@ public class Carrito {
 	//ver carrito
 	public HashMap<Comida, Integer> verCarrito(){
 		return carrito;
+	}
+	
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 }

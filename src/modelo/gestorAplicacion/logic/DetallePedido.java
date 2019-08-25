@@ -6,34 +6,18 @@ import modelo.BaseDatos.Datos;
 public class DetallePedido {
 	
 	private String codigoDetalle;
-	private int cantidad;
+	private String cantidad;
 	private Comida comida;
 	private Pedido pedidoDetalle;
-	private int precioUnitario;
-	//private int precioTotalComida;
+	private String precioUnitario;
 	public static HashMap<String, DetallePedido> detallesPedido = new HashMap<String, DetallePedido>(); //String = codigo de el detalle                          
 	
-	public DetallePedido(Comida comida, int cantidad) { 
-		this.cantidad = cantidad;
-		this.comida = comida;
-	}
-	public DetallePedido(String codigoDetalle, Comida comida, int cantidad, Pedido pedidoDetalle) { 
+	public DetallePedido(String codigoDetalle, String cantidad, Comida comida,Pedido pedidoDetalle) {
 		this.codigoDetalle = codigoDetalle;
 		this.cantidad = cantidad;
 		this.comida = comida;
 		this.pedidoDetalle = pedidoDetalle;
-	}
-	
-	public DetallePedido(String codigoDetalle, Comida comida, int cantidad, String precioTotal, Pedido pedidoDetalle) { 
-		this.codigoDetalle = codigoDetalle;
-		this.cantidad = cantidad;
-		this.comida = comida;
-		this.pedidoDetalle = pedidoDetalle;
-	}
-	public DetallePedido(String codigoD, Comida comida, int cantidad) { 
-		this.codigoDetalle = codigoD;
-		this.cantidad = cantidad;
-		this.comida = comida;
+		this.precioUnitario = obtenerPrecioUnitario();
 	}
 	
 	public DetallePedido() {
@@ -48,10 +32,10 @@ public class DetallePedido {
 	public void setPedidoDetalle(Pedido pedido) {
 		this.pedidoDetalle = pedido;
 	}
-	public int getCantidad() {
+	public String getCantidad() {
 		return cantidad;
 	}
-	public void setCantidad(int cantidad) {
+	public void setCantidad(String cantidad) {
 		this.cantidad = cantidad;
 	}
 	public Comida getComida() {
@@ -61,35 +45,29 @@ public class DetallePedido {
 		this.comida = comida;
 	}
 	
-	public int getPrecioUnitario() {
+	public String getPrecioUnitario() {
 		return precioUnitario;
 	}
-	public void setPrecioUnitario(int precioUnitario) {
+	public void setPrecioUnitario(String precioUnitario) {
 		this.precioUnitario = precioUnitario;
 	}
-	public int precioUnitario(int precioUnitario) {
-		this.precioUnitario = comida.getPrecioComida();
-		return this.precioUnitario;
+
+	public String  obtenerPrecioUnitario() {
+		return comida.getPrecioComida();
 	}
+	
 	public static DetallePedido getDetalleConCodigo(String codigoDet) {
 		return DetallePedido.detallesPedido.get(codigoDet);
 	}
 	
-	//¿tiene que ser static?
-	public static DetallePedido crearDetallePedido(String codigoDetalle, Comida comida, int cantidadComida, Pedido pedido) {  //BIEN
-		DetallePedido detallito = null;
-		for(Map.Entry<String, Comida> menu : Comida.menuComidas.entrySet()) {    //Es necesario hacer que el detallePedido este asociado a una comida existente.
-			Comida comidaBuscador = menu.getValue();
-			DetallePedido detallePedido = new DetallePedido(codigoDetalle,comidaBuscador,cantidadComida,pedido);
-			detallito = detallePedido;
-			detallePedido.precioTotalComida();
-			DetallePedido.detallesPedido.put(codigoDetalle,detallePedido);	
-		}
-		return detallito;
+	public static DetallePedido crearDetallePedido(String codigoDetalle, String cantidadComida, Comida comida, Pedido pedido) {  
+		DetallePedido detalle = new DetallePedido(codigoDetalle, cantidadComida, comida, pedido);
+		return detalle;
 	}
 	
-	//simplemente hace la operacion de la cantidad de comida por el precio para obtener el precio total del detalle (no se si sea de ayuda)
 	public int precioTotalComida() {
+		int precioUnitario = Integer.parseInt(this.precioUnitario);
+		int cantidad = Integer.parseInt(this.cantidad);
 		return precioUnitario*cantidad;
 	}
 	

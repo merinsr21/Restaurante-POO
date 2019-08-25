@@ -14,14 +14,20 @@ public class Mesa {
 	public Mesa() {
 
 	}
-	public Mesa(String codigoMesa) {      
+	public Mesa(String codigoMesa, String numeroDeSillas, Usuario usuario) {      
 		this.codigoMesa = codigoMesa;
+		this.numeroDeSillas = numeroDeSillas;
+		this.usuario = usuario;
+	}
+	public Mesa(String codigoMesa, String numeroDeSillas) {
+		this.codigoMesa = codigoMesa;
+		this.numeroDeSillas = numeroDeSillas;
 	}
 	
 	// el codigo de la mesa lo ingresa el admin al momento de crearla.
-	public static void crearMesa(String codigoMesa) {
-		Mesa mesaOb = new Mesa(codigoMesa);               
-		Mesa.mesas.put(codigoMesa, mesaOb);
+	public static void crearMesa(String codigoMesa, String numeroDeSillas) {
+		Mesa mesa = new Mesa(codigoMesa,numeroDeSillas);               
+		Mesa.mesas.put(codigoMesa, mesa);
 	}
 	
 	public String getCodigoMesa() {
@@ -42,11 +48,11 @@ public class Mesa {
 	}
 	
 	// Le asigna a un usuario una mesa, en caso de que esta este disponible.
-	public static String ocuparMesa(String codigo) {             
+	public static String ocuparMesa(String codigoMesa) {             
 		String print = "La mesa que desea ocupar no existe";
 		for(Map.Entry<String, Mesa> mesa : Mesa.mesas.entrySet()) {
 			Mesa buscador = mesa.getValue();
-			if(buscador.getCodigoMesa().equals(codigo)) {
+			if(buscador.getCodigoMesa().equals(codigoMesa)) {
 				if(buscador.getUsuario() != null) {
 					print = "La mesa ya se encuentra ocupada.";
 					break;
@@ -63,24 +69,46 @@ public class Mesa {
 	}
 	
 	// Al cerrar sesion se desocupa la mesa correspondiente a ese usuario y esta queda disponible para ser ocupada por otro usuario.
-	public static void liberarMesa(String codigo) {
+	public static void liberarMesa(String codigoMesa) {
 		for(Map.Entry<String, Mesa> mesa : Mesa.mesas.entrySet()) {
 			Mesa mesaOb = mesa.getValue();
-			if(mesaOb.getCodigoMesa().equals(codigo)) {
+			if(mesaOb.getCodigoMesa().equals(codigoMesa)) {
 				mesaOb.getUsuario().setMesa(null);
 				mesaOb.setUsuario(null);
 			}
 		}
 	}
 	
-	// Verifica que no se encuentre una mesa con el mismo codigo.
-	public static String ValidacionMesa(String codigo) {
-		if(!Mesa.mesas.containsKey(codigo)) {
-			Mesa.crearMesa(codigo);
+	// Crea una mesa en caso de que no se encuentre una ya existente con el mismo codigo
+	public static String ValidacionMesa(String codigoMesa, String numeroDeSillas) {
+		if(!Mesa.mesas.containsKey(codigoMesa)) {
+			Mesa.crearMesa(codigoMesa,numeroDeSillas);
 			return "La mesa ha sido creada con éxito.";
 		}
 		else {
 			return "Ya existe una mesa con ese código.";
 		}
 	}
+	
+	// Elimina una mesa con base al codigo.
+	public static void eliminarMesa(String codigoMesa) {
+		for(Map.Entry<String, Mesa> mesa : Mesa.mesas.entrySet()) {
+			if(mesa.getKey().equals(codigoMesa)){
+				Mesa.mesas.remove(codigoMesa);
+				break;
+			}
+		}
+	}
+	
+	// Retorna las mesas disponibles
+	public String mostrarMesasDisponibles() {
+		for(Map.Entry<String, Mesa> mesa : Mesa.mesas.entrySet()) {
+			if(mesa.getValue().getUsuario() != null) {
+				return mesa.toString();
+			}
+		}
+		return "";
+	}
+	
+	
 }

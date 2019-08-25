@@ -11,6 +11,7 @@ import java.util.*;
 
 import modelo.gestorAplicacion.logic.*;
 import modelo.gestorAplicacion.users.*;
+import uiMain.Main;
 import uiMain.MenuDeConsola;
 import uiMain.OpcionDeMenu;
 
@@ -37,8 +38,6 @@ public class Datos {
             FileReader fr = new FileReader(ruta+"usuarios.txt");
             BufferedReader br = new BufferedReader(fr);
             String line;
-            //String line3;
-            //String line2;
             while(((line = br.readLine()) != null)/* && ((line3 = br.readLine()) != null) && ((line2 = br.readLine()) != null)*/){
             	if (!line.isEmpty()) {
             		String [] usuarioDatos = line.split(";");
@@ -47,29 +46,10 @@ public class Datos {
             		String correo = usuarioDatos[2];
             		String contraseña = usuarioDatos[3];
             		Usuario usuario = new Usuario(nombre, nombreUsuario, correo, contraseña);
-            		
-            		/*TODO: FElipe arregle esto
-            		 * String [] ped = line3.split(";");
-            		for(String x : ped) {
-            			for (Map.Entry<String, Pedido> p : pedidos.entrySet()) {
-                			Pedido pO = p.getValue();
-                			if(pedidos.containsKey(x)) {
-                				if(x.equals(pO.getCodigoP())) {
-                					usuario1.setPedidosU(pO);
-                					pO.setUsuario(usuario1);
-                    			}
-                			}
-            			}	
-            		}
-            		String [] cal = line2.split(";");
-            		for(String y : cal) {
-            			for (Calificacion f: Datos.calificaciones) {
-                			if(f.getCodigoCa().equals(y)) {
-                					usuario1.setCalificacionesU(f);
-                					f.setUsuario(usuario1);
-                			}
-            			}	
-            		}*/
+            		Usuario.usuarios.put(nombreUsuario,usuario);
+            		Carrito carrito = new Carrito();
+            		usuario.setMiCarrito(carrito);
+            		carrito.setUsuario(usuario);
             	}
             }
             br.close();
@@ -90,7 +70,8 @@ public class Datos {
             		String nombre = usuario[1];
             		String correo = usuario[2];
             		String contraseña = usuario[3];
-            		new Administrador(nombre, nombreUsuario, correo, contraseña);
+            		Usuario administrador = new Usuario(nombre, nombreUsuario, correo, contraseña);
+            		Usuario.usuarios.put(nombreUsuario, administrador);
             	}
             }
             br.close();
@@ -106,12 +87,13 @@ public class Datos {
 			while((line = br.readLine()) != null) {
 				if(!line.isEmpty()) {
 					String [] comidas = line.split(";");
-					String codigo = comidas[0];
-					String nombre = comidas[1];
-					String precio = comidas[2];
+					String codigoComida = comidas[0];
+					String nombreComida = comidas[1];
+					String precioComida = comidas[2];
 					String calorias = comidas[3];
-					Comida comida = new Comida(codigo,nombre,Integer.parseInt(calorias),Integer.parseInt(precio));
-					Comida.menuComidas.put(codigo, comida);
+					String disponible = comidas[4];
+					Comida comida = new Comida(codigoComida,nombreComida,precioComida,calorias,disponible);
+					Comida.menuComidas.put(codigoComida, comida);
 				}
 			}
 			br.close();
@@ -130,9 +112,10 @@ public class Datos {
 					String [] mesa = line.split(";");
 					String codigo = mesa[0];		
 					String numeroDeSillas = mesa[1];							
-					String ocupada = mesa[2];
-					Mesa mesam = new Mesa(codigo, numeroDeSillas);
-					Mesa.mesas.put(codigo, mesam);
+					String nombreUsuario = mesa[2];
+					Usuario usuario = Usuario.getUsuarioConNombreUsuario(nombreUsuario);
+					Mesa mesaOb = new Mesa(codigo, numeroDeSillas, usuario);
+					Mesa.mesas.put(codigo, mesaOb);
 				}
 			}
 			br.close();
@@ -140,6 +123,7 @@ public class Datos {
 			
 		}
 	}
+
 	private static void cargarDetallesPedido(String ruta){ 
 	    try{
 	        FileReader fr = new FileReader(ruta + "detallesPedidos.txt");
@@ -148,12 +132,18 @@ public class Datos {
 			while((line = br.readLine()) != null) {
 				if(!line.isEmpty()) {
 				    String [] detalles = line.split(";");
-				    String codigo = detalles[0];
+				    String codigoDetalle = detalles[0];      //codigoPedido-codigoDetalle
 				    String cantidad = detalles[1];
-				    Comida comida = Comida.getComidaConCodigo(detalles[2]);
-				    int cantidadEntero = Integer.parseInt(cantidad);
-				    DetallePedido detallePedido = new DetallePedido(codigo, comida, cantidadEntero);
-				    DetallePedido.detallesPedido.put(codigo, detallePedido);
+				    String codigoComida = detalles[2]; 
+				    
+				    Comida comida = Comida.getComidaConCodigo(codigoComida);
+				    String codigoPedido = String.valueOf(codigoDetalle.charAt(0));
+				    Pedido pedido = Pedido.getPedidoConCodigo(codigoPedido);
+				    
+				    DetallePedido detalle = new DetallePedido(codigoDetalle, cantidad, comida, pedido);
+				    
+				    comida.setDetallePedidoComida(detalle);
+				    pedido.setDetallesPedidoDeCadaPedido(detalle);
 				}
 			}
 			br.close();
@@ -170,22 +160,15 @@ public class Datos {
 			while((line = br.readLine()) != null) {
 				if(!line.isEmpty()) {
 					String [] pedido = line.split(";");
-					String codigo = pedido[0];
-					Factura factura = Factura.getFacturaConCodigo(pedido[1]);
+					String codigoPedido = pedido[0];
+					String nombreUsuario = pedido[1];
 					
-					String [] detalles = Arrays.copyOfRange(pedido, 3, pedido.length);
+					Usuario usuario = Usuario.getUsuarioConNombreUsuario(nombreUsuario);
+					Pedido pedidoOb = new Pedido(codigoPedido,usuario);
+					Pedido.pedidos.put(codigoPedido, pedidoOb);
+					usuario.setPedidosUsuario(pedidoOb);
 					
-					Pedido pedidop = new Pedido(codigo, factura);
-					
-		    		Pedido.pedidos.put(codigo, pedidop);
-            		
-            		factura.setPedidoFactura(pedidop);  //asignarle al atributo factura creado, el pedido
-            		Factura factura2 = new Factura(factura.getCodigoFactura(), factura.getFecha(), factura.getPedidoFactura()); //sobreescribir el objeto factura con los atributos ya organizados 
-            		Factura.facturas.put(factura.getCodigoFactura(), factura2);
-            		
-            		pedidop.setFactura(factura2);  //asignarle al atributo pedido creado, la factura
-            		Pedido pedido2 = new Pedido(pedidop.getCodigoPedido(), pedidop.getFactura());
-            		Pedido.pedidos.put(pedidop.getCodigoPedido(), pedido2);
+					Pedido.setConsecutivoPedido(Pedido.asignacionConsecutivoPedido());
 				}
 			}
 			br.close();
@@ -204,8 +187,15 @@ public class Datos {
 				    String [] facturas = line.split(";");
 				    String codigoFactura = facturas[0];
 				    String fecha = facturas[1];
-				    Factura factura0 = new Factura(codigoFactura, fecha);
-				    Factura.facturas.put(codigoFactura, factura0);
+				    String codigoPedido = facturas[2];
+				    
+				    Pedido pedido = Pedido.getPedidoConCodigo(codigoPedido);
+				    
+				    Factura factura = new Factura(codigoFactura, fecha, pedido);
+				    
+				    pedido.setFactura(factura);
+				    
+				    Factura.setConsecutivoFactura(Factura.asignacionConsecutivoFactura());
 				}
 			}
 			br.close();
@@ -223,12 +213,21 @@ public class Datos {
 				if(!line.isEmpty()) {
 				    String [] calificacion = line.split(";");
 				    String codigoCalificacion = calificacion[0];
-				    String puntaje = calificacion[2];
-				    String comentario = calificacion[3];
-					Comida comida = Comida.getComidaConCodigo(calificacion[1]);
-				    Calificacion cal = new Calificacion(codigoCalificacion,comida,Integer.parseInt(puntaje),comentario); 
-				    Calificacion.calificaciones.add(cal);
+				    String puntaje = calificacion[1];
+				    String codigoComida = calificacion[2];
+				    String nombreUsuario = calificacion[3];
+				    String comentario = calificacion[4];
 				    
+				    Usuario usuario = Usuario.getUsuarioConNombreUsuario(nombreUsuario);
+				    Comida comida = Comida.getComidaConCodigo(codigoComida);
+				    
+				    Calificacion calificacionOb = new Calificacion(codigoCalificacion,puntaje,comida,usuario,comentario);
+				    Calificacion.calificaciones.add(calificacionOb);
+				    
+				    comida.setCalificacionesComida(calificacionOb);
+				    usuario.setCalificacionesUsuario(calificacionOb);
+				    
+				    Calificacion.setConsecutivoCalificacion(Calificacion.asignacionConsecutivoCalificacion());
 				}
 			}
 			br.close();
@@ -280,23 +279,12 @@ public class Datos {
     			String line = usuarioO.getNombreUsuario()+";";
     			line += usuarioO.getNombre()+";";
     			line += usuarioO.getCorreo()+";";
-    			line += usuarioO.getContraseña()+";";
-    			line += usuarioO.getMiCarrito();
-    			/*String line2 = "";
-    			String line3 = "";
-    			for(Calificacion f : usuarioO.getCalificacionesUsuario()) {//en una tercera línea del txt muestra las calificaciones asociados al usuario
-    				line2 += f.getCodigoCa()+";";
-    			}
-    			for(Pedido p : usuarioO.getPedidosUsuario()) { //en una segunda línea del txt muestra los pedidos asociados al usuario
-    				line3 += p.getCodigoPedido()+";";
-    			}*/
+    			line += usuarioO.getContraseña();
     			if(usuarioO instanceof Administrador) {
     				pwAdmin.println(line);
 					
 				}else {
 					pw.println(line);
-					/*pw.println(line3.substring(0,(line3.length()-1)));
-					pw.println(line2.substring(0,(line2.length()-1)));*/
     			}
     		}
             pw.close();
@@ -314,7 +302,7 @@ public class Datos {
 				Mesa mesaOb = mesa.getValue();
 				String line = mesaOb.getCodigoMesa() + ";";
 				line += mesaOb.getNumeroDeSillas() + ";";
-				line += mesaOb.getUsuario() + ";";
+				line += mesaOb.getUsuario();
 				pw.println(line);
 			}
 			pw.close();
@@ -331,7 +319,8 @@ public class Datos {
 				String line = comidaOb.getCodigoComida() + ";";
 				line += comidaOb.getNombreComida() + ";";
 				line+= comidaOb.getPrecioComida() + ";";
-				line += comidaOb.getCalorias();
+				line += comidaOb.getCalorias() + ";";
+				line  += comidaOb.getDisponible();
 				pw.println(line);
 			}
 			pw.close();
@@ -347,11 +336,8 @@ public class Datos {
 			for(Map.Entry<String, DetallePedido> detPedido : DetallePedido.detallesPedido.entrySet()) {
 				DetallePedido dpedidoOb = detPedido.getValue();
 				String line = dpedidoOb.getCodigoDetalle() + ";";
-				line += dpedidoOb.getPedidoDetalle().getCodigoPedido() + ";";
-				line += dpedidoOb.getComida().getCodigoComida() + ";";
-				line += Integer.toString(dpedidoOb.getCantidad()) + ";";
-				line+= dpedidoOb.getPrecioUnitario();
-				
+				line += dpedidoOb.getCantidad() + ";";
+				line += dpedidoOb.getComida().getCodigoComida();
 				pw.println(line);
 			}
 			pw.close();
@@ -367,14 +353,7 @@ public class Datos {
 			for(Map.Entry<String, Pedido> pedido : Pedido.pedidos.entrySet()) {
 				Pedido pedidoOb = pedido.getValue();
 				String line = pedidoOb.getCodigoPedido() + ";";
-				line += pedidoOb.getFactura().getCodigoFactura() + ";";
-				for(DetallePedido detalle : pedidoOb.getDetallesPedidoDeCadaPedido()) {
-					if(detalle != null) {
-						line += detalle.getCodigoDetalle() + ";";
-					}
-					
-				}
-				pw.println(line.substring(0,(line.length()-1)));
+				line += pedidoOb.getUsuario().getNombreUsuario();
 			}
 			pw.close();
 		}catch(IOException IOe) {
@@ -388,7 +367,8 @@ public class Datos {
 			for(Map.Entry<String, Factura> factura : Factura.facturas.entrySet()) {
 				Factura facturaOb = factura.getValue();
 				String line = facturaOb.getCodigoFactura() + ";";
-				line += facturaOb.getFecha();
+				line += facturaOb.getFecha() +";";
+				line += facturaOb.getPedidoFactura().getCodigoPedido();
 				pw.println(line);
 			}
 			pw.close();
@@ -402,9 +382,10 @@ public class Datos {
 			FileWriter fw = new FileWriter(ruta + "calificaciones.txt");
 			PrintWriter pw = new PrintWriter(fw);
 			for(Calificacion cali : Calificacion.calificaciones) {
-				String line = cali.getCodigoCa() + ";";				
-				line += cali.getComida().getCodigoComida() + ";";
+				String line = cali.getCodigoCalificacion() + ";";				
 				line += cali.getPuntaje() + ";";
+				line += cali.getComida().getCodigoComida() + ";";
+				line += cali.getUsuario().getNombreUsuario() + ";";
 				line += cali.getComentario();
 				pw.println(line);
 			}

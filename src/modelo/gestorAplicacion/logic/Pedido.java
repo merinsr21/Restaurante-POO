@@ -16,23 +16,24 @@ public class Pedido {
 	public static HashMap<String, Pedido> pedidos = new HashMap<String, Pedido>();//String= Código del pedido	
 	private ArrayList<DetallePedido> detallesPedidoDeCadaPedido = new ArrayList<DetallePedido>();
 
-	
-	public Pedido(String codigoPedido, Factura factura, Usuario usuario) {
-		this.codigoPedido = codigoPedido;
-		this.factura = factura;
-		this.usuario = usuario;
+	public Pedido() {
 	}
-	public Pedido(String codigoPedido, Factura factura) {
+	
+	public Pedido(String codigoPedido, Usuario usuario) {
 		this.codigoPedido = codigoPedido;
-		this.factura = factura;
+		this.usuario = usuario;
 	}
 
 	public static void crearPedido(Usuario usuario) {
-		Pedido pedido = new Pedido(generarCodigoPedido(),Factura. crearFactura(),Main.usuario); //creo el pedido. //crear metodo en Factura para crear Factura
+		Pedido pedido = new Pedido(generarCodigoPedido(),Main.usuario);
+		Factura factura = Factura.crearFactura(pedido);
+		pedido.setFactura(factura);
 		for(Map.Entry<Comida, Integer> comida : Main.usuario.getMiCarrito().verCarrito().entrySet()) {
-			int cantidad = comida.getValue();
-			DetallePedido.crearDetallePedido(pedido.generarCodigoDetalle(), comida.getKey(), cantidad, pedido);  //creo detalles y asociarlos al pedido.  
+			String cantidad = String.valueOf(comida.getValue());
+			DetallePedido detalle = DetallePedido.crearDetallePedido(pedido.generarCodigoDetalle(), cantidad, comida.getKey(), pedido);
+			pedido.setDetallesPedidoDeCadaPedido(detalle);
 		}
+		Pedido.pedidos.put(pedido.getCodigoPedido(), pedido);
 	}
 	
 	private static String generarCodigoPedido() {
@@ -71,6 +72,12 @@ public class Pedido {
 	public void setDetallesPedidoDeCadaPedido(DetallePedido detalle) {
 		detallesPedidoDeCadaPedido.add(detalle);
 	}
+	public static int getConsecutivoPedido() {
+		return consecutivoPedido;
+	}
+	public static void setConsecutivoPedido(int consecutivoPedido) {
+		Pedido.consecutivoPedido = consecutivoPedido;
+	}
 	 
 	// Calcula el precio total del pedido
 	public int calcularPrecioTotalPedido() {
@@ -80,5 +87,21 @@ public class Pedido {
 		}
 		return sumatoria;
 	}
+	
+	public static int asignacionConsecutivoPedido() {
+		int mayor = 0;
+		for(Map.Entry<String, Pedido> p : Pedido.pedidos.entrySet()) {
+			String c = p.getKey();
+			int codigo =Integer.parseInt(c);
+			if(codigo > mayor) {
+				mayor = codigo;
+			}
+		}
+		return mayor;
+	}
+	
+	public static Pedido getPedidoConCodigo(String codigoPedido){
+        return Pedido.pedidos.get(codigoPedido);
+    }
 	
 }

@@ -1,6 +1,7 @@
 package modelo.gestorAplicacion.logic;
 import java.util.ArrayList;
-
+import java.util.Map;
+import java.util.*;
 import modelo.BaseDatos.Datos;
 import modelo.gestorAplicacion.users.*;
 import uiMain.Main;
@@ -9,36 +10,22 @@ public class Calificacion {
 	
 	private static int consecutivoCalificacion = 0;
 	private String codigoCalificacion;        
-	private int puntaje;
+	private String puntaje;
 	private Comida comida;
 	// ASIGANARLE UN PEDIDO
 	private Usuario usuario;
 	private String comentario;
-	public static ArrayList<Calificacion> calificaciones = new ArrayList<Calificacion>(); 
+	public static HashMap<String, Calificacion> calificaciones = new HashMap <String, Calificacion>();
 	
 	public Calificacion() {
 		
 	}
 	
-	public Calificacion (String codigoCalificacion, int puntaje, Usuario usuario){
+	public Calificacion(String codigoCalificacion, String puntaje, Comida comida, Usuario usuario, String comentario) {
 		this.codigoCalificacion = codigoCalificacion;
-		this.puntaje=puntaje;
-		this.usuario = usuario;
-	}
-	public Calificacion (String codigoCalificacion, Comida comida, int puntaje, Usuario usuario){
-		this.codigoCalificacion = codigoCalificacion;
+		this.puntaje = puntaje;
 		this.comida = comida;
-		this.puntaje=puntaje;
 		this.usuario = usuario;
-	}
-	public Calificacion (String codigoCalificacion, int puntaje){
-		this.codigoCalificacion = codigoCalificacion;
-		this.puntaje=puntaje;
-	}
-	public Calificacion (String codigoCalificacion, Comida comida, int puntaje, String comentario){
-		this.codigoCalificacion = codigoCalificacion;
-		this.comida = comida;
-		this.puntaje=puntaje;
 		this.comentario = comentario;
 	}
 	
@@ -56,19 +43,19 @@ public class Calificacion {
 		this.comentario = comentario;
 	}
 
-	public String getCodigoCa() {
+	public String getCodigoCalificacion() {
 		return codigoCalificacion;
 	}
 	
-	public void setCodigoCa(String codigo) {
+	public void setCodigoCalificacion(String codigo) {
 		this.codigoCalificacion = codigo;
 	}
 	
-	public int getPuntaje() {
+	public String getPuntaje() {
 		return puntaje;
 	}
 	
-	public void setPuntaje(int puntaje) {
+	public void setPuntaje(String puntaje) {
 		this.puntaje = puntaje;
 	}
 	
@@ -89,19 +76,34 @@ public class Calificacion {
 		this.usuario = usuario;
 	}
 	
-	public static ArrayList<Calificacion> getCalificaciones(){
-		return calificaciones;
-	}
-	
-	public static void setCalificaciones(Calificacion calificacion) {
-		calificaciones.add(calificacion);
-	}
-	
-	public static Calificacion crearCalificacion(String codigoCalificacion, int puntaje) {                
-		Calificacion calificacion = new Calificacion(codigoCalificacion, puntaje, Main.usuario); 
-		Calificacion.calificaciones.add(calificacion);	        
-		Calificacion.setCalificaciones(calificacion);
+	public static Calificacion crearCalificacion(String puntaje, String codigoComida, String comentario) {                
+		String codigoCalificacion = Calificacion.generarCodigoCalificacion();
+		Usuario usuario = Main.usuario;
+		Comida comida = Comida.getComidaConCodigo(codigoComida);
+		
+		Calificacion calificacion = new Calificacion(codigoCalificacion, puntaje, comida, usuario, comentario);
+		Calificacion.calificaciones.put(codigoCalificacion, calificacion);
+		
 		return calificacion;
 	}
 	
+	public static int asignacionConsecutivoCalificacion() {
+		int mayor = 0;
+		for(Map.Entry<String, Pedido> p : Pedido.pedidos.entrySet()) {
+			String c = p.getKey();
+			int codigo =Integer.parseInt(c);
+			if(codigo > mayor) {
+				mayor = codigo;
+			}
+		}
+		return mayor;
+	}
+	
+	public static void setConsecutivoCalificacion(int consecutivoCalificacion) {
+		Calificacion.consecutivoCalificacion = consecutivoCalificacion;
+	}
+	
+	public static int getConsecutivoCalificacion() {
+		return consecutivoCalificacion;
+	}
 }
