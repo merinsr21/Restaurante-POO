@@ -101,13 +101,15 @@ public class Mesa {
 	}
 	
 	// Retorna las mesas disponibles
-	public String mostrarMesasDisponibles() {
-		for(Map.Entry<String, Mesa> mesa : Mesa.mesas.entrySet()) {
-			if(mesa.getValue().getUsuario() != null) {
-				return mesa.toString();
+	public ArrayList<Mesa> mostrarMesasDisponibles() {
+		ArrayList<Mesa> disponibles = new ArrayList<Mesa>();
+		for(Map.Entry<String, Mesa> m : Mesa.mesas.entrySet()) {
+			Mesa mesa = m.getValue();
+			if(mesa.getUsuario() == null) {
+				disponibles.add(mesa);
 			}
 		}
-		return "";
+		return disponibles;
 	}
 	
 	

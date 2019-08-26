@@ -106,4 +106,52 @@ public class Calificacion {
 	public static int getConsecutivoCalificacion() {
 		return consecutivoCalificacion;
 	}
+	
+	
+	// Califica una comida en un determinado pedido.
+	public String calificar(Pedido pedido, String codigoComida, String puntje, String comentario) {    // opciones puntaje [1,2,3,4,5]
+		for(DetallePedido detalle: pedido.getDetallesPedidoDeCadaPedido()) {
+			Comida comida = detalle.getComida();
+			String codigo = comida.getCodigoComida();
+			if(codigo.equals(codigoComida)){
+				Calificacion calificacion = Calificacion.crearCalificacion(puntaje, codigoComida, comentario);
+				comida.setCalificacionesComida(calificacion);
+				break;
+			}
+		}
+		return "La comida ha sido calificada exitosamente, gracias";
+	}
+	
+	// Devuelve las calificaciones correspondientes a la comida con el codigo ingresado.
+	public ArrayList<Calificacion> verCalificaciones(String codigoComida) {
+		Comida comida = Comida.getComidaConCodigo(codigoComida);
+		return comida.getCalificacionesComida();
+	}
+	
+	// Devuelve la comida con la mejor calificacion.
+	public String obtenerComidaMejorCalificada() {
+		HashMap<Comida, Integer> totalCalificaciones = new HashMap<Comida, Integer>();
+		for(Map.Entry<String, Comida> c : Comida.menuComidas.entrySet()) {
+			int sumatoria = 0;
+			int contador = 0;
+			Comida comida = c.getValue();
+			for(Calificacion calificacion : comida.getCalificacionesComida()) {
+				sumatoria += Integer.parseInt(calificacion.getPuntaje());
+				contador ++;
+			}
+			int total = sumatoria/contador;
+			totalCalificaciones.put(comida,total);
+		}
+		int mayor = 0;
+		Comida comidaMayor = null;
+		for(Map.Entry<Comida, Integer> c :totalCalificaciones.entrySet()) {
+			Comida comidab = c.getKey();
+			int totalb = c.getValue();
+			if(totalb > mayor) {
+				mayor = totalb;
+				comidaMayor = comidab;
+			}
+		}
+		return "La comida mejor calificada es "+comidaMayor.getNombreComida()+" y su calificacion es :"+mayor;
+	}
 }

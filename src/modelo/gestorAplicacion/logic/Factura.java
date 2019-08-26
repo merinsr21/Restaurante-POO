@@ -1,15 +1,17 @@
 package modelo.gestorAplicacion.logic;
-import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import modelo.BaseDatos.*;
 import modelo.gestorAplicacion.users.*;
+import uiMain.Main;
 
 public class Factura {
 	
 	private static int consecutivoFactura = 0; 
 	private String codigoFactura;  
-	private String fecha;
+	private String fecha;     // formato dd/MM/yyyy
 	private Pedido pedidoFactura;
 	public static HashMap<String, Factura> facturas = new HashMap<String, Factura>(); //String = código de la factura
 
@@ -49,7 +51,8 @@ public class Factura {
 	// Devuelve la fecha actual
 	public String obtenerFechaActual() {
 		Date fechaActual = new Date();
-		return fechaActual.toString();
+		DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+		return formatoFecha.format(fechaActual).toString();
 	}
 	
 	public static int asignacionConsecutivoFactura() {
@@ -94,5 +97,56 @@ public class Factura {
 	public static void setConsecutivoFactura(int consecutivoFactura) {
 		Factura.consecutivoFactura = consecutivoFactura;
 	}
-
+	
+	// Devuelve todas las facturas asociadas a un usuario
+	public ArrayList<Factura> verMisFacturas(){
+		ArrayList<Factura> misFacturas = new ArrayList<Factura>();
+		Usuario usuario = Main.usuario;
+		for(Map.Entry<String, Factura> f : Factura.facturas.entrySet()) {
+			Factura factura = f.getValue();
+			if(factura.getPedidoFactura().getUsuario().getNombreUsuario().equals(usuario.getNombreUsuario())){
+				misFacturas.add(factura);
+			}
+		}
+		return misFacturas;
+	
+	}
+	
+	// Devuelve la factura asociada a un pedido¿
+	public Factura verFactura(Pedido pedido) {
+		Factura fac = null;
+		for(Map.Entry<String, Factura> f : Factura.facturas.entrySet()) {
+			Factura factura = f.getValue();
+			if(factura.getPedidoFactura().getCodigoPedido().equals(pedido.getCodigoPedido())){
+				fac = factura;
+				break;
+			}
+		}
+		return fac;
+	}
+	
+	// Calcula el total de ventas en un dia especifico.
+	public int totalVentasDia(String fecha) {        
+		int totalVendido = 0;
+		for(Map.Entry<String, Factura> f : Factura.facturas.entrySet()) {
+			Factura factura = f.getValue();
+			Pedido pedido = factura.getPedidoFactura();
+			if(factura.getFecha().equals(fecha)) {
+				totalVendido += pedido.calcularPrecioTotalPedido();			}
+		}
+		return totalVendido;
+	}
+	
+	// Calcula el total de ventas en un mes especifico.
+	public int totalVentasMes(String fecha) {      //fecha = mes , formato MM
+		int totalVendido = 0;
+		for(Map.Entry<String, Factura> f : Factura.facturas.entrySet()) {
+			Factura factura = f.getValue();
+			Pedido pedido = factura.getPedidoFactura();
+			String mes = factura.getFecha().substring(3,5);
+			if(mes.equals(fecha)) {
+				totalVendido += pedido.calcularPrecioTotalPedido();			}
+		}
+		return totalVendido;
+	}
 }

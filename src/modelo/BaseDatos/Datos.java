@@ -92,7 +92,7 @@ public class Datos {
 					String precioComida = comidas[2];
 					String calorias = comidas[3];
 					String disponible = comidas[4];
-					Comida comida = new Comida(codigoComida,nombreComida,precioComida,calorias,disponible);
+					Comida comida = new Comida(codigoComida,nombreComida,precioComida,calorias);
 					Comida.menuComidas.put(codigoComida, comida);
 				}
 			}
@@ -222,7 +222,7 @@ public class Datos {
 				    Comida comida = Comida.getComidaConCodigo(codigoComida);
 				    
 				    Calificacion calificacionOb = new Calificacion(codigoCalificacion,puntaje,comida,usuario,comentario);
-				    Calificacion.calificaciones.add(calificacionOb);
+				    Calificacion.calificaciones.put(codigoCalificacion, calificacionOb);
 				    
 				    comida.setCalificacionesComida(calificacionOb);
 				    usuario.setCalificacionesUsuario(calificacionOb);
@@ -381,12 +381,13 @@ public class Datos {
 		try {
 			FileWriter fw = new FileWriter(ruta + "calificaciones.txt");
 			PrintWriter pw = new PrintWriter(fw);
-			for(Calificacion cali : Calificacion.calificaciones) {
-				String line = cali.getCodigoCalificacion() + ";";				
-				line += cali.getPuntaje() + ";";
-				line += cali.getComida().getCodigoComida() + ";";
-				line += cali.getUsuario().getNombreUsuario() + ";";
-				line += cali.getComentario();
+			for(Map.Entry<String, Calificacion> cali : Calificacion.calificaciones.entrySet()) {
+				Calificacion calificacionOb = cali.getValue();
+				String line = calificacionOb.getCodigoCalificacion() + ";";				
+				line += calificacionOb.getPuntaje() + ";";
+				line += calificacionOb.getComida().getCodigoComida() + ";";
+				line += calificacionOb.getUsuario().getNombreUsuario() + ";";
+				line += calificacionOb.getComentario();
 				pw.println(line);
 			}
 			pw.close();

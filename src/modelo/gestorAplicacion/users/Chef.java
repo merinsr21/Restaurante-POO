@@ -33,14 +33,4 @@ public class Chef extends Usuario{
 		Usuario.usuarios.put(nombreUsuario,chef);
 		return "Ha sido creado";
 	}
-	
-	public static void calcularCalorias(Pedido pedido) {
-		int sumaCalorias = 0;
-		for(DetallePedido buscador: pedido.getDetallesPedidoDeCadaPedido()) {
-			int calorias = buscador.getComida().getCalorias();
-			sumaCalorias += calorias;
-			System.out.println("La cantidad de calorias en "+buscador.getComida().getNombreComida()+" es: "+buscador.getComida().getCalorias());
-		}
-		System.out.println("La cantidad total de calorias en el pedido es :"+sumaCalorias);
-	}
 }

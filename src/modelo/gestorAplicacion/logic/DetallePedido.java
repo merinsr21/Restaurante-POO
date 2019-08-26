@@ -75,7 +75,31 @@ public class DetallePedido {
 		return "Código: "+comida.getCodigoComida()+"| Nombre: "+comida.getNombreComida()+"| Cantidad: "+cantidad+"| Precio: "+comida.getPrecioComida()+"| Precio Total: "+precioTotalComida(); 
 	}
 	
-	
-	
+	// Dveuelve la comida mas pedida
+	public String verComidaMasPedida() {
+		HashMap<Comida, Integer> comidas = new HashMap<Comida, Integer>();
+		for(Map.Entry<String, DetallePedido> Dpedido : DetallePedido.detallesPedido.entrySet()) {
+			DetallePedido detalle = Dpedido.getValue();
+			int cantidad = Integer.parseInt(detalle.getCantidad());
+			Comida comida = detalle.getComida();
+			if(!comidas.containsKey(comida)) {
+				comidas.put(comida,cantidad);
+			}
+			else {
+				int cantidadActual = comidas.get(comida);
+				comidas.put(comida,cantidadActual+cantidad);
+			}
+		}
+		int  contador = 0;
+		Comida comida = null;
+		for(Map.Entry<Comida, Integer> p : comidas.entrySet()) {
+			int cantidad = p.getValue();
+			if(cantidad > contador) {
+				contador = cantidad;
+				comida = p.getKey();
+			}
+		}
+		return "La comida mas pedida es "+comida.getNombreComida()+" y ha sido pedida "+contador+" veces";
+	}
 	
 }

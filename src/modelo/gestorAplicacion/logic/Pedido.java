@@ -100,8 +100,35 @@ public class Pedido {
 		return mayor;
 	}
 	
+	// Devuelve el pedido correspondiente al codigo ingresado como parametro.
 	public static Pedido getPedidoConCodigo(String codigoPedido){
         return Pedido.pedidos.get(codigoPedido);
     }
 	
+	// Devuelve todos los pedidos asociados a un usuario.
+	public ArrayList<Pedido> verMisPedidos(){
+		ArrayList<Pedido> misPedidos = new ArrayList<Pedido>();
+		Usuario usuario = Main.usuario;
+		for(Map.Entry<String, Pedido> p : Pedido.pedidos.entrySet()) {
+			Pedido pedido = p.getValue();
+			if(pedido.getUsuario().getNombreUsuario().equals(usuario.getNombreUsuario())){
+				misPedidos.add(pedido);
+			}
+		}
+		return misPedidos;
+	}
+	
+	// Calcula el total de calorias de los productos en el carrito.
+	public int calcularCalorias() {
+		int totalCalorias = 0;
+		Usuario usuario = Main.usuario;
+		Carrito carritoUsuario = usuario.getMiCarrito();
+		for(Map.Entry<Comida, Integer> carrito : carritoUsuario.verCarrito().entrySet()) {
+			Comida comida = carrito.getKey();
+			int caloriasComida = Integer.parseInt(comida.getCalorias());
+			int cantidad = carrito.getValue();
+			totalCalorias += (caloriasComida*cantidad);
+		}
+		return totalCalorias;
+	}
 }

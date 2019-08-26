@@ -10,26 +10,24 @@ public class Comida  {
 	private String nombreComida;
 	private String precioComida;
 	private String calorias;
-	public String disponible = "true";                //Identificar que comidas se pueden ver en el menu del usuario.
+	private String disponible = "true";                //Identificar que comidas se pueden ver en el menu del usuario.
 	private DetallePedido detallePedidoComida;
 	public static HashMap<String, Comida> menuComidas = new HashMap<String, Comida>(); //String  = Código de la comida
 	private ArrayList<Calificacion> calificacionesComida = new ArrayList<Calificacion>();
-	//private static ArrayList<Comida> menuComida = new ArrayList<Comida>();
 	
 	public Comida() {
 		
 	}
 	
-	public Comida(String codigoComida, String nombreComida, String precioComida, String calorias, String disponible) {
+	public Comida(String codigoComida, String nombreComida, String precioComida, String calorias) {
 		this.codigoComida = codigoComida;
 		this.nombreComida = nombreComida;
 		this.precioComida = precioComida;
-		this.calorias = calorias;
-		this.disponible = disponible;		
+		this.calorias = calorias;	
 	}
 
-	public static void agregarComida(String codigoComida, String nombreComida, String precioComida, String calorias, String disponible ) {
-		Comida comida = new Comida(codigoComida,nombreComida,precioComida,calorias,disponible);
+	public static void agregarComida(String codigoComida, String nombreComida, String precioComida, String calorias) {
+		Comida comida = new Comida(codigoComida,nombreComida,precioComida,calorias);
 		Comida.menuComidas.put(codigoComida, comida);
 	}
 	
@@ -117,13 +115,30 @@ public class Comida  {
 	}
 	
 	// Verifica que los datos ingresados por el admin sean validos para agregar una comida.
-	public static String ValidacionComida(String codigoComida, String nombreComida, String precioComida, String calorias, String disponible) {
+	public static String ValidacionComida(String codigoComida, String nombreComida, String precioComida, String calorias) {
 			if(!Comida.menuComidas.containsKey(codigoComida)) {
-				Comida.agregarComida(codigoComida, nombreComida,precioComida,calorias,disponible);
+				Comida.agregarComida(codigoComida, nombreComida,precioComida,calorias);
 				return "La comida se ha agregado en el menú.";
 	
 			}else {
 				return "Este código ya se encuenta en el menú. La comida no ha sido agregada al menú.";
 			}		
+	}
+	
+	// Retorna todas las comidas existentes
+	public HashMap<String,Comida> getMenuComida(){
+		return menuComidas;
+	}
+	
+	// Retorna las comidas disponibles para ser ordenadas por el usuario
+	public ArrayList<Comida> obtenerComidasDisponibles(){
+		ArrayList<Comida> comidasDisponibles = new ArrayList<Comida>();
+		for(Map.Entry<String, Comida> c : Comida.menuComidas.entrySet()) {
+			Comida comida = c.getValue();
+			if(comida.getDisponible().equals("true")) {
+				comidasDisponibles.add(comida);
+			}
+		}
+		return comidasDisponibles;
 	}
 }
