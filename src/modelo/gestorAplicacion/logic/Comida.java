@@ -131,7 +131,7 @@ public class Comida  {
 	}
 	
 	// Retorna las comidas disponibles para ser ordenadas por el usuario
-	public ArrayList<Comida> obtenerComidasDisponibles(){
+	public static ArrayList<Comida> obtenerComidasDisponibles(){
 		ArrayList<Comida> comidasDisponibles = new ArrayList<Comida>();
 		for(Map.Entry<String, Comida> c : Comida.menuComidas.entrySet()) {
 			Comida comida = c.getValue();

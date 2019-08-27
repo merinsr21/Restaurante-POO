@@ -5,12 +5,12 @@ import javax.swing.*;
 
 import controlador.ControlMenu;
 
-public class VentanaUsuario extends JFrame implements InterfazVista{
+public class VentanaAdministrador extends JFrame implements InterfazVista {
 	public static Container contenedor;
 	JMenu archivo, procesos,ayuda; 
-	JMenuItem usuario, salir, verMenu, miCarrito, verFacturas, verPedidos, verMesas;
+	JMenuItem usuario, salir, crearMesa, verMesas, crearComida, verMenu, gananciaDia, gananciaMes, crearUsuario;
 	
-	public VentanaUsuario() {
+	public VentanaAdministrador() {
 		super("Usuario:");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contenedor = this.getContentPane();
@@ -27,29 +27,31 @@ public class VentanaUsuario extends JFrame implements InterfazVista{
 		procesos = new JMenu("Procesos y Consultas");
 		ayuda = new JMenu("Ayuda");
 		
-		//menu del archivo
+		//menu archivo
 		usuario = new JMenuItem("Usuario");
 		salir = new JMenuItem("Salir");
 		salir.addActionListener(new ControlMenu());
 		archivo.add(usuario);
 		archivo.add(salir);
 		
-		//menu de ayuda
+		//menu ayuda
 		JMenuItem acercaDe = new JMenuItem("Acerca de..");
 		ayuda.add(acercaDe);
 		
-		//menu de procesos
-		verMenu = new JMenuItem("Ver Menú de Comidas");
-		miCarrito = new JMenuItem("Ver mi Carrito");
-		verFacturas = new JMenuItem("Ver mis Facturas");
-		verPedidos = new JMenuItem("Ver mis Pedidos");
-		verMesas = new JMenuItem("Ver mesas disponibles");
-		verMenu.addActionListener(new ControlMenu());
-		procesos.add(verMenu);
-		procesos.add(miCarrito);
-		procesos.add(verFacturas);
-		procesos.add(verPedidos);
+		//menu procesos
+		crearMesa = new JMenuItem("Crear mesas");
+		verMesas = new JMenuItem("Ver mesas disponibles");	
+		gananciaDia = new JMenuItem("Ver Ganancias del día");
+		gananciaMes = new JMenuItem("Ver ganancias del mes");
+		crearUsuario = new JMenuItem("Crear un nuevo Usuario");
+		procesos.add(crearUsuario);
+		procesos.add(crearMesa);
 		procesos.add(verMesas);
+		procesos.add(gananciaDia);
+		procesos.add(gananciaMes);
+
+		
+		
 		opcionesDeMenu.add(archivo);
 		opcionesDeMenu.add(procesos);
 		opcionesDeMenu.add(ayuda);
@@ -58,7 +60,7 @@ public class VentanaUsuario extends JFrame implements InterfazVista{
 		contenedor.add(panelGeneral);
 		
 		//
-		
+	
 
 	}
 	@Override
@@ -73,5 +75,4 @@ public class VentanaUsuario extends JFrame implements InterfazVista{
 		this.setVisible(false);
 		this.dispose();
 	}
-
 }

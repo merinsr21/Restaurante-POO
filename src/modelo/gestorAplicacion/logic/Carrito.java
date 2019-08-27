@@ -8,12 +8,12 @@ public class Carrito {
 	private HashMap<Comida, Integer> carrito = new HashMap<Comida,Integer>();   // key = comida, value = cantidad
 	
 	//Añadir comida al carrito
-	public void AñadirComida(Comida comida, int cantidad) {
+	public void añadirComida(Comida comida, int cantidad) {
 		carrito.put(comida, cantidad);
 	}
 	
 	//Borrar comida del carrito
-	public void BorrarComida(Comida comida) {
+	public void borrarComida(Comida comida) {
 		carrito.remove(comida);
 	}
 	

@@ -114,18 +114,14 @@ public class Usuario {
 	}
 	
 	public static String nuevoUsuario(String nombre, String nombreUsuario, String correo, String contraseña){
-		Usuario usuario = new Usuario();
-		//Validaciones de cada parámetro porque son private en la clase
-		usuario.setNombre(nombre);
-		usuario.setNombreUsuario(nombreUsuario);
-		usuario.setCorreo(correo);
-		usuario.setContraseña(contraseña);
-		
-		//Menu por defecto al crear un nuevo usuario
-		String [] funcionalidades = {"1","2","3","4","5","6","15","12"};
-		MenuDeConsola.nuevoMenu(usuario, funcionalidades);
-		Usuario.usuarios.put(nombreUsuario,usuario);
-		return "Ha sido creado";
+		if(!Usuario.usuarios.containsKey(nombreUsuario)) {
+			Usuario usuario = new Usuario(nombre, nombreUsuario, correo, contraseña);
+			Usuario.usuarios.put(nombreUsuario, usuario);
+			return "El usuario ha sido creado de forma exitosa";
+		}
+		else {
+			return "Ya existe un usuario con ese nombre de usuario";
+		}
 	}
 	
 	public static String editarUsuario(Usuario uusuario,int opcion, String valor){ //editar un usuario en específico

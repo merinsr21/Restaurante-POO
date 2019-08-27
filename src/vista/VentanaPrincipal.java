@@ -6,8 +6,8 @@ import javax.swing.border.LineBorder;
 
 import controlador.*;
 
-public class VentanaPrincipal extends JFrame{
-	Container contenedor;
+public class VentanaPrincipal extends JFrame implements InterfazVista{
+	public static Container contenedor;
 	public static JButton admin;
 	public static JButton usuario;
 	public static JButton chef;
@@ -56,7 +56,7 @@ public class VentanaPrincipal extends JFrame{
 		JPanel panel4 = new JPanel();
 		foto = new ImageIcon("B1.png");
 		botonFotos = new JButton();
-		botonFotos.setBounds(0, 0, 700, 800);
+		botonFotos.setBounds(0, 0, 400, 400);
 		icono = new ImageIcon(foto.getImage().getScaledInstance(botonFotos.getWidth(), botonFotos.getHeight(), Image.SCALE_SMOOTH));
 		botonFotos.setIcon(icono);
 		botonFotos.setBackground(Color.WHITE);
@@ -122,16 +122,27 @@ public class VentanaPrincipal extends JFrame{
 		panelBotonSalir.setLayout(new BorderLayout());
 		JButton salir = new JButton("Salir");
 		salir.addActionListener(new ControlIniciar());
-		salir.setBounds(0,0,250,100);
+		salir.setPreferredSize(new Dimension(250,100));
 		panelBotonSalir.add(salir);
 		panel2.add(panelBotonSalir);
 
 		//
 		
+	}
 
+	@Override
+	public void arranca() {
 		pack();
 		setLocationRelativeTo(null);
-
-
+		setVisible(true);
 	}
+
+	@Override
+	public void cerrar() {
+		this.setVisible(false);
+		this.dispose();
+	}
+			
+	
+	
 }
