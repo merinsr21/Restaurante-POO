@@ -64,6 +64,10 @@ public class VentanaUsuario extends JFrame implements InterfazVista{
 	@Override
 	public void arranca() {
 		pack();
+		String ruta = System.getProperty("user.dir")+ "\\src\\vista\\images\\";
+		ImageIcon ImageIcon = new ImageIcon(ruta + "images.png");
+		Image imagen = ImageIcon.getImage();
+		setIconImage(imagen);
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}

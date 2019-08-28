@@ -11,7 +11,7 @@ public class VentanaChef extends JFrame implements InterfazVista{
 	JMenuItem usuario, salir, verComidaMejor, verCalificacionComida, verComidaMasPedida, crearComida, verMenu;
 	
 	public VentanaChef() {
-		super("Usuario:");
+		super("Chef:");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contenedor = this.getContentPane();
 		setVisible(false);
@@ -36,7 +36,9 @@ public class VentanaChef extends JFrame implements InterfazVista{
 				
 		//menu ayuda
 		JMenuItem acercaDe = new JMenuItem("Acerca de..");
+		acercaDe.addActionListener(new ControlMenu());
 		ayuda.add(acercaDe);
+		
 				
 		//menu procesos
 		verComidaMejor = new JMenuItem("Ver la comida mejor calificada");
@@ -64,6 +66,10 @@ public class VentanaChef extends JFrame implements InterfazVista{
 	@Override
 	public void arranca() {
 		pack();
+		String ruta = System.getProperty("user.dir")+ "\\src\\vista\\images\\";
+		ImageIcon ImageIcon = new ImageIcon(ruta + "images.png");
+		Image imagen = ImageIcon.getImage();
+		setIconImage(imagen);
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}

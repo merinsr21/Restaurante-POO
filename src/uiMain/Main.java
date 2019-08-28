@@ -12,7 +12,7 @@ import modelo.gestorAplicacion.users.Usuario;
 public class Main {
 
 	public static Usuario usuario;
-	
+	public static Datos datos;
 	public static MenuDeConsola menuInvitado;
 	
 	public static void main(String[] args) {
@@ -71,7 +71,7 @@ public class Main {
 		
 		
 		//Cargar los datos
-		Datos datos = new Datos();
+		datos = new Datos();
 		datos.cargarDatos();
 		
 		//Operaciones del usuario por defecto

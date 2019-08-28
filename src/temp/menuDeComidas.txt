@@ -1,8 +1,0 @@
-100;Cazuela_de_frijoles;10000;1000
-101;jugo_de_mora       ;2000 ;500 
-102;Papas_a_la_francesa;3000 ;4000
-103;Ensalada_de_frutas ;3000 ;100 
-104;Carne_a_la_plancha ;15000;500 
-105;Jugo_de_mango      ;3000 ;300 
-106;Filete_de_pescado  ;13000;500 
-107;Bandeja_Paisa      ;14000;2000

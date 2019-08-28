@@ -1,27 +1,21 @@
 package vista;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.TextArea;
-import java.util.HashMap;
-import java.util.Map;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.TableCellRenderer;
+import java.awt.*;
+import java.util.*;
 
-import controlador.tableButton.ControlTableButtonComidas;
-import controlador.tableButton.TablaMouseListener;
+import javax.swing.*;
+
+import controlador.tableButton.*;
 import modelo.gestorAplicacion.logic.Comida;
-import vista.JTableButtonRenderer;
-import vista.TablaModelo;
+import vista.*;
 
-public class VentanaMenuComida extends JPanel implements InterfazVista{
+public class PanelMenuComida extends JPanel{
 	//JTable tabla;
-	public VentanaMenuComida(){
-		JPanel panelMenu = new JPanel();
+	public static JPanel panelMenu;
+	public PanelMenuComida(){
+		setVisible(false);
+		panelMenu = new JPanel();
 		TextArea texto = new TextArea(arreglo(), 0, 0, TextArea.SCROLLBARS_VERTICAL_ONLY);
 		texto.setFont(new Font("arial", Font.HANGING_BASELINE, 15));
 		texto.setEditable(false);
@@ -36,20 +30,32 @@ public class VentanaMenuComida extends JPanel implements InterfazVista{
 		}
 		return texto;
 	}
-	@Override
-	public void arranca() {
-		pack();
-		setLocationRelativeTo(null);
-		setVisible(true);		
-	}
-	@Override
-	public void cerrar() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*HashMap<String, Comida> menu = Comida.menuComidas;
 String nombreBoton = "Ordenar";
 String [] nombreColumnas = {"Código", "Nombre", "Precio", nombreBoton};

@@ -146,15 +146,15 @@ public class Usuario {
         return Usuario.usuarios.get(nombreUsuario);
     }
 
-    public static String iniciarSesion(String nombreUsuario, String contraseña){
+    public static boolean iniciarSesion(String nombreUsuario, String contraseña){
         Usuario usuario = Usuario.getUsuarioConNombreUsuario(nombreUsuario);
         if (usuario != null){
             if(usuario.getNombreUsuario().equals(nombreUsuario) && usuario.getContraseña().equals(contraseña)){
             	Main.usuario = usuario;
-                return "Bienvenido "+usuario.getNombre();
+                return true;
             }
         }
-        return "Usuario no encontrado";
+        return false;
     }
     
     public static String cerrarSesion(){

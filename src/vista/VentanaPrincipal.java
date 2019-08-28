@@ -13,8 +13,8 @@ public class VentanaPrincipal extends JFrame implements InterfazVista{
 	public static JButton chef;
 	public static JLabel textoingrese;
 	public static JPanel panelDatos;
-	public static JTextField codigoUsuarioT;
-	public static JPasswordField claveT;
+	public static JTextField nombreUsuarioT;
+	public static JPasswordField contraseñaT;
 	public static JLabel nombreUsuario;
 	public static JLabel contraseña;
 	public static JLabel labelBienvenido;
@@ -109,8 +109,8 @@ public class VentanaPrincipal extends JFrame implements InterfazVista{
 		panelDatos.setLayout(new GridLayout(2,2));
 		nombreUsuario = new JLabel("Nombre de Usuario");
 		contraseña = new JLabel("Contraseña");
-		codigoUsuarioT = new JTextField();
-		claveT = new JPasswordField();
+		nombreUsuarioT = new JTextField();
+		contraseñaT = new JPasswordField();
 		
 		
 		panel6.add(panelDatos, BorderLayout.SOUTH);
@@ -119,10 +119,10 @@ public class VentanaPrincipal extends JFrame implements InterfazVista{
 		
 		//panel para que el boton salir aparezca centrado
 		JPanel panelBotonSalir = new JPanel();
-		panelBotonSalir.setLayout(new BorderLayout());
+		panelBotonSalir.setLayout(null);
 		JButton salir = new JButton("Salir");
 		salir.addActionListener(new ControlIniciar());
-		salir.setPreferredSize(new Dimension(250,100));
+		salir.setBounds(150,80,200,100);
 		panelBotonSalir.add(salir);
 		panel2.add(panelBotonSalir);
 
@@ -133,6 +133,10 @@ public class VentanaPrincipal extends JFrame implements InterfazVista{
 	@Override
 	public void arranca() {
 		pack();
+		String ruta = System.getProperty("user.dir")+ "\\src\\vista\\images\\";
+		ImageIcon ImageIcon = new ImageIcon(ruta + "images.png");
+		Image imagen = ImageIcon.getImage();
+		setIconImage(imagen);
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
