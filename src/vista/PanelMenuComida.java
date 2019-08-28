@@ -6,30 +6,53 @@ import java.util.*;
 
 import javax.swing.*;
 
+import controlador.*;
 import controlador.tableButton.*;
 import modelo.gestorAplicacion.logic.Comida;
 import vista.*;
 
 public class PanelMenuComida extends JPanel{
 	//JTable tabla;
+	JPanel panelGeneral, panelNombre, panelDescripcion, panelDatosExterior;
+	JLabel nombreFuncionalidad;
+	JButton añadirAlCarrito;
+	
 	public static JPanel panelMenu;
 	public PanelMenuComida(){
-		setVisible(false);
+		
+		//parte de la informacion 
+		panelGeneral = new JPanel();
+		panelGeneral.setLayout(new BorderLayout());
+		
+		panelNombre = new JPanel();
+		nombreFuncionalidad = new JLabel("Ver Menú de comidas");
+		panelNombre.add(nombreFuncionalidad);
+		panelGeneral.add(panelNombre, BorderLayout.NORTH);
+		
+		panelDescripcion = new JPanel();
+		TextArea descripcion = new TextArea("En esta funcionalidad se muestra el menú donde están las comidas para ser pedidas.");
+		panelDescripcion.add(descripcion);
+		panelGeneral.add(panelDescripcion, BorderLayout.CENTER);
+		//hasta aca
+		
+		panelDatosExterior = new JPanel();
+		panelDatosExterior.setLayout(new BorderLayout());
 		panelMenu = new JPanel();
-		TextArea texto = new TextArea(arreglo(), 0, 0, TextArea.SCROLLBARS_VERTICAL_ONLY);
+		TextArea texto = new TextArea(ControlMenuComida.arreglo(), 0, 0, TextArea.SCROLLBARS_VERTICAL_ONLY);
 		texto.setFont(new Font("arial", Font.HANGING_BASELINE, 15));
 		texto.setEditable(false);
 		texto.setBackground(Color.WHITE);
-		panelMenu.add(texto);	
+		panelMenu.add(texto);
+		panelDatosExterior.add(panelMenu, BorderLayout.NORTH);
+		
+		
+		añadirAlCarrito = new JButton("Añadir al carrito");
+		añadirAlCarrito.add(añadirAlCarrito, BorderLayout.CENTER);
+		añadirAlCarrito.addActionListener(new ControlMenuComida());
+		panelGeneral.add(panelDatosExterior, BorderLayout.SOUTH);
 		
 	}
-	public String arreglo() {
-		String texto = "";
-		for(Comida comida : Comida.obtenerComidasDisponibles()) {
-			texto += "/n"+comida.toString();
-		}
-		return texto;
-	}
+	
 	
 	
 

@@ -17,9 +17,8 @@ public class VentanaChef extends JFrame implements InterfazVista{
 		setVisible(false);
 		contenedor.setLayout(new FlowLayout());
 		contenedor.setPreferredSize(new Dimension(1000,700));
-		JPanel panelGeneral = new JPanel();
-		//panelGeneral.setBounds(0, 0, 200, 400);
-		panelGeneral.setLayout(new FlowLayout());
+		
+		
 		
 		//menu general
 		JMenuBar opcionesDeMenu = new JMenuBar();
@@ -46,6 +45,11 @@ public class VentanaChef extends JFrame implements InterfazVista{
 		verComidaMasPedida = new JMenuItem("Ver la comida más pedida");
 		crearComida = new JMenuItem("Crear comidas para el menú");
 		verMenu = new JMenuItem("Ver menú de comidas");
+		verComidaMejor.addActionListener(new ControlMenu());
+		verCalificacionComida.addActionListener(new ControlMenu());
+		verComidaMasPedida.addActionListener(new ControlMenu());
+		crearComida.addActionListener(new ControlMenu());
+		verMenu.addActionListener(new ControlMenu());
 		procesos.add(crearComida);
 		procesos.add(verMenu);
 		procesos.add(verComidaMejor);
@@ -56,9 +60,8 @@ public class VentanaChef extends JFrame implements InterfazVista{
 		opcionesDeMenu.add(archivo);
 		opcionesDeMenu.add(procesos);
 		opcionesDeMenu.add(ayuda);
-		panelGeneral.add(opcionesDeMenu);
 		
-		contenedor.add(panelGeneral);
+		setJMenuBar(opcionesDeMenu);
 		
 		//
 

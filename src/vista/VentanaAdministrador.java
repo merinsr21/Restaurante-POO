@@ -17,9 +17,6 @@ public class VentanaAdministrador extends JFrame implements InterfazVista {
 		setVisible(false);
 		contenedor.setLayout(new FlowLayout());
 		contenedor.setPreferredSize(new Dimension(1000,700));
-		JPanel panelGeneral = new JPanel();
-		//panelGeneral.setBounds(0, 0, 200, 400);
-		panelGeneral.setLayout(new FlowLayout());
 		
 		//menu general
 		JMenuBar opcionesDeMenu = new JMenuBar();
@@ -45,6 +42,12 @@ public class VentanaAdministrador extends JFrame implements InterfazVista {
 		gananciaDia = new JMenuItem("Ver Ganancias del día");
 		gananciaMes = new JMenuItem("Ver ganancias del mes");
 		crearUsuario = new JMenuItem("Crear un nuevo Usuario");
+		crearMesa.addActionListener(new ControlMenu());
+		verMesas.addActionListener(new ControlMenu());
+		gananciaDia.addActionListener(new ControlMenu());
+		gananciaMes.addActionListener(new ControlMenu());
+		crearUsuario.addActionListener(new ControlMenu());
+		
 		procesos.add(crearUsuario);
 		procesos.add(crearMesa);
 		procesos.add(verMesas);
@@ -56,10 +59,8 @@ public class VentanaAdministrador extends JFrame implements InterfazVista {
 		opcionesDeMenu.add(archivo);
 		opcionesDeMenu.add(procesos);
 		opcionesDeMenu.add(ayuda);
-		panelGeneral.add(opcionesDeMenu);
-		
-		contenedor.add(panelGeneral);
-		
+	
+		setJMenuBar(opcionesDeMenu);
 		//
 	
 

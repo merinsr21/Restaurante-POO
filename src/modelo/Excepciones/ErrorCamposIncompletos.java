@@ -6,6 +6,6 @@ public class ErrorCamposIncompletos extends Exception {
 	
 	
 	public ErrorCamposIncompletos() {
-		super("Campos incompletos, por favor llenarlos para continuar.");
+		super("Por favor llene los campos vacíos para continuar.");
 	}
 }

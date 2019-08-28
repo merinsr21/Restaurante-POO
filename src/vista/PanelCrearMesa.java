@@ -12,6 +12,8 @@ public class PanelCrearMesa extends JPanel{
 	JButton aceptar, borrar;
 	
 	public PanelCrearMesa() {
+		
+		//lo que se deberia poner en cada panel
 		panelGeneral = new JPanel();
 		panelGeneral.setLayout(new BorderLayout());
 		
@@ -40,6 +42,9 @@ public class PanelCrearMesa extends JPanel{
 		panelDatos.add(cantidadSillas);
 		panelDatos.add(cantidad);
 		panelDatosExterior.add(panelDatos, BorderLayout.SOUTH);
+		//hasta aqui
+		
+		
 		
 		//botones
 		aceptar = new JButton("Aceptar");

@@ -48,14 +48,18 @@ public class ControlIniciar implements ActionListener{
 			try {
 				 if(VentanaPrincipal.contraseñaT.getText().isEmpty() && VentanaPrincipal.nombreUsuarioT.getText().isEmpty() || VentanaPrincipal.contraseñaT.getText().isEmpty() ||  VentanaPrincipal.nombreUsuarioT.getText().isEmpty()) {
 						throw new ErrorCamposIncompletos();
-				}else {
+				}/*else if(Usuario.iniciarSesion(VentanaPrincipal.nombreUsuarioT.getText(), VentanaPrincipal.contraseña.getText()) == false) {
+					throw new ErrorDatosErroneos();
+				}*/else {
 					Principal.ventana.cerrar();
 					Principal.ventana = new VentanaUsuario();
 					Principal.ventana.arranca();
 				}
 			}catch(ErrorCamposIncompletos ex ){
-				JOptionPane.showMessageDialog(null, "Manejo de errores de la Aplicación: Por favor llene los campos vacíos para continuar", "¡¡CUIDADO!!", JOptionPane.ERROR_MESSAGE );	
-			}
+				JOptionPane.showMessageDialog(null, "Manejo de errores de la Aplicación: "+ex.getMessage(), "¡¡CUIDADO!!", JOptionPane.ERROR_MESSAGE );	
+			}/*catch(ErrorDatosErroneos exd) {
+				JOptionPane.showMessageDialog(null, "Manejo de errores de la Aplicación: "+ exd.getMessage(), "¡¡ALERTA!!", JOptionPane.ERROR_MESSAGE );	
+			}*/
 			
 			
 			
@@ -63,19 +67,19 @@ public class ControlIniciar implements ActionListener{
 			try {
 				 if(VentanaPrincipal.contraseñaT.getText().isEmpty() && VentanaPrincipal.nombreUsuarioT.getText().isEmpty() || VentanaPrincipal.contraseñaT.getText().isEmpty() ||  VentanaPrincipal.nombreUsuarioT.getText().isEmpty()) {
 						throw new ErrorCamposIncompletos();
-				}else if(Usuario.iniciarSesion(VentanaPrincipal.nombreUsuarioT.getText(), VentanaPrincipal.contraseña.getText()) == false) {
+				}/*else if(Usuario.iniciarSesion(VentanaPrincipal.nombreUsuarioT.getText(), VentanaPrincipal.contraseña.getText()) == false) {
 					throw new ErrorDatosErroneos();
-				}
+				}*/
 				 else {
 					Principal.ventana.cerrar();
 					Principal.ventana = new VentanaAdministrador();
 					Principal.ventana.arranca();
 				}
 			}catch(ErrorCamposIncompletos ex){
-				JOptionPane.showMessageDialog(null, "Manejo de errores de la Aplicación: Por favor llene los campos vacíos para continuar", "¡¡CUIDADO!!", JOptionPane.ERROR_MESSAGE );	
-			}catch(ErrorDatosErroneos exd) {
-				JOptionPane.showMessageDialog(null, "Manejo de errores de la Aplicación: Los datos ingresados no son correctos", "¡¡ALERTA!!", JOptionPane.ERROR_MESSAGE );	
-			}
+				JOptionPane.showMessageDialog(null, "Manejo de errores de la Aplicación: "+ex.getMessage(), "¡¡CUIDADO!!", JOptionPane.ERROR_MESSAGE );	
+			}/*catch(ErrorDatosErroneos exd) {
+				JOptionPane.showMessageDialog(null, "Manejo de errores de la Aplicación: "+ exd.getMessage(), "¡¡ALERTA!!", JOptionPane.ERROR_MESSAGE );	
+			}*/
 			
 			
 			
@@ -83,14 +87,18 @@ public class ControlIniciar implements ActionListener{
 			try {
 				 if(VentanaPrincipal.contraseñaT.getText().isEmpty() && VentanaPrincipal.nombreUsuarioT.getText().isEmpty() || VentanaPrincipal.contraseñaT.getText().isEmpty() ||  VentanaPrincipal.nombreUsuarioT.getText().isEmpty()) {
 						throw new ErrorCamposIncompletos();
-				}else {
+				}/*else if(Usuario.iniciarSesion(VentanaPrincipal.nombreUsuarioT.getText(), VentanaPrincipal.contraseña.getText()) == false) {
+					throw new ErrorDatosErroneos();
+				}*/else {
 					Principal.ventana.cerrar();
 					Principal.ventana = new VentanaChef();
 					Principal.ventana.arranca();
 				}
 			}catch(ErrorCamposIncompletos ex ){
-				JOptionPane.showMessageDialog(null, "Manejo de errores de la Aplicación: Por favor llene los campos vacíos para continuar", "¡¡CUIDADO!!", JOptionPane.ERROR_MESSAGE );	
-			}
+				JOptionPane.showMessageDialog(null, "Manejo de errores de la Aplicación:" +ex.getMessage(), "¡¡CUIDADO!!", JOptionPane.ERROR_MESSAGE );	
+			}/*catch(ErrorDatosErroneos exd) {
+			JOptionPane.showMessageDialog(null, "Manejo de errores de la Aplicación: "+ exd.getMessage(), "¡¡ALERTA!!", JOptionPane.ERROR_MESSAGE );	
+			}*/
 			
 		}else  if(accion.equals("Salir")){
 			Object [] textoDeOpciones = {"Si", "No"};

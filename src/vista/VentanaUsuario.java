@@ -18,7 +18,6 @@ public class VentanaUsuario extends JFrame implements InterfazVista{
 		contenedor.setLayout(new FlowLayout());
 		contenedor.setPreferredSize(new Dimension(1000,700));
 		JPanel panelGeneral = new JPanel();
-		//panelGeneral.setBounds(0, 0, 200, 400);
 		panelGeneral.setLayout(new FlowLayout());
 		
 		//menu general
@@ -36,6 +35,7 @@ public class VentanaUsuario extends JFrame implements InterfazVista{
 		
 		//menu de ayuda
 		JMenuItem acercaDe = new JMenuItem("Acerca de..");
+		acercaDe.addActionListener(new ControlMenu());
 		ayuda.add(acercaDe);
 		
 		//menu de procesos
@@ -45,6 +45,10 @@ public class VentanaUsuario extends JFrame implements InterfazVista{
 		verPedidos = new JMenuItem("Ver mis Pedidos");
 		verMesas = new JMenuItem("Ver mesas disponibles");
 		verMenu.addActionListener(new ControlMenu());
+		miCarrito.addActionListener(new ControlMenu());
+		verFacturas.addActionListener(new ControlMenu());
+		verPedidos.addActionListener(new ControlMenu());
+		verMesas.addActionListener(new ControlMenu());
 		procesos.add(verMenu);
 		procesos.add(miCarrito);
 		procesos.add(verFacturas);
@@ -53,9 +57,9 @@ public class VentanaUsuario extends JFrame implements InterfazVista{
 		opcionesDeMenu.add(archivo);
 		opcionesDeMenu.add(procesos);
 		opcionesDeMenu.add(ayuda);
-		panelGeneral.add(opcionesDeMenu);
 		
-		contenedor.add(panelGeneral);
+		setJMenuBar(opcionesDeMenu);
+		
 		
 		//
 		

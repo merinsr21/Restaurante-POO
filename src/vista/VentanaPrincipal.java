@@ -8,22 +8,17 @@ import controlador.*;
 
 public class VentanaPrincipal extends JFrame implements InterfazVista{
 	public static Container contenedor;
-	public static JButton admin;
-	public static JButton usuario;
-	public static JButton chef;
-	public static JLabel textoingrese;
+	public static JButton admin, usuario, chef, botonFotos;
+	public static JLabel textoingrese, nombreUsuario, contraseña, labelBienvenido;
 	public static JPanel panelDatos;
 	public static JTextField nombreUsuarioT;
 	public static JPasswordField contraseñaT;
-	public static JLabel nombreUsuario;
-	public static JLabel contraseña;
-	public static JLabel labelBienvenido;
-	public static ImageIcon foto;
-	public static JButton botonFotos;
-	public static ImageIcon icono;
+	public static ImageIcon foto, icono;
+	public static JFrame ventana;
 	
 	public VentanaPrincipal() {
-		super("Inicio");
+		super("Restaurante");
+		ventana = this;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contenedor = this.getContentPane();
 		setVisible(true);
@@ -54,7 +49,8 @@ public class VentanaPrincipal extends JFrame implements InterfazVista{
 		
 		//Panel para el boton de las fotos
 		JPanel panel4 = new JPanel();
-		foto = new ImageIcon("B1.png");
+		String ruta = System.getProperty("user.dir")+ "\\src\\vista\\images\\";
+		foto = new ImageIcon(ruta + "B1.png");
 		botonFotos = new JButton();
 		botonFotos.setBounds(0, 0, 400, 400);
 		icono = new ImageIcon(foto.getImage().getScaledInstance(botonFotos.getWidth(), botonFotos.getHeight(), Image.SCALE_SMOOTH));
@@ -67,13 +63,10 @@ public class VentanaPrincipal extends JFrame implements InterfazVista{
 		
 		//panel para el scroll del texto
 		JPanel panel5 = new JPanel();
-		TextArea texto = new TextArea("Este programa se trata sobre un restaurante en "
-				+ "KLSHFIYWKDBSCVKÑJEFSJAVOUEAJSLÑDBFÑWURHFBNWEAHYFNCWKJDJAFUOWBDNSIARFEAJSFCIWhadfviawdkurfjorjsvbnoeaurwegfc"
-				+ "nqyerufreqguvhewpqifuirwvbjksvjuuerovhgrwiqguohvnwksgjuuwrhgfbqeutiquekejfvuqkadgkjbveydfhbrvjwkdhgbvwrlkUTK"
-				+ "JBDVKLDSHYFVOURWBFLSVD.XJHFUORWJLHSGDUJWRSDNVIOWRYGTHURdfhfnssfnfndhahbdghbdsghgfhjrughdahetuhghdghartyrfgsga"
-				+ "asrtgsgtwryfsdgSGwgfesytjhvdhagarty5yrujfhjdhtrjuikljhfdWJGWUORWYHGJFSNVWELKYRUIWEBVCLASHFVUIAel que pides comi"
-				+ "da\n" + " y te la comes, luego das una opinion sore todo y blah.\n" + "i should write more stuff to see if itreally works"
-						+ "             Creado por: NOSOTROS", 0, 0, TextArea.SCROLLBARS_VERTICAL_ONLY);
+		TextArea texto = new TextArea("El Restaurante es una aplicación gratuita de escritorio implementada en java, que sirve como herramienta cliente/servidor para la gestión de Bases de Datos de un restaurante en tiempo real.\r\n" + 
+				"Permitiendo la creación de usuarios, la gestión de pedidos, productos, facturas y precios. \r\n" + 
+				"Desarrollado por: Laura Vanesa Bustamante Hurtado, Cristian Alejandro Rojas Mazo, Felipe Merino Toro y Alejandro Gómez Serna. \r\n" + 
+				"Este programa funciona gracias a la implementación del patrón MVC. Continuará...", 0, 0, TextArea.SCROLLBARS_VERTICAL_ONLY);
 		texto.setFont(new Font("arial", Font.HANGING_BASELINE, 15));
 		texto.setEditable(false);
 		texto.setBackground(Color.WHITE);
