@@ -26,12 +26,12 @@ public class PanelMenuComida extends JPanel{
 		
 		panelNombre = new JPanel();
 		nombreFuncionalidad = new JLabel("Ver Menú de comidas");
-		panelNombre.add(nombreFuncionalidad);
+		this.add(nombreFuncionalidad);
 		panelGeneral.add(panelNombre, BorderLayout.NORTH);
 		
 		panelDescripcion = new JPanel();
-		TextArea descripcion = new TextArea("En esta funcionalidad se muestra el menú donde están las comidas para ser pedidas.");
-		panelDescripcion.add(descripcion);
+		JTextField descripcion = new JTextField("En esta funcionalidad se muestra el menú donde están las comidas para ser pedidas.");
+		this.add(descripcion);
 		panelGeneral.add(panelDescripcion, BorderLayout.CENTER);
 		//hasta aca
 		
@@ -47,7 +47,7 @@ public class PanelMenuComida extends JPanel{
 		
 		
 		añadirAlCarrito = new JButton("Añadir al carrito");
-		añadirAlCarrito.add(añadirAlCarrito, BorderLayout.CENTER);
+		panelDatosExterior.add(añadirAlCarrito, BorderLayout.CENTER);
 		añadirAlCarrito.addActionListener(new ControlMenuComida());
 		panelGeneral.add(panelDatosExterior, BorderLayout.SOUTH);
 		

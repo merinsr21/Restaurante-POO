@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import controlador.ControlMenu;
+import uiMain.Main;
 
 public class VentanaUsuario extends JFrame implements InterfazVista{
 	public static Container contenedor;
@@ -11,7 +12,7 @@ public class VentanaUsuario extends JFrame implements InterfazVista{
 	JMenuItem usuario, salir, verMenu, miCarrito, verFacturas, verPedidos, verMesas;
 	
 	public VentanaUsuario() {
-		super("Usuario:");
+		super("Usuario:" );
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contenedor = this.getContentPane();
 		setVisible(false);

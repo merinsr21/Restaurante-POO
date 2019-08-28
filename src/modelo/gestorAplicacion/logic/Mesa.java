@@ -80,7 +80,7 @@ public class Mesa {
 	}
 	
 	// Crea una mesa en caso de que no se encuentre una ya existente con el mismo codigo
-	public static String ValidacionMesa(String codigoMesa, String numeroDeSillas) {
+	public static String validacionMesa(String codigoMesa, String numeroDeSillas) {
 		if(!Mesa.mesas.containsKey(codigoMesa)) {
 			Mesa.crearMesa(codigoMesa,numeroDeSillas);
 			return "La mesa ha sido creada con éxito.";

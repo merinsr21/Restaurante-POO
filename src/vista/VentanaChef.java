@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import controlador.ControlMenu;
+import uiMain.Main;
 
 public class VentanaChef extends JFrame implements InterfazVista{
 	public static Container contenedor;
